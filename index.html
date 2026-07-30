@@ -196,6 +196,31 @@
   .metric-card .m-delta.neg{color:var(--danger);}
   .metric-card .m-delta.zero{color:var(--text-muted);}
   .metric-card .m-rank{font-size:11px;color:var(--text-muted);margin-top:3px;}
+  .m-std-row{margin-top:8px;}
+  .std-badge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:5px;letter-spacing:0.2px;}
+  .std-badge.std-below{background:rgba(163,49,43,0.12);color:var(--danger);}
+  .std-badge.std-developing{background:rgba(138,106,8,0.12);color:var(--warning);}
+  .std-badge.std-goal{background:rgba(28,107,60,0.12);color:var(--success);}
+  .std-badge.std-exceptional{background:rgba(8,145,178,0.12);color:#0891b2;}
+  .info-icon{position:relative;display:inline-block;margin-left:5px;color:var(--text-muted);cursor:help;font-size:12px;vertical-align:1px;}
+  .info-icon:hover, .info-icon:focus{color:var(--csu-green);}
+  .info-tooltip{
+    display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+    width:260px;background:var(--csu-green-deep);color:#fff;font-size:11.5px;font-weight:400;
+    line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    z-index:60;text-transform:none;letter-spacing:normal;
+  }
+  .info-tooltip em{display:block;margin-top:6px;color:#c9e3d6;font-style:italic;}
+  .info-icon:hover .info-tooltip, .info-icon:focus .info-tooltip{display:block;}
+  .self-compare-row{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:12.5px;border-top:1px solid var(--border);flex-wrap:wrap;}
+  .self-compare-row:first-child{border-top:none;}
+  .sc-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;padding:3px 8px;border-radius:5px;white-space:nowrap;}
+  .self-compare-strength .sc-tag{background:rgba(28,107,60,0.12);color:var(--success);}
+  .self-compare-weak .sc-tag{background:rgba(163,49,43,0.12);color:var(--danger);}
+  .sc-metric{font-weight:700;color:var(--text-primary);}
+  .sc-diff{margin-left:auto;font-weight:700;font-size:12px;}
+  .sc-diff.pos{color:var(--success);}
+  .sc-diff.neg{color:var(--danger);}
 
   .analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .analysis-card{border:1px solid var(--border);background:var(--surface-2);border-radius:var(--radius);padding:16px;}
@@ -210,20 +235,65 @@
 
   .flags-intro{background:var(--csu-green-dim);border:1px solid rgba(0,103,71,0.35);color:var(--csu-green-deep);
     padding:11px 15px;border-radius:var(--radius-sm);font-size:12.5px;margin-bottom:18px;line-height:1.5;}
-  .flags-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:16px;}
+  .flags-intro-link{color:var(--csu-green-deep);font-weight:700;text-decoration:underline;}
+  .flags-col-head{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary);margin:22px 0 10px;}
+  .flags-col-head:first-of-type{margin-top:8px;}
+  .flags-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:16px;margin-bottom:6px;}
+  .flags-grid-4{grid-template-columns:repeat(auto-fit,minmax(360px,1fr));}
   .flag-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;}
   .flag-card-head{display:flex;align-items:center;gap:8px;margin-bottom:2px;}
   .flag-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
   .flag-card h3{margin:0;font-size:14.5px;color:var(--text-primary);}
   .flag-card p.hint{margin:2px 0 12px;font-size:11.5px;color:var(--text-muted);line-height:1.45;}
+  .std-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;}
+  .std-section-head{display:flex;align-items:center;margin-bottom:10px;}
+  .std-section-head h3{margin:0;font-size:14px;color:var(--text-primary);display:flex;align-items:center;}
+  .tier-bar{display:flex;width:100%;height:20px;border-radius:6px;overflow:hidden;margin-bottom:8px;}
+  .tier-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:800;min-width:0;transition:width 0.2s;}
+  .tier-seg-below{background:var(--danger);}
+  .tier-seg-developing{background:var(--warning);}
+  .tier-seg-goal{background:var(--success);}
+  .tier-seg-exceptional{background:#0891b2;}
+  .tier-legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;}
+  .tier-legend-item{font-size:10.8px;color:var(--text-secondary);display:flex;align-items:center;gap:5px;}
+  .tier-legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .tier-legend-dot.dot-below{background:var(--danger);}
+  .tier-legend-dot.dot-developing{background:var(--warning);}
+  .tier-legend-dot.dot-goal{background:var(--success);}
+  .tier-legend-dot.dot-exceptional{background:#0891b2;}
+  .std-below-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;color:var(--text-secondary);margin:4px 0 4px;}
+  .std-summary-line{font-size:11.5px;color:var(--text-secondary);margin-bottom:8px;}
+  .tier-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+  .tier-toggle-btn{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text-secondary);
+    padding:5px 11px;border-radius:16px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .tier-toggle-btn:hover:not(.active){border-color:var(--csu-green);color:var(--csu-green);}
+  .tier-toggle-btn.active{background:var(--csu-green);border-color:var(--csu-green);color:var(--white);}
+  .method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:6px;}
+  .method-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px;}
+  .method-card h3{margin:0 0 7px;font-size:13.5px;color:var(--text-primary);}
+  .method-values{font-size:11.5px;font-weight:600;color:var(--csu-green-deep);background:var(--csu-green-dim);display:inline-block;padding:4px 9px;border-radius:6px;margin-bottom:6px;}
+  .method-short-source{font-size:11px;color:var(--text-muted);margin-bottom:8px;}
+  .method-details summary{font-size:11px;font-weight:700;color:var(--csu-green);cursor:pointer;list-style:none;user-select:none;}
+  .method-details summary::-webkit-details-marker{display:none;}
+  .method-details summary::before{content:'+ ';}
+  .method-details[open] summary::before{content:'\u2212 ';}
+  .method-details[open] summary{margin-bottom:8px;}
+  .method-source{font-size:12px;line-height:1.55;color:var(--text-secondary);margin:0 0 8px;}
+  .method-note{font-size:11.5px;line-height:1.5;color:var(--text-muted);font-style:italic;background:var(--surface-2);border-left:2px solid var(--border-strong);padding:6px 10px;margin-bottom:8px;}
+  .method-link{font-size:11.5px;font-weight:700;color:var(--csu-green);text-decoration:none;}
+  .method-link:hover{text-decoration:underline;}
   .flag-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;}
   .flag-row:last-child{border-bottom:none;}
   .flag-row:hover{background:var(--surface-2);}
   .flag-rank{width:18px;text-align:center;font-weight:700;color:var(--text-muted);font-size:11.5px;flex-shrink:0;}
-  .flag-name{flex:1;min-width:0;font-weight:700;font-size:12.8px;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .flag-name{flex:1;min-width:80px;font-weight:700;font-size:12.8px;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .flag-name .pos-tag{margin-left:6px;}
-  .flag-value{font-weight:800;font-size:12.8px;color:var(--danger);white-space:nowrap;flex-shrink:0;}
-  .flag-context{font-size:10.8px;color:var(--text-secondary);white-space:nowrap;flex-shrink:0;min-width:108px;text-align:right;}
+  .flag-value{font-weight:800;font-size:12.8px;white-space:nowrap;flex-shrink:0;}
+  .flag-value-below{color:var(--danger);}
+  .flag-value-developing{color:var(--warning);}
+  .flag-value-goal{color:var(--success);}
+  .flag-value-exceptional{color:#0891b2;}
+  .flag-context{font-size:10.8px;color:var(--text-secondary);white-space:nowrap;flex-shrink:0;min-width:60px;text-align:right;}
   .flag-empty{color:var(--text-secondary);font-size:12.5px;padding:10px 0;line-height:1.5;}
 
   footer.app-footer{text-align:center;padding:20px;font-size:11.5px;color:var(--text-muted);}
@@ -251,6 +321,7 @@
   <button class="tab-btn active" data-tab="overview">Team overview</button>
   <button class="tab-btn" data-tab="leaderboard">Leaderboard &amp; trends</button>
   <button class="tab-btn" data-tab="flags">Flags</button>
+  <button class="tab-btn" data-tab="methodology">Methodology</button>
 </nav>
 
 <main>
@@ -371,29 +442,26 @@
   </section>
 
   <section class="panel" id="panel-flags">
-    <div class="flags-intro">Top 10 per category, worst-first, based on each athlete's most recent test on file. Only athletes with data for that metric are ranked — nobody is flagged on a test they haven't taken yet. Click any name to open their full profile.</div>
-    <div class="flags-grid">
-      <div class="flag-card">
-        <div class="flag-card-head"><span class="flag-dot" style="background:#a3312b;"></span><h3>Needs to build muscle</h3></div>
-        <p class="hint">Lowest Fat-Free Mass Index (lean mass adjusted for height) on the team, from the most recent Bod Pod. Fairer across positions than raw lean mass — a lean attackman and a bigger d-pole are judged on the same scale.</p>
-        <div id="flagMuscle"></div>
-      </div>
-      <div class="flag-card">
-        <div class="flag-card-head"><span class="flag-dot" style="background:#8a6a08;"></span><h3>Needs to lose body fat %</h3></div>
-        <p class="hint">Highest body fat % on the team from the most recent Bod Pod, with the gap vs team average.</p>
-        <div id="flagBodyFat"></div>
-      </div>
-      <div class="flag-card">
-        <div class="flag-card-head"><span class="flag-dot" style="background:#1f6feb;"></span><h3>Needs to improve power</h3></div>
-        <p class="hint">Lowest combined percentile of CMJ height and power clean max. CMJ isn't tested yet, so this currently ranks on power clean alone — CMJ will factor in once logged.</p>
-        <div id="flagPower"></div>
-      </div>
-      <div class="flag-card">
-        <div class="flag-card-head"><span class="flag-dot" style="background:#7c3aed;"></span><h3>Needs to improve speed</h3></div>
-        <p class="hint">Lowest combined percentile of 40-yard dash and 1200m Bronco time.</p>
-        <div id="flagSpeed"></div>
+    <div class="flags-intro">Every category below is judged against a real standard, not just team rank — hover the <span class="info-icon" style="margin-left:0;">&#9432;</span> next to any metric to see exactly where its numbers come from. Full detail lives in the <a href="#" data-goto-tab="methodology" class="flags-intro-link">Methodology</a> tab. Click any athlete to open their profile.</div>
+
+    <div class="flags-col-head">Body composition</div>
+    <div class="flags-grid" id="flagBodyComp"></div>
+
+    <div class="flags-col-head">Strength</div>
+    <div class="flags-grid flags-grid-4" id="flagStrength"></div>
+
+    <div class="flags-col-head">Power &amp; speed</div>
+    <div class="flags-grid" id="flagPowerSpeed"></div>
+  </section>
+
+  <section class="panel" id="panel-methodology">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Methodology &amp; sources</h2>
+        <p>The numbers behind every standard, at a glance. Tap "Full sourcing" on any card for the citation and detail.</p>
       </div>
     </div>
+    <div id="methodologyBody"></div>
   </section>
 
 
@@ -437,6 +505,7 @@
           <div id="modalCompare"></div>
         </div>
       </div>
+      <div id="modalSelfCompare" style="margin-top:16px;"></div>
     </div>
   </div>
 </div>
@@ -643,6 +712,214 @@ function tierLabel(t){
   if(t==='yellow') return 'Solid';
   if(t==='red') return 'Developing';
   return 'No data';
+}
+
+/* ================= STANDARDS ENGINE ================= */
+/* Every real standard used on this dashboard, with its actual source.
+   kind: ratioTier (min/goal/exceptional as a multiple of another metric),
+         bandTier (fixed value bands), threshold (single flag line, lower/higher),
+         percentileBottom (team-relative, no external standard),
+         percentileBottomPower (team-relative, computed via Sayers formula) */
+var STANDARDS = {
+  backSquat: {
+    kind:'ratioTier', relTo:'bodyMass', min:1.5, goal:2.0, exceptional:2.5,
+    label:'Back squat', relLabel:'body weight',
+    source:'Patrick Basil, CSCS \u2014 Head Strength & Conditioning Coach, Hamilton College (SimpliFaster, 2022). Independently corroborated: widely used strength-standard aggregators (ExRx, Strength Level, NSCA-referenced classification tables) cite ~1.5\u00d7 body weight as the same novice\u2192intermediate squat benchmark.',
+    sourceUrl:'https://simplifaster.com/articles/applying-relative-strength-standards/',
+    note:'Checked against this roster: only 31% currently fall below the Min line \u2014 a realistic, not overly aggressive, bar.'
+  },
+  benchPress: {
+    kind:'ratioTier', relTo:'bodyMass', min:1.25, goal:1.375, exceptional:1.5,
+    label:'Bench press', relLabel:'body weight',
+    source:'Patrick Basil, CSCS \u2014 Head Strength & Conditioning Coach, Hamilton College (SimpliFaster, 2022). Independently corroborated: multiple strength-standard aggregators (ExRx, Strength Level, NSCA-referenced tables) cite ~1.25\u00d7 body weight for the same novice\u2192intermediate bench benchmark.',
+    sourceUrl:'https://simplifaster.com/articles/applying-relative-strength-standards/',
+    note:'Checked against this roster: 55% currently fall below the Min line. The article itself notes bench typically lags squat/deadlift for most athletes \u2014 expected, not a sign the standard is off.'
+  },
+  deadlift: {
+    kind:'ratioTier', relTo:'bodyMass', min:1.5, goal:2.0, exceptional:2.5,
+    label:'Deadlift', relLabel:'body weight',
+    source:'Patrick Basil, CSCS \u2014 Head Strength & Conditioning Coach, Hamilton College (SimpliFaster, 2022). Independently corroborated: multiple strength-standard aggregators (ExRx, Strength Level, NSCA-referenced tables) cite ~2.0\u00d7 body weight for the same novice\u2192intermediate deadlift benchmark.',
+    sourceUrl:'https://simplifaster.com/articles/applying-relative-strength-standards/',
+    note:'Checked against this roster: only 14% currently fall below the Min line \u2014 this is the team\u2019s strongest lift relative to standard.'
+  },
+  powerClean: {
+    kind:'ratioTier', relTo:'backSquat', min:0.75, goal:0.90, exceptional:null,
+    label:'Power clean', relLabel:'back squat',
+    source:'Team-calibrated, not from an external source. No verified published standard exists for power clean relative to squat in lacrosse specifically, and this roster\u2019s actual ratio (team median 0.87\u00d7 squat) runs well above the commonly cited generic 60\u201370% rule of thumb, so tiers were built from this team\u2019s own tested distribution instead of importing an unverified outside number.',
+    sourceUrl:null,
+    note:null
+  },
+  ffmi: {
+    kind:'bandTier', bands:[19,22,24],
+    bandLabels:['Below average','Average','Athletic','Elite (near natural ceiling)'],
+    label:'Fat-Free Mass Index',
+    source:'Kouri et al., "Fat-Free Mass Index in Users and Nonusers of Anabolic-Androgenic Steroids," Clinical Journal of Sport Medicine, 1995 \u2014 the foundational FFMI study (157 male athletes), referenced by both NSCA and ACSM. Cross-checked against a comparable NCAA DIII football body composition study (n=111, mean FFMI 23.5, range 18.1\u201327.7).',
+    sourceUrl:null,
+    note:'This roster: mean 21.7, range 18.4\u201324.7 \u2014 slightly leaner than the football comparison, which fits a lacrosse vs. lineman-heavy population.'
+  },
+  bodyFat: {
+    kind:'threshold', flagIf:'above', value:20,
+    label:'Body fat %',
+    source:'DEXA study of 71 NCAA Division I male lacrosse players (Goldburt & Smoliga, High Point University, presented at ACSM 2018). Team mean 18.2%\u00b13.5%, with no significant difference across positions (attack 18.9%, midfield 18.2%, defense 18.3%, goalie 17.0%).',
+    sourceUrl:'https://www.highpoint.edu/healthsciences/files/2021/03/Goldburt-A-2018-ACSM-Presenter.pdf',
+    note:'The measured D1 team mean was 18.2%. The 20% flag line was chosen as a middle ground between that mean (which would flag close to half of any roster by definition) and a looser, less useful cutoff.'
+  },
+  bronco: {
+    kind:'threshold', flagIf:'above', value:275, /* 4:35 in seconds */
+    label:'1200m Bronco',
+    source:'Program standard set directly by the Cleveland State strength & conditioning staff (4:35 pass time), not an external or published figure.',
+    sourceUrl:null,
+    note:null
+  },
+  fortyYard: {
+    kind:'percentileBottom', pct:20,
+    label:'40-yard dash',
+    source:'Team-relative only \u2014 bottom 20% of the roster. No verified D1 lacrosse-specific published time standard was found, so this flags relative to teammates rather than an absolute external bar.',
+    sourceUrl:null,
+    note:null
+  },
+  cmj: {
+    kind:'percentileBottomPower', pct:20,
+    label:'CMJ (vertical jump)',
+    source:'Jump height and body mass converted to peak power using the Sayers equation (Sayers et al., "Cross-validation of three jump power equations," Medicine & Science in Sports & Exercise, 1999; cross-validated, derived from squat-jump data but tested valid for CMJ within ~2.7%), then expressed as relative power (W/kg) for a bodyweight-fair comparison, and flagged as the bottom 20% of the team.',
+    sourceUrl:'https://pubmed.ncbi.nlm.nih.gov/10211854/',
+    note:null
+  }
+};
+
+var LB_TO_KG = 0.453592;
+var IN_TO_CM = 2.54;
+
+function sayersRelativePower(a){
+  var cmjIn = curVal(a,'cmj');
+  var bwLb = curVal(a,'bodyMass');
+  if(cmjIn===null || bwLb===null) return null;
+  var cmjCm = cmjIn*IN_TO_CM;
+  var bwKg = bwLb*LB_TO_KG;
+  var peakW = 60.7*cmjCm + 45.3*bwKg - 2055;
+  if(peakW<=0) return null;
+  return round2(peakW/bwKg);
+}
+
+function ratioForStandard(a, key){
+  var std = STANDARDS[key];
+  if(!std || std.kind!=='ratioTier') return null;
+  var num = curVal(a, key);
+  var denom = curVal(a, std.relTo);
+  if(num===null || denom===null || !denom) return null;
+  return num/denom;
+}
+
+/* {tier:'below'|'developing'|'goal'|'exceptional', label, ratio} or null if no data */
+function tierForRatioMetric(a, key){
+  var std = STANDARDS[key];
+  var ratio = ratioForStandard(a, key);
+  if(ratio===null) return null;
+  var tier, label;
+  if(ratio < std.min){ tier='below'; label='Below min'; }
+  else if(std.exceptional!==null && std.exceptional!==undefined && ratio >= std.exceptional){ tier='exceptional'; label='Exceptional'; }
+  else if(ratio >= std.goal){ tier='goal'; label='Goal'; }
+  else { tier='developing'; label='Developing'; }
+  return {tier:tier, label:label, ratio:round2(ratio)};
+}
+
+function ffmiTier(a){
+  var std = STANDARDS.ffmi;
+  var val = computeFFMI(a);
+  if(val===null) return null;
+  var bands = std.bands;
+  var idx = 0;
+  for(var i=0;i<bands.length;i++){ if(val>=bands[i]) idx=i+1; }
+  var tiers = ['below','developing','goal','exceptional'];
+  return {tier:tiers[idx], label:std.bandLabels[idx], value:val};
+}
+
+function thresholdFlag(a, key){
+  var std = STANDARDS[key];
+  var v = curVal(a, key);
+  if(v===null) return null;
+  var flagged = std.flagIf==='above' ? v > std.value : v < std.value;
+  return {flagged:flagged, value:v};
+}
+
+var TIER_ORDER = ['below','developing','goal','exceptional'];
+var TIER_LABELS = {below:'Below min', developing:'Developing', goal:'Goal', exceptional:'Exceptional'};
+var TIER_COLOR_VARS = {below:'var(--danger)', developing:'var(--warning)', goal:'var(--success)', exceptional:'#0891b2'};
+
+function stdBadgeHtml(tier, label){
+  return '<span class="std-badge std-'+tier+'">'+escapeHtml(label)+'</span>';
+}
+
+function infoIconValuesText(key){
+  var std = STANDARDS[key];
+  if(std.kind==='ratioTier'){
+    return std.label+' \u2014 Min '+std.min+'\u00d7'+(std.exceptional?', Goal '+std.goal+'\u00d7, Exceptional '+std.exceptional+'\u00d7':', Goal '+std.goal+'\u00d7')+' '+std.relLabel+'.';
+  }
+  if(std.kind==='bandTier'){
+    return std.label+' \u2014 below '+std.bands[0]+' / '+std.bands[0]+'\u2013'+std.bands[1]+' / '+std.bands[1]+'\u2013'+std.bands[2]+' / '+std.bands[2]+'+.';
+  }
+  if(std.kind==='threshold'){
+    var unitLabel = key==='bronco' ? fmtTime(std.value) : std.value+'%';
+    return std.label+' \u2014 flagged if '+(std.flagIf==='above'?'above':'below')+' '+unitLabel+'.';
+  }
+  if(std.kind==='percentileBottom' || std.kind==='percentileBottomPower'){
+    return std.label+' \u2014 bottom '+std.pct+'% of the team flagged, team-relative.';
+  }
+  return '';
+}
+
+function infoIconHtml(key){
+  var std = STANDARDS[key];
+  if(!std) return '';
+  var text = infoIconValuesText(key);
+  return '<span class="info-icon" tabindex="0" data-info-key="'+key+'">&#9432;<span class="info-tooltip">'+escapeHtml(text)+' <em>Full sourcing in the Methodology tab.</em></span></span>';
+}
+
+/* Badge to embed in a metric card, or '' if this metric has no standard */
+function tierBadgeForCard(key, a){
+  var std = STANDARDS[key];
+  if(!std) return '';
+  if(std.kind==='ratioTier'){
+    var t = tierForRatioMetric(a, key);
+    if(!t) return '';
+    return stdBadgeHtml(t.tier, t.label+' \u00b7 '+t.ratio+'\u00d7 '+std.relLabel);
+  }
+  if(std.kind==='threshold'){
+    var f = thresholdFlag(a, key);
+    if(!f) return '';
+    return stdBadgeHtml(f.flagged?'below':'goal', f.flagged?'Flagged':'Within standard');
+  }
+  return '';
+}
+
+/* ================= SELF-RELATIVE (WITHIN-ATHLETE) COMPARISON ================= */
+/* Only uses metrics with a real min/goal standard, so we're not inventing scales for
+   metrics that don't have one yet (body fat/Bronco/40yd/CMJ standards aren't shaped that way). */
+var SELF_COMPARE_METRICS = ['backSquat','benchPress','deadlift','powerClean','ffmi'];
+
+function selfCompareScore(a, key){
+  if(key==='ffmi'){
+    var v = computeFFMI(a);
+    if(v===null) return null;
+    var b = STANDARDS.ffmi.bands;
+    return round1(((v-b[0])/(b[2]-b[0]))*100);
+  }
+  var std = STANDARDS[key];
+  var ratio = ratioForStandard(a, key);
+  if(ratio===null) return null;
+  return round1(((ratio-std.min)/(std.goal-std.min))*100);
+}
+
+function selfCompareProfile(a){
+  var scores = SELF_COMPARE_METRICS.map(function(key){
+    var s = selfCompareScore(a, key);
+    return s!==null ? {key:key, score:s} : null;
+  }).filter(Boolean);
+  if(scores.length<2) return null;
+  var avg = scores.reduce(function(sum,x){return sum+x.score;},0)/scores.length;
+  scores.forEach(function(x){ x.diff = round1(x.score-avg); });
+  scores.sort(function(x,y){ return y.diff-x.diff; });
+  return {avg:round1(avg), strength:scores[0], weakness:scores[scores.length-1], scores:scores, n:scores.length};
 }
 
 /* --- Header --- */
@@ -1080,12 +1357,60 @@ function metricCardHtml(key, a){
     secondaryHtml = '<div class="m-rank">Team avg: '+avgDisplay+'</div>';
   }
 
+  var badgeHtml = tierBadgeForCard(key, a);
+
   return '<div class="metric-card">'+
-    '<div class="m-label">'+meta.label+'</div>'+
+    '<div class="m-label">'+meta.label+infoIconHtml(key)+'</div>'+
     '<div class="m-value'+(hasVal?'':' empty')+'">'+valueHtml+'</div>'+
     primaryHtml+
     secondaryHtml+
+    (badgeHtml?'<div class="m-std-row">'+badgeHtml+'</div>':'')+
     '</div>';
+}
+
+function ffmiCardHtml(a){
+  var t = ffmiTier(a);
+  var hasVal = !!t;
+  var valueHtml = hasVal ? t.value.toFixed(1)+' FFMI' : (a.heightIn ? 'Not tested yet' : 'Height not on file');
+  var allVals = athletes.map(function(x){ var v=computeFFMI(x); return v!==null?{id:x.id,v:v}:null; }).filter(Boolean);
+  allVals.sort(function(x,y){return y.v-x.v;});
+  var rank = null, total = allVals.length;
+  allVals.forEach(function(x,idx){ if(x.id===a.id) rank = idx+1; });
+  var avg = allVals.length ? round1(allVals.reduce(function(s,x){return s+x.v;},0)/allVals.length) : null;
+  var secondaryHtml = hasVal
+    ? '<div class="m-rank">Team avg '+(avg!==null?avg.toFixed(1):'\u2014')+' &middot; Rank '+rank+' of '+total+'</div>'
+    : '<div class="m-rank">Team avg: '+(avg!==null?avg.toFixed(1):'\u2014')+'</div>';
+  var badgeHtml = t ? stdBadgeHtml(t.tier, t.label) : '';
+  return '<div class="metric-card">'+
+    '<div class="m-label">Fat-Free Mass Index'+infoIconHtml('ffmi')+'</div>'+
+    '<div class="m-value'+(hasVal?'':' empty')+'">'+valueHtml+'</div>'+
+    secondaryHtml+
+    (badgeHtml?'<div class="m-std-row">'+badgeHtml+'</div>':'')+
+    '</div>';
+}
+
+function selfCompareCardHtml(a){
+  var profile = selfCompareProfile(a);
+  if(!profile){
+    return '<div class="analysis-card"><h3>Relative to their own numbers</h3><p class="hint">Needs at least two of squat, bench, deadlift, power clean, or FFMI on file to compare \u2014 not enough data yet.</p></div>';
+  }
+  var metaOf = function(key){ return key==='ffmi' ? {label:'FFMI'} : metricMeta(key); };
+  var sHtml = '<div class="self-compare-row self-compare-strength"><span class="sc-tag">Relative strength</span><span class="sc-metric">'+escapeHtml(metaOf(profile.strength.key).label)+'</span><span class="sc-diff pos">+'+Math.abs(profile.strength.diff).toFixed(0)+' pts vs. their own average</span></div>';
+  var wHtml = '<div class="self-compare-row self-compare-weak"><span class="sc-tag">Relative weak point</span><span class="sc-metric">'+escapeHtml(metaOf(profile.weakness.key).label)+'</span><span class="sc-diff neg">\u2212'+Math.abs(profile.weakness.diff).toFixed(0)+' pts vs. their own average</span></div>';
+  var sameMetric = profile.strength.key===profile.weakness.key;
+  var body = sameMetric
+    ? '<div class="self-compare-row"><span class="sc-tag">Balanced</span><span class="sc-metric">Only one metric with enough data to compare yet.</span></div>'
+    : sHtml+wHtml;
+  return '<div class="analysis-card">'+
+    '<h3>Relative to their own numbers'+infoIconSelfCompare()+'</h3>'+
+    '<p class="hint">Compares this athlete\u2019s squat/bench/deadlift/power clean/FFMI against each other (not vs. teammates) to find their own personal standout and lagging metric.</p>'+
+    body+
+    '</div>';
+}
+
+function infoIconSelfCompare(){
+  var text = 'Each metric is scored 0\u2013100 relative to its own Min\u2192Goal standard, then compared against this athlete\u2019s average across the other tested metrics. A metric well below their own average is a relative weak point even if it still clears the team standard; one well above is a relative strength.';
+  return '<span class="info-icon" tabindex="0">&#9432;<span class="info-tooltip">'+escapeHtml(text)+'</span></span>';
 }
 
 function openProfile(id){
@@ -1115,10 +1440,12 @@ function openProfile(id){
   document.getElementById('modalLiftCards').innerHTML = liftCardsHtml;
 
   document.getElementById('modalPowerCards').innerHTML = ['cmj','bronco','fortyYard'].map(function(k){ return metricCardHtml(k,a); }).join('');
-  document.getElementById('modalBodyCards').innerHTML = ['bodyFat','leanMass','bodyMass'].map(function(k){ return metricCardHtml(k,a); }).join('');
+  document.getElementById('modalBodyCards').innerHTML = metricCardHtml('bodyFat',a) + ffmiCardHtml(a) + ['leanMass','bodyMass'].map(function(k){ return metricCardHtml(k,a); }).join('');
 
   document.getElementById('modalRadar').innerHTML = buildRadarSVG(a);
   document.getElementById('modalCompare').innerHTML = buildCompareSVG(a);
+  var selfCompareEl = document.getElementById('modalSelfCompare');
+  if(selfCompareEl) selfCompareEl.innerHTML = selfCompareCardHtml(a);
   document.getElementById('modalOverlay').classList.add('active');
 }
 
@@ -1134,6 +1461,15 @@ Array.prototype.forEach.call(document.querySelectorAll('.tab-btn'), function(btn
     btn.classList.add('active');
     document.getElementById('panel-'+btn.getAttribute('data-tab')).classList.add('active');
     if(btn.getAttribute('data-tab')==='leaderboard') renderTrendChart();
+  });
+});
+
+Array.prototype.forEach.call(document.querySelectorAll('[data-goto-tab]'), function(link){
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    var target = link.getAttribute('data-goto-tab');
+    var btn = document.querySelector('.tab-btn[data-tab="'+target+'"]');
+    if(btn) btn.click();
   });
 });
 
@@ -1357,74 +1693,13 @@ function renderTrendChart(){
   container.innerHTML = svg + legend;
 }
 
-/* --- Flags: top 10 concerns per category --- */
-function percentileFor(key, id){
-  var ri = rankFor(key);
-  var rank = ri.ranks[id];
-  if(!rank) return null;
-  return ri.total>1 ? round1(((ri.total-rank)/(ri.total-1))*100) : 100;
-}
-
-function buildMuscleFlags(){
-  return athletes.map(function(a){ return {a:a, ffmi:computeFFMI(a), ffmLb:curVal(a,'leanMass')}; })
-    .filter(function(x){ return x.ffmi!==null; })
-    .sort(function(x,y){ return x.ffmi-y.ffmi; })
-    .slice(0,10);
-}
-
-function buildBodyFatFlags(){
-  return athletes.map(function(a){ return {a:a, v:curVal(a,'bodyFat')}; })
-    .filter(function(x){ return x.v!==null; })
-    .sort(function(x,y){ return y.v-x.v; })
-    .slice(0,10);
-}
-
-function buildPowerFlags(){
-  var rows = athletes.map(function(a){
-    var cmjV = curVal(a,'cmj');
-    var pcV = curVal(a,'powerClean');
-    var cmjPct = cmjV!==null ? percentileFor('cmj', a.id) : null;
-    var pcPct = pcV!==null ? percentileFor('powerClean', a.id) : null;
-    var pcts = [cmjPct, pcPct].filter(function(v){return v!==null;});
-    if(pcts.length===0) return null;
-    var composite = round1(pcts.reduce(function(s,v){return s+v;},0)/pcts.length);
-    return {a:a, composite:composite, cmjV:cmjV, pcV:pcV};
-  }).filter(Boolean);
-  rows.sort(function(x,y){ return x.composite-y.composite; });
-  return rows.slice(0,10);
-}
-
-function buildSpeedFlags(){
-  var rows = athletes.map(function(a){
-    var fyV = curVal(a,'fortyYard');
-    var brV = curVal(a,'bronco');
-    var fyPct = fyV!==null ? percentileFor('fortyYard', a.id) : null;
-    var brPct = brV!==null ? percentileFor('bronco', a.id) : null;
-    var pcts = [fyPct, brPct].filter(function(v){return v!==null;});
-    if(pcts.length===0) return null;
-    var composite = round1(pcts.reduce(function(s,v){return s+v;},0)/pcts.length);
-    return {a:a, composite:composite, fyV:fyV, brV:brV};
-  }).filter(Boolean);
-  rows.sort(function(x,y){ return x.composite-y.composite; });
-  return rows.slice(0,10);
-}
-
-function ordinalSuffix(n){
-  n = Math.round(n);
-  var mod100 = n % 100;
-  if(mod100>=11 && mod100<=13) return n+'th';
-  var mod10 = n % 10;
-  if(mod10===1) return n+'st';
-  if(mod10===2) return n+'nd';
-  if(mod10===3) return n+'rd';
-  return n+'th';
-}
-
-function flagRowHtml(rank, a, valueHtml, contextHtml){
+/* --- Flags: built from real standards, not just team-relative top-10 lists --- */
+function flagRowHtml(rank, a, valueHtml, contextHtml, tier){
+  var tierClass = tier ? ' flag-value-'+tier : ' flag-value-below';
   return '<div class="flag-row" data-id="'+a.id+'">'+
     '<span class="flag-rank">'+rank+'</span>'+
     '<span class="flag-name">'+escapeHtml(a.name)+'<span class="pos-tag">'+escapeHtml(a.pos||'')+'</span></span>'+
-    '<span class="flag-value">'+valueHtml+'</span>'+
+    '<span class="flag-value'+tierClass+'">'+valueHtml+'</span>'+
     '<span class="flag-context">'+(contextHtml||'')+'</span>'+
     '</div>';
 }
@@ -1435,62 +1710,219 @@ function wireFlagRows(container){
   });
 }
 
+/* squat/bench/deadlift/powerClean/ffmi: tier distribution bar + "below min" list */
+function tierGroupsFor(key){
+  var tierFn = key==='ffmi' ? ffmiTier : function(a){ return tierForRatioMetric(a, key); };
+  var groups = {below:[], developing:[], goal:[], exceptional:[]};
+  var total = 0;
+  athletes.forEach(function(a){
+    var t = tierFn(a);
+    if(t){ groups[t.tier].push({a:a, info:t}); total++; }
+  });
+  return {groups:groups, total:total};
+}
+
+var flagTierView = {backSquat:'below', benchPress:'below', deadlift:'below', powerClean:'below', ffmi:'below'};
+
+function tierSectionHtml(key){
+  var std = STANDARDS[key];
+  var data = tierGroupsFor(key);
+  var total = data.total;
+  var headHtml = '<div class="std-section-head"><h3>'+escapeHtml(std.label)+infoIconHtml(key)+'</h3></div>';
+  if(total===0){
+    return '<div class="std-section">'+headHtml+'<div class="flag-empty">No data on file yet for this metric.</div></div>';
+  }
+  var hasExceptional = std.exceptional!==null && std.exceptional!==undefined;
+  var order = hasExceptional ? TIER_ORDER : ['below','developing','goal'];
+  var segs = order.map(function(t){
+    var n = data.groups[t].length;
+    var pct = total>0 ? (n/total*100) : 0;
+    return '<div class="tier-seg tier-seg-'+t+'" style="width:'+pct+'%;" title="'+TIER_LABELS[t]+': '+n+' athlete'+(n===1?'':'s')+'">'+(pct>=8?n:'')+'</div>';
+  }).join('');
+  var legend = order.map(function(t){
+    return '<span class="tier-legend-item"><span class="tier-legend-dot dot-'+t+'"></span>'+TIER_LABELS[t]+' ('+data.groups[t].length+')</span>';
+  }).join('');
+
+  var activeTier = order.indexOf(flagTierView[key])>=0 ? flagTierView[key] : 'below';
+  var toggleHtml = '<div class="tier-toggle" data-tier-key="'+key+'">'+order.map(function(t){
+    return '<button class="tier-toggle-btn'+(t===activeTier?' active':'')+'" data-tier="'+t+'">'+TIER_LABELS[t]+' ('+data.groups[t].length+')</button>';
+  }).join('')+'</div>';
+
+  var list = data.groups[activeTier].slice().sort(function(x,y){
+    var xv = key==='ffmi' ? x.info.value : x.info.ratio;
+    var yv = key==='ffmi' ? y.info.value : y.info.ratio;
+    return activeTier==='below' ? xv-yv : yv-xv; /* below: worst first; others: best first */
+  });
+  var emptyMsg = {
+    below:'Nobody currently below the Min line.',
+    developing:'Nobody currently in the Developing range.',
+    goal:'Nobody currently at Goal.',
+    exceptional:'Nobody currently at Exceptional yet.'
+  }[activeTier];
+  var listHtml = list.length===0
+    ? '<div class="flag-empty" style="padding:10px 0;">'+emptyMsg+'</div>'
+    : list.map(function(r,i){
+        var valStr, ctxStr;
+        if(key==='ffmi'){
+          valStr = r.info.value.toFixed(1)+' FFMI';
+          var ffmLb = curVal(r.a,'leanMass');
+          ctxStr = ffmLb!==null ? formatValue(ffmLb, metricMeta('leanMass'))+' lb FFM' : '';
+        } else {
+          valStr = r.info.ratio+'\u00d7';
+          var raw = curVal(r.a, key);
+          var rawMeta = metricMeta(key);
+          ctxStr = raw!==null ? formatValue(raw, rawMeta)+' '+rawMeta.unit : '';
+        }
+        return flagRowHtml(i+1, r.a, valStr, ctxStr, r.info.tier);
+      }).join('');
+  return '<div class="std-section">'+headHtml+
+    '<div class="tier-bar">'+segs+'</div>'+
+    '<div class="tier-legend">'+legend+'</div>'+
+    toggleHtml+
+    listHtml+
+  '</div>';
+}
+
+/* bodyFat/bronco: single pass/fail threshold */
+function thresholdSectionHtml(key){
+  var std = STANDARDS[key];
+  var meta = metricMeta(key);
+  var headHtml = '<div class="std-section-head"><h3>'+escapeHtml(std.label)+infoIconHtml(key)+'</h3></div>';
+  var flagged = [], ok = [];
+  athletes.forEach(function(a){
+    var f = thresholdFlag(a, key);
+    if(f){ (f.flagged?flagged:ok).push({a:a, v:f.value}); }
+  });
+  var total = flagged.length+ok.length;
+  if(total===0){
+    return '<div class="std-section">'+headHtml+'<div class="flag-empty">No data on file yet '+(key==='bronco'?'\u2014 this will populate once testing begins at the end of August.':'for this metric.')+'</div></div>';
+  }
+  flagged.sort(function(x,y){ return std.flagIf==='above' ? y.v-x.v : x.v-y.v; });
+  var listHtml = flagged.length===0
+    ? '<div class="flag-empty" style="padding:10px 0;">Nobody currently flagged.</div>'
+    : flagged.map(function(r,i){
+        return flagRowHtml(i+1, r.a, formatValue(r.v,meta)+(meta.timeFormat?'':meta.unit), 'Flagged');
+      }).join('');
+  return '<div class="std-section">'+headHtml+
+    '<div class="std-summary-line">'+flagged.length+' of '+total+' flagged &middot; '+ok.length+' within standard</div>'+
+    listHtml+
+  '</div>';
+}
+
+/* fortyYard/cmj: no fixed standard, flag bottom N% of the team */
+function bottomPercentGroup(pairs, pct){
+  var sorted = pairs.slice().sort(function(x,y){ return y.v-x.v; });
+  var n = sorted.length;
+  var cutoffCount = Math.max(1, Math.round(n*pct/100));
+  return sorted.slice(n-cutoffCount);
+}
+
+function percentileSectionHtml(key){
+  var std = STANDARDS[key];
+  var meta = metricMeta(key);
+  var headHtml = '<div class="std-section-head"><h3>'+escapeHtml(std.label)+infoIconHtml(key)+'</h3></div>';
+  var pairs;
+  if(key==='cmj'){
+    pairs = athletes.map(function(a){
+      var rp = sayersRelativePower(a);
+      return rp!==null ? {a:a, v:rp, display:rp.toFixed(1)+' W/kg'} : null;
+    }).filter(Boolean);
+  } else {
+    pairs = athletes.map(function(a){
+      var v = curVal(a, key);
+      if(v===null) return null;
+      var g = meta.better==='low' ? -v : v;
+      return {a:a, v:g, display:formatValue(v,meta)+(meta.timeFormat?'s':meta.unit)};
+    }).filter(Boolean);
+  }
+  if(pairs.length===0){
+    return '<div class="std-section">'+headHtml+'<div class="flag-empty">No test data logged yet \u2014 this will populate once testing begins at the end of August.</div></div>';
+  }
+  var bottom = bottomPercentGroup(pairs, std.pct).sort(function(x,y){ return x.v-y.v; });
+  var listHtml = bottom.map(function(r,i){
+    return flagRowHtml(i+1, r.a, r.display, 'Bottom '+std.pct+'%');
+  }).join('');
+  return '<div class="std-section">'+headHtml+
+    '<div class="std-summary-line">Bottom '+std.pct+'% of '+pairs.length+' tested &middot; '+bottom.length+' shown</div>'+
+    listHtml+
+  '</div>';
+}
+
 function renderFlags(){
-  var muscleEl = document.getElementById('flagMuscle');
-  var muscleRows = buildMuscleFlags();
-  if(muscleRows.length===0){
-    muscleEl.innerHTML = '<div class="flag-empty">No Bod Pod fat-free mass and height on file yet.</div>';
-  } else {
-    muscleEl.innerHTML = muscleRows.map(function(r,i){
-      var ctx = formatValue(r.ffmLb,metricMeta('leanMass'))+' lb FFM \u00b7 '+r.a.heightIn.toFixed(0)+'"';
-      return flagRowHtml(i+1, r.a, r.ffmi.toFixed(1)+' FFMI', ctx);
-    }).join('');
-    wireFlagRows(muscleEl);
-  }
+  var bodyCompEl = document.getElementById('flagBodyComp');
+  if(bodyCompEl) bodyCompEl.innerHTML = thresholdSectionHtml('bodyFat') + tierSectionHtml('ffmi');
 
-  var bfMeta = metricMeta('bodyFat');
-  var bfEl = document.getElementById('flagBodyFat');
-  var bfRows = buildBodyFatFlags();
-  var bfTeamAvg = avgFor('bodyFat');
-  if(bfRows.length===0){
-    bfEl.innerHTML = '<div class="flag-empty">No Bod Pod body fat % on file yet.</div>';
-  } else {
-    bfEl.innerHTML = bfRows.map(function(r,i){
-      var ctx = '';
-      if(bfTeamAvg!==null){
-        var gap = round1(r.v-bfTeamAvg);
-        ctx = (gap>0?'+':'\u2212')+Math.abs(gap).toFixed(1)+' pts vs team avg';
-      }
-      return flagRowHtml(i+1, r.a, formatValue(r.v,bfMeta)+'%', ctx);
-    }).join('');
-    wireFlagRows(bfEl);
-  }
+  var strengthEl = document.getElementById('flagStrength');
+  if(strengthEl) strengthEl.innerHTML = tierSectionHtml('backSquat') + tierSectionHtml('benchPress') + tierSectionHtml('deadlift') + tierSectionHtml('powerClean');
 
-  var powerEl = document.getElementById('flagPower');
-  var powerRows = buildPowerFlags();
-  if(powerRows.length===0){
-    powerEl.innerHTML = '<div class="flag-empty">No CMJ or power clean data on file yet.</div>';
-  } else {
-    powerEl.innerHTML = powerRows.map(function(r,i){
-      var pcStr = r.pcV!==null ? formatValue(r.pcV,metricMeta('powerClean'))+' lb clean' : 'no clean yet';
-      var cmjStr = r.cmjV!==null ? formatValue(r.cmjV,metricMeta('cmj'))+' in CMJ' : 'no CMJ yet';
-      return flagRowHtml(i+1, r.a, ordinalSuffix(r.composite)+' pct', pcStr+' \u00b7 '+cmjStr);
-    }).join('');
-    wireFlagRows(powerEl);
-  }
+  var powerSpeedEl = document.getElementById('flagPowerSpeed');
+  if(powerSpeedEl) powerSpeedEl.innerHTML = percentileSectionHtml('cmj') + percentileSectionHtml('fortyYard') + thresholdSectionHtml('bronco');
 
-  var speedEl = document.getElementById('flagSpeed');
-  var speedRows = buildSpeedFlags();
-  if(speedRows.length===0){
-    speedEl.innerHTML = '<div class="flag-empty">No 40-yard dash or Bronco times logged yet \u2014 this will populate once testing begins at the end of August.</div>';
-  } else {
-    speedEl.innerHTML = speedRows.map(function(r,i){
-      var fyStr = r.fyV!==null ? formatValue(r.fyV,metricMeta('fortyYard'))+'s 40yd' : 'no 40yd yet';
-      var brStr = r.brV!==null ? formatValue(r.brV,metricMeta('bronco'))+' Bronco' : 'no Bronco yet';
-      return flagRowHtml(i+1, r.a, ordinalSuffix(r.composite)+' pct', fyStr+' \u00b7 '+brStr);
-    }).join('');
-    wireFlagRows(speedEl);
+  var panel = document.getElementById('panel-flags');
+  Array.prototype.forEach.call(panel.querySelectorAll('.tier-toggle'), function(toggle){
+    var key = toggle.getAttribute('data-tier-key');
+    Array.prototype.forEach.call(toggle.querySelectorAll('.tier-toggle-btn'), function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        flagTierView[key] = btn.getAttribute('data-tier');
+        renderFlags();
+      });
+    });
+  });
+
+  if(panel) wireFlagRows(panel);
+}
+
+/* --- Methodology tab: generated straight from STANDARDS, one source of truth --- */
+function shortSourceLabel(key, std){
+  if(key==='backSquat'||key==='benchPress'||key==='deadlift') return 'Patrick Basil, CSCS (SimpliFaster, 2022) + cross-checked against other published standards';
+  if(key==='powerClean') return 'Team-calibrated from this roster\u2019s own numbers';
+  if(key==='ffmi') return 'Kouri et al., 1995 (foundational FFMI study)';
+  if(key==='bodyFat') return 'DEXA study, 71 D1 male lacrosse players (2018)';
+  if(key==='bronco') return 'Set directly by CSU strength staff';
+  if(key==='fortyYard') return 'Team-relative, no external standard';
+  if(key==='cmj') return 'Sayers equation (1999), peer-reviewed';
+  return '';
+}
+
+function methodologyCardHtml(key){
+  var std = STANDARDS[key];
+  var valuesHtml = '';
+  if(std.kind==='ratioTier'){
+    valuesHtml = 'Min <b>'+std.min+'\u00d7</b> &middot; Goal <b>'+std.goal+'\u00d7</b>'+(std.exceptional?' &middot; Exceptional <b>'+std.exceptional+'\u00d7</b>':'')+' '+escapeHtml(std.relLabel);
+  } else if(std.kind==='bandTier'){
+    valuesHtml = 'Bands: <b>below '+std.bands[0]+'</b> &middot; <b>'+std.bands[0]+'\u2013'+std.bands[1]+'</b> &middot; <b>'+std.bands[1]+'\u2013'+std.bands[2]+'</b> &middot; <b>'+std.bands[2]+'+</b>';
+  } else if(std.kind==='threshold'){
+    var unitLabel = key==='bronco' ? fmtTime(std.value) : std.value+'%';
+    valuesHtml = 'Flag if '+(std.flagIf==='above'?'above':'below')+' <b>'+unitLabel+'</b>';
+  } else if(std.kind==='percentileBottom' || std.kind==='percentileBottomPower'){
+    valuesHtml = 'Flag bottom <b>'+std.pct+'%</b> of the team';
   }
+  var linkHtml = std.sourceUrl ? '<a href="'+std.sourceUrl+'" target="_blank" rel="noopener" class="method-link">View source \u2192</a>' : '';
+  var noteHtml = std.note ? '<div class="method-note">'+escapeHtml(std.note)+'</div>' : '';
+  return '<div class="method-card">'+
+    '<h3>'+escapeHtml(std.label)+'</h3>'+
+    '<div class="method-values">'+valuesHtml+'</div>'+
+    '<div class="method-short-source">'+escapeHtml(shortSourceLabel(key,std))+'</div>'+
+    '<details class="method-details"><summary>Full sourcing</summary>'+
+      '<p class="method-source">'+escapeHtml(std.source)+'</p>'+
+      noteHtml+
+      linkHtml+
+    '</details>'+
+  '</div>';
+}
+
+function renderMethodology(){
+  var el = document.getElementById('methodologyBody');
+  if(!el) return;
+  var groups = [
+    {title:'Body composition', keys:['bodyFat','ffmi']},
+    {title:'Strength', keys:['backSquat','benchPress','deadlift','powerClean']},
+    {title:'Power & speed', keys:['cmj','fortyYard','bronco']}
+  ];
+  el.innerHTML = groups.map(function(g){
+    return '<div class="flags-col-head">'+g.title+'</div><div class="method-grid">'+g.keys.map(methodologyCardHtml).join('')+'</div>';
+  }).join('');
 }
 
 function renderAll(){
@@ -1500,6 +1932,7 @@ function renderAll(){
   renderLeaderboard();
   renderTrendChart();
   renderFlags();
+  renderMethodology();
 }
 
 loadData();
