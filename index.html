@@ -245,6 +245,22 @@
   .flag-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
   .flag-card h3{margin:0;font-size:14.5px;color:var(--text-primary);}
   .flag-card p.hint{margin:2px 0 12px;font-size:11.5px;color:var(--text-muted);line-height:1.45;}
+  .quad-toolbar-note{font-size:12px;color:var(--text-secondary);margin:0 0 14px;line-height:1.5;max-width:760px;}
+  .quad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:22px;}
+  .quad-card{background:var(--surface);border:1px solid var(--border);border-top:4px solid var(--csu-green);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;}
+  .quad-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;}
+  .quad-card h3{margin:0;font-size:14px;color:var(--text-primary);}
+  .quad-count{font-size:11.5px;font-weight:800;color:var(--csu-green);background:var(--csu-green-dim);padding:2px 9px;border-radius:12px;}
+  .quad-card.quad-partial{border-top-color:var(--text-muted);}
+  .quad-card.quad-partial .quad-count{color:var(--text-secondary);background:var(--surface-2);}
+  .quad-card p.hint{margin:3px 0 12px;font-size:11.5px;color:var(--text-muted);line-height:1.45;}
+  .quad-athlete-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-top:1px solid var(--border);font-size:12.5px;}
+  .quad-athlete-row:first-of-type{border-top:none;}
+  .quad-athlete-name{font-weight:600;color:var(--text-primary);cursor:pointer;}
+  .quad-athlete-name:hover{color:var(--csu-green);text-decoration:underline;}
+  .quad-athlete-stats{color:var(--text-secondary);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:11.5px;}
+  .quad-empty{font-size:12px;color:var(--text-muted);padding:6px 0;}
+  .quad-untested-note{font-size:12px;color:var(--text-muted);margin-top:4px;}
   .std-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;}
   .std-section-head{display:flex;align-items:center;margin-bottom:10px;}
   .std-section-head h3{margin:0;font-size:14px;color:var(--text-primary);display:flex;align-items:center;}
@@ -320,6 +336,9 @@
 <nav class="tabs">
   <button class="tab-btn active" data-tab="overview">Team overview</button>
   <button class="tab-btn" data-tab="leaderboard">Leaderboard &amp; trends</button>
+  <button class="tab-btn" data-tab="power">Power profile</button>
+  <button class="tab-btn" data-tab="speed">Speed profile</button>
+  <button class="tab-btn" data-tab="strength">Strength profile</button>
   <button class="tab-btn" data-tab="flags">Flags</button>
   <button class="tab-btn" data-tab="methodology">Methodology</button>
 </nav>
@@ -441,6 +460,69 @@
     </div>
   </section>
 
+  <section class="panel" id="panel-power">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Power profile: jump height &times; ground contact time</h2>
+        <p class="quad-toolbar-note">Every athlete's pogo-hop RSI test gives us three numbers from the same rep: how high they jump, how long they're on the ground, and RSI (jump height &divide; ground contact time). Plotting jump height against ground contact time sorts the roster into four training-need groups &mdash; who needs raw power, who needs to get off the ground faster, and who's already doing both well.</p>
+      </div>
+    </div>
+    <div class="field-inline" style="margin-bottom:16px;">
+      <label>Thresholds</label>
+      <div class="segmented" id="powerModeToggle">
+        <button data-mode="team" class="active">Team-relative</button>
+        <button data-mode="fixed">Fixed benchmarks</button>
+      </div>
+    </div>
+    <div class="empty-note" id="powerProfileNote"></div>
+
+    <div class="chart-card" id="quadChartCard" style="margin-bottom:22px;"></div>
+
+    <div class="quad-grid" id="quadGrid"></div>
+  </section>
+
+  <section class="panel" id="panel-speed">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Speed profile: 40-yard dash &times; MAS (Bronco)</h2>
+        <p class="quad-toolbar-note">The 40-yard dash captures acceleration and top-end speed; MAS (maximal aerobic speed, derived from the Bronco: 1200m &divide; time) captures the aerobic engine that lets speed repeat over a game. Plotting them together separates true all-around speed from a big engine with no top gear, or a fast first step that can't be repeated.</p>
+      </div>
+    </div>
+    <div class="field-inline" style="margin-bottom:16px;">
+      <label>Thresholds</label>
+      <div class="segmented" id="speedModeToggle">
+        <button data-mode="team" class="active">Team-relative</button>
+        <button data-mode="fixed">Fixed benchmarks</button>
+      </div>
+    </div>
+    <div class="empty-note" id="speedProfileNote"></div>
+
+    <div class="chart-card" id="speedChartCard" style="margin-bottom:22px;"></div>
+
+    <div class="quad-grid" id="speedGrid"></div>
+  </section>
+
+  <section class="panel" id="panel-strength">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Strength profile: relative squat &times; clean:squat ratio</h2>
+        <p class="quad-toolbar-note">Back squat relative to bodyweight captures maximal strength; the power clean : squat ratio captures how much of that strength converts into rate of force development. Plotting them together separates athletes who are strong but slow to apply it from athletes who are explosive relative to a still-developing strength base.</p>
+      </div>
+    </div>
+    <div class="field-inline" style="margin-bottom:16px;">
+      <label>Thresholds</label>
+      <div class="segmented" id="strengthModeToggle">
+        <button data-mode="team" class="active">Team-relative</button>
+        <button data-mode="fixed">Fixed benchmarks</button>
+      </div>
+    </div>
+    <div class="empty-note" id="strengthProfileNote"></div>
+
+    <div class="chart-card" id="strengthChartCard" style="margin-bottom:22px;"></div>
+
+    <div class="quad-grid" id="strengthGrid"></div>
+  </section>
+
   <section class="panel" id="panel-flags">
     <div class="flags-intro">Every category below is judged against a real standard, not just team rank — hover the <span class="info-icon" style="margin-left:0;">&#9432;</span> next to any metric to see exactly where its numbers come from. Full detail lives in the <a href="#" data-goto-tab="methodology" class="flags-intro-link">Methodology</a> tab. Click any athlete to open their profile.</div>
 
@@ -515,7 +597,7 @@
 <script>
 (function(){
 
-var ATHLETES_SEED = [{"id":"m2","no":2,"name":"Evan Ryba","pos":"D","cl":"Fr.","hometown":"Medina, OH / Medina","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":294}]}},{"id":"m11","no":11,"name":"Carter Haun","pos":"SSDM","cl":"Fr.","hometown":"Milford, OH / Milford","series":{}},{"id":"m14","no":14,"name":"Gavin Cunningham","pos":"M","cl":"Fr.","hometown":"Lino Lakes, MN / Centennial","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":289}]}},{"id":"m20","no":20,"name":"Grant Koloski","pos":"GK","cl":"Fr.","hometown":"Lincoln, RI / Mt. Saint Charlies Academy","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":320}]}},{"id":"m21","no":21,"name":"Gabe Ponte","pos":"LSM","cl":"Fr.","hometown":"Kent, OH / Perkiomen School","series":{}},{"id":"m25","no":25,"name":"Micah Fenske","pos":"SSDM","cl":"Fr.","hometown":"Salem, OR / West Salem","series":{}},{"id":"m32","no":32,"name":"Brooks Mahoney","pos":"A","cl":"Fr.","hometown":"Louisville, KY / St. Xavier","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":290}]}},{"id":"m35","no":35,"name":"Malik Andrews","pos":"FO","cl":"Fr.","hometown":"Wausau, WI / Wausau","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":312}]}},{"id":"m37","no":37,"name":"Brady Gallagher","pos":"A","cl":"Fr.","hometown":"Reinholds, PA / Cocalico","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":301}]}},{"id":"m45","no":45,"name":"Michael McBay","pos":"D","cl":"Fr.","hometown":"Burlington, Ontario / Dr. Frank Hayden Secondary School","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":310}]}},{"id":"m55","no":55,"name":"Grayson Cole","pos":"SSDM","cl":"Fr.","hometown":"Highlands Ranch, CO / Rock Canyon","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":302}]}},{"id":"m3","no":3,"name":"Brennen Hickey","pos":"A","cl":"Jr.","hometown":"West Chester, OH / Moeller","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":10.7},{"date":"2025-12-03","label":"Dec 2025","value":13}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":165.6},{"date":"2025-12-03","label":"Dec 2025","value":164.1}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":185.4},{"date":"2025-12-03","label":"Dec 2025","value":188.7}]},"heightIn":70.5},{"id":"m4","no":4,"name":"Adam Van Voorhis","pos":"M","cl":"Jr.","hometown":"Columbus, OH / Hilliard Davidson","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":15.4},{"date":"2025-12-02","label":"Dec 2025","value":15.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.7},{"date":"2025-12-02","label":"Dec 2025","value":155.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":182.8},{"date":"2025-12-02","label":"Dec 2025","value":184.4}]},"heightIn":70.0},{"id":"m10","no":10,"name":"Seth Alejandrino","pos":"D","cl":"Jr.","hometown":"Dayton, OH / Centerville","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":300}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":19.5},{"date":"2025-12-04","label":"Dec 2025","value":16.3}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":161.3},{"date":"2025-12-04","label":"Dec 2025","value":172.1}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":200.5},{"date":"2025-12-04","label":"Dec 2025","value":205.7}]},"heightIn":72.5},{"id":"m12","no":12,"name":"Enrico Lombardo","pos":"LSM","cl":"Jr.","hometown":"North York, Ontario / Perkiomen School","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":240.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":260.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":195.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":322.6}],"bodyFat":[{"date":"2025-09-12","label":"Fall 2025","value":21.3},{"date":"2025-12-02","label":"Dec 2025","value":21.4}],"leanMass":[{"date":"2025-09-12","label":"Fall 2025","value":149.4},{"date":"2025-12-02","label":"Dec 2025","value":145}],"bodyMass":[{"date":"2025-09-12","label":"Fall 2025","value":189.9},{"date":"2025-12-02","label":"Dec 2025","value":184.4}]},"heightIn":70.7},{"id":"m15","no":15,"name":"Maddox Johnson","pos":"M","cl":"Jr.","hometown":"Beavercreek Township, OH / Beavercreek","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":293}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":13.7},{"date":"2025-12-04","label":"Dec 2025","value":16.8}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":152.7},{"date":"2025-12-04","label":"Dec 2025","value":155.3}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":176.9},{"date":"2025-12-04","label":"Dec 2025","value":186.6}]},"heightIn":68.5},{"id":"m24","no":24,"name":"Jason Hilton","pos":"M","cl":"Jr.","hometown":"Lancaster, PA / Hempfield (Wagner)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":360.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":286.5},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":290}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":11.8},{"date":"2025-12-04","label":"Dec 2025","value":11.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":163.4},{"date":"2025-12-04","label":"Dec 2025","value":165.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":185.3},{"date":"2025-12-04","label":"Dec 2025","value":187.3}]},"heightIn":72.8},{"id":"m27","no":27,"name":"Alex Long","pos":"SSDM","cl":"Jr.","hometown":"Hamilton, Ontario / Bishop Ryan","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":287.6},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":308}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.6},{"date":"2025-12-03","label":"Dec 2025","value":11.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":142.1},{"date":"2025-12-03","label":"Dec 2025","value":139.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":166.3},{"date":"2025-12-03","label":"Dec 2025","value":158}]},"heightIn":71.9},{"id":"m29","no":29,"name":"Ethan Erker","pos":"M","cl":"Jr.","hometown":"Heber City, UT / Wasatch","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":286.5}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":4.4},{"date":"2025-12-03","label":"Dec 2025","value":7.5}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":172.9},{"date":"2025-12-03","label":"Dec 2025","value":170.4}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":180.8},{"date":"2025-12-03","label":"Dec 2025","value":184.1}]},"heightIn":70.2},{"id":"m31","no":31,"name":"Carson Cheek","pos":"FO","cl":"Jr.","hometown":"West Chester, OH / Badin","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":313.9},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":318}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":18.9},{"date":"2025-12-02","label":"Dec 2025","value":18}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":145.8},{"date":"2025-12-02","label":"Dec 2025","value":146.6}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":179.8},{"date":"2025-12-02","label":"Dec 2025","value":178.9}]},"heightIn":68.3},{"id":"m47","no":47,"name":"Mattix Groves","pos":"M","cl":"Jr.","hometown":"Naperville, IL / Naperville North","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":190.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":273.4},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":289}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":9},{"date":"2025-12-04","label":"Dec 2025","value":7.4}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":152.6},{"date":"2025-12-04","label":"Dec 2025","value":160.1}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":167.8},{"date":"2025-12-04","label":"Dec 2025","value":173}]},"heightIn":73.7},{"id":"m77","no":77,"name":"Caden Wilson","pos":"FO","cl":"Jr.","hometown":"Hilliard, OH / Hilliard Davidson","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":355.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":11.3},{"date":"2025-12-02","label":"Dec 2025","value":15.3}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":181},{"date":"2025-12-02","label":"Dec 2025","value":174.5}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":204.1},{"date":"2025-12-02","label":"Dec 2025","value":206.1}]},"heightIn":70.5},{"id":"m88","no":88,"name":"Creed McDonald","pos":"M","cl":"Jr.","hometown":"Springboro, OH / Springboro","series":{"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":290}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.2},{"date":"2025-12-03","label":"Dec 2025","value":16.7}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.8},{"date":"2025-12-03","label":"Dec 2025","value":151}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":180.4},{"date":"2025-12-03","label":"Dec 2025","value":181.4}]},"heightIn":71.2},{"id":"m99","no":99,"name":"Logan Leatherberry","pos":"GK","cl":"Jr.","hometown":"Oregon, WI / Oregon","series":{"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":339.0}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":36.8},{"date":"2025-12-04","label":"Dec 2025","value":35.1}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":180},{"date":"2025-12-04","label":"Dec 2025","value":171.5}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":284.8},{"date":"2025-12-04","label":"Dec 2025","value":264.3}]},"heightIn":73.8},{"id":"m16","no":16,"name":"Joel Brown","pos":"SSDM","cl":"R-Jr.","hometown":"Loveland, OH / Archbishop Moeller","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":255.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":295.3}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":11.8}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":127.9}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":145}]},"heightIn":69.9},{"id":"m19","no":19,"name":"Joe Ginnetti","pos":"SSDM","cl":"R-Jr.","hometown":"Cincinnati, OH / Moeller (Air Force)","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":321.5}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":21.2},{"date":"2025-12-02","label":"Dec 2025","value":25.9}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":175.3},{"date":"2025-12-02","label":"Dec 2025","value":173.7}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":222.6},{"date":"2025-12-02","label":"Dec 2025","value":234.3}]},"heightIn":71.8},{"id":"m22","no":22,"name":"Jameson Demarco","pos":"SSDM","cl":"R-Jr.","hometown":"Olmstead Falls, OH / Olmstead Falls","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":235.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":284.3},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":282}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.7},{"date":"2025-12-03","label":"Dec 2025","value":8.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":152.3},{"date":"2025-12-03","label":"Dec 2025","value":150.8}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":161.5},{"date":"2025-12-03","label":"Dec 2025","value":165}]},"heightIn":67.2},{"id":"m28","no":28,"name":"Luke Ray","pos":"M","cl":"R-So.","hometown":"Milfrod, OH / Milford (Towson)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":29.3},{"date":"2025-12-04","label":"Dec 2025","value":28.6}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":128.1},{"date":"2025-12-04","label":"Dec 2025","value":128.2}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":181.1},{"date":"2025-12-04","label":"Dec 2025","value":179.7}],"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":293}]},"heightIn":66.1},{"id":"m0","no":0,"name":"Noah Goedjen","pos":"D","cl":"R-Sr.","hometown":"Greenfield, MN / Providence Academy (High Point)","series":{"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":300}]}},{"id":"m1","no":1,"name":"Will Adair","pos":"M","cl":"R-Sr.","hometown":"Cincinnati, OH / Indian Hills","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":320.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bodyFat":[{"date":"2025-09-12","label":"Fall 2025","value":10.6},{"date":"2025-12-03","label":"Dec 2025","value":12.5}],"leanMass":[{"date":"2025-09-12","label":"Fall 2025","value":165.1},{"date":"2025-12-03","label":"Dec 2025","value":163.2}],"bodyMass":[{"date":"2025-09-12","label":"Fall 2025","value":184.7},{"date":"2025-12-03","label":"Dec 2025","value":186.4}],"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":289}]},"heightIn":71.9},{"id":"m7","no":7,"name":"Jack Dickson","pos":"SSDM","cl":"R-Sr.","hometown":"Laguna Niguel, CA / Corona Del Mar","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":297.5},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":304}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":16},{"date":"2025-12-03","label":"Dec 2025","value":20.8}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":168.4},{"date":"2025-12-03","label":"Dec 2025","value":161.3}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":200.5},{"date":"2025-12-03","label":"Dec 2025","value":203.6}]},"heightIn":71.9},{"id":"m41","no":41,"name":"Xander Johnson","pos":"A","cl":"R-Sr.","hometown":"Lancaster, PA / Manheim Township","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":300.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":395.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":13.9},{"date":"2025-12-02","label":"Dec 2025","value":12}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.1},{"date":"2025-12-02","label":"Dec 2025","value":155.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":177.8},{"date":"2025-12-02","label":"Dec 2025","value":177.1}],"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":289}]},"heightIn":70.5},{"id":"m66","no":66,"name":"Chase Gettys","pos":"D","cl":"So.","hometown":"Mason, OH / Mason","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":420.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":294.2},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":297}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":9.1},{"date":"2025-12-03","label":"Dec 2025","value":12.1}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":151.1},{"date":"2025-12-03","label":"Dec 2025","value":149.9}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":166.2},{"date":"2025-12-03","label":"Dec 2025","value":170.5}]},"heightIn":71.0},{"id":"m9","no":9,"name":"Ever Whitaker","pos":"D","cl":"So.","hometown":"Reno, NV / Galena","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":255.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":296}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":16.1},{"date":"2025-12-05","label":"Dec 2025","value":15.8}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":165.9},{"date":"2025-12-05","label":"Dec 2025","value":169.7}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":197.8},{"date":"2025-12-05","label":"Dec 2025","value":201.4}]},"heightIn":72.0},{"id":"m17","no":17,"name":"Jayvon Robinson","pos":"GK","cl":"So.","hometown":"Bronx, NY / Suffield Academy","series":{"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":16.2},{"date":"2025-12-05","label":"Dec 2025","value":16.3}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":144.8},{"date":"2025-12-05","label":"Dec 2025","value":145.7}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":172.8},{"date":"2025-12-05","label":"Dec 2025","value":174.1}]},"heightIn":70.8},{"id":"m33","no":33,"name":"Nico Federici","pos":"GK","cl":"So.","hometown":"Wausau, WI / Wausau","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":145.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":17.9},{"date":"2025-12-03","label":"Dec 2025","value":20.4}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":161.4},{"date":"2025-12-03","label":"Dec 2025","value":162.4}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":196.5},{"date":"2025-12-03","label":"Dec 2025","value":204}],"bronco":[{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":301}]},"heightIn":76.2},{"id":"m34","no":34,"name":"Tavin Jones","pos":"FO","cl":"So.","hometown":"Las Vegas, NV / Western Reserve Academy","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":375.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":287.6},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":292}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":9.5},{"date":"2025-12-02","label":"Dec 2025","value":7.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.3},{"date":"2025-12-02","label":"Dec 2025","value":153.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":170.6},{"date":"2025-12-02","label":"Dec 2025","value":166.5}]},"heightIn":70.0},{"id":"m51","no":51,"name":"Landon Whalen","pos":"A","cl":"So.","hometown":"Hilliard, OH / Hilliard Darby","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":295.3},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":292}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":14.3},{"date":"2025-12-04","label":"Dec 2025","value":15.4}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":163.1},{"date":"2025-12-04","label":"Dec 2025","value":164.8}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":190.4},{"date":"2025-12-04","label":"Dec 2025","value":194.9}]},"heightIn":71.9},{"id":"m5","no":5,"name":"Layton Speer","pos":"M","cl":"Sr.","hometown":"Houston, TX / Langham Creek","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":284.3}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":9.6},{"date":"2025-12-02","label":"Dec 2025","value":5.5}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.2},{"date":"2025-12-02","label":"Dec 2025","value":156.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":169.5},{"date":"2025-12-02","label":"Dec 2025","value":166.1}]},"heightIn":72.0},{"id":"m6","no":6,"name":"Oliver Vanyo","pos":"GK","cl":"Sr.","hometown":"St. Catherines, Ontario / Governor Science (Lindenwood)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":200.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":311.7},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":303}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.3},{"date":"2025-12-03","label":"Dec 2025","value":20.3}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":138},{"date":"2025-12-03","label":"Dec 2025","value":136.8}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":161.1},{"date":"2025-12-03","label":"Dec 2025","value":171.8}]},"heightIn":72.2},{"id":"m8","no":8,"name":"Griffin Valli","pos":"D","cl":"Sr.","hometown":"Buffalo, MN / Buffalo","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":365.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":285.4}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":14.8},{"date":"2025-12-08","label":"Dec 2025","value":12.7}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":170.1},{"date":"2025-12-08","label":"Dec 2025","value":171.5}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":199.6},{"date":"2025-12-08","label":"Dec 2025","value":196.5}]},"heightIn":73.4},{"id":"m18","no":18,"name":"Ethan Brooks","pos":"M","cl":"Sr.","hometown":"Powell, OH / Olentangy Liberty","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":165.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":295.3},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":288}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":12.5},{"date":"2025-12-02","label":"Dec 2025","value":10.3}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":123.1},{"date":"2025-12-02","label":"Dec 2025","value":123.7}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":140.7},{"date":"2025-12-02","label":"Dec 2025","value":138}]},"heightIn":67.5},{"id":"m23","no":23,"name":"Evan Knickle","pos":"A","cl":"Sr.","hometown":"Springboro, OH / Springboro","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":310.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":235.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":300.7},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":300}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.3},{"date":"2025-12-02","label":"Dec 2025","value":7.5}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":174.2},{"date":"2025-12-02","label":"Dec 2025","value":175.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":184},{"date":"2025-12-02","label":"Dec 2025","value":190.1}]},"heightIn":72.0},{"id":"m36","no":36,"name":"Liam Moffatt","pos":"D","cl":"Sr.","hometown":"Toronto, Ontario / Everest Academy","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":260.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":190.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":302.9}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":15.9},{"date":"2025-12-05","label":"Dec 2025","value":20.9}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.9},{"date":"2025-12-05","label":"Dec 2025","value":148.3}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":183},{"date":"2025-12-05","label":"Dec 2025","value":187.4}]},"heightIn":72.2},{"id":"m43","no":43,"name":"Luke Mitchell","pos":"LSM","cl":"Sr.","hometown":"Troy, OH / Chaminade-Juliene","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":210.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":298.6},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":312}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.8},{"date":"2025-12-03","label":"Dec 2025","value":2.8}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":155.1},{"date":"2025-12-03","label":"Dec 2025","value":152.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":164.7},{"date":"2025-12-03","label":"Dec 2025","value":157.2}]},"heightIn":73.0},{"id":"m50","no":50,"name":"Sebastian West","pos":"A","cl":"Sr.","hometown":"Racine, WI / Culver Acadmey (Hampton)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":308.4},{"date":"2026-08-27","label":"Fall '26 tested (1200m)","value":305}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":14.5},{"date":"2025-12-09","label":"Dec 2025","value":10.8}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":119.8},{"date":"2025-12-09","label":"Dec 2025","value":126.5}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":140.2},{"date":"2025-12-09","label":"Dec 2025","value":141.8}]},"heightIn":65.7},{"id":"m82","no":82,"name":"Mitchell Maibaucher","pos":"SSDM","cl":"Sr.","hometown":"Chicago, IL / Notre Dame College Prep","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":450.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":340.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested (pace-adj. to 1200m)","value":286.5}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":7.1},{"date":"2025-12-03","label":"Dec 2025","value":8.7}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":170.6},{"date":"2025-12-03","label":"Dec 2025","value":169.8}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":183.5},{"date":"2025-12-03","label":"Dec 2025","value":186}]},"heightIn":69.7}];
+var ATHLETES_SEED = [{"id":"m2","no":2,"name":"Evan Ryba","pos":"D","cl":"Fr.","hometown":"Medina, OH / Medina","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":17.2}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.248}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.74}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":294}]}},{"id":"m11","no":11,"name":"Carter Haun","pos":"SSDM","cl":"Fr.","hometown":"Milford, OH / Milford","series":{}},{"id":"m14","no":14,"name":"Gavin Cunningham","pos":"M","cl":"Fr.","hometown":"Lino Lakes, MN / Centennial","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.17}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.69}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":289}]}},{"id":"m20","no":20,"name":"Grant Koloski","pos":"GK","cl":"Fr.","hometown":"Lincoln, RI / Mt. Saint Charlies Academy","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":24.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.187}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.1}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.19}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":320}]}},{"id":"m21","no":21,"name":"Gabe Ponte","pos":"LSM","cl":"Fr.","hometown":"Kent, OH / Perkiomen School","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.195}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":13.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.75}]}},{"id":"m25","no":25,"name":"Micah Fenske","pos":"SSDM","cl":"Fr.","hometown":"Salem, OR / West Salem","series":{}},{"id":"m32","no":32,"name":"Brooks Mahoney","pos":"A","cl":"Fr.","hometown":"Louisville, KY / St. Xavier","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.5}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.193}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":12.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.64}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":290}]}},{"id":"m35","no":35,"name":"Malik Andrews","pos":"FO","cl":"Fr.","hometown":"Wausau, WI / Wausau","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":23.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.227}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.5}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.96}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":312}]}},{"id":"m37","no":37,"name":"Brady Gallagher","pos":"A","cl":"Fr.","hometown":"Reinholds, PA / Cocalico","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":17.5}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.208}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":13.2}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.61}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":301}]}},{"id":"m45","no":45,"name":"Michael McBay","pos":"D","cl":"Fr.","hometown":"Burlington, Ontario / Dr. Frank Hayden Secondary School","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.4}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.175}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.3}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.38}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":310}]}},{"id":"m55","no":55,"name":"Grayson Cole","pos":"SSDM","cl":"Fr.","hometown":"Highlands Ranch, CO / Rock Canyon","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.187}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.1}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.45}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":302}]}},{"id":"m3","no":3,"name":"Brennen Hickey","pos":"A","cl":"Jr.","hometown":"West Chester, OH / Moeller","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":10.7},{"date":"2025-12-03","label":"Dec 2025","value":13}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":165.6},{"date":"2025-12-03","label":"Dec 2025","value":164.1}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":185.4},{"date":"2025-12-03","label":"Dec 2025","value":188.7}]},"heightIn":70.5},{"id":"m4","no":4,"name":"Adam Van Voorhis","pos":"M","cl":"Jr.","hometown":"Columbus, OH / Hilliard Davidson","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":15.4},{"date":"2025-12-02","label":"Dec 2025","value":15.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.7},{"date":"2025-12-02","label":"Dec 2025","value":155.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":182.8},{"date":"2025-12-02","label":"Dec 2025","value":184.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.4}]},"heightIn":70.0},{"id":"m10","no":10,"name":"Seth Alejandrino","pos":"D","cl":"Jr.","hometown":"Dayton, OH / Centerville","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":300}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":19.5},{"date":"2025-12-04","label":"Dec 2025","value":16.3}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":161.3},{"date":"2025-12-04","label":"Dec 2025","value":172.1}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":200.5},{"date":"2025-12-04","label":"Dec 2025","value":205.7}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.235}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.14}]},"heightIn":72.5},{"id":"m12","no":12,"name":"Enrico Lombardo","pos":"LSM","cl":"Jr.","hometown":"North York, Ontario / Perkiomen School","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":240.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":260.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":195.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":295}],"bodyFat":[{"date":"2025-09-12","label":"Fall 2025","value":21.3},{"date":"2025-12-02","label":"Dec 2025","value":21.4}],"leanMass":[{"date":"2025-09-12","label":"Fall 2025","value":149.4},{"date":"2025-12-02","label":"Dec 2025","value":145}],"bodyMass":[{"date":"2025-09-12","label":"Fall 2025","value":189.9},{"date":"2025-12-02","label":"Dec 2025","value":184.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.182}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.7}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.77}]},"heightIn":70.7},{"id":"m15","no":15,"name":"Maddox Johnson","pos":"M","cl":"Jr.","hometown":"Beavercreek Township, OH / Beavercreek","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":293}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":13.7},{"date":"2025-12-04","label":"Dec 2025","value":16.8}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":152.7},{"date":"2025-12-04","label":"Dec 2025","value":155.3}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":176.9},{"date":"2025-12-04","label":"Dec 2025","value":186.6}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.184}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":21.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.92}]},"heightIn":68.5},{"id":"m24","no":24,"name":"Jason Hilton","pos":"M","cl":"Jr.","hometown":"Lancaster, PA / Hempfield (Wagner)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":360.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":262},{"date":"2026-08-27","label":"Fall '26 test","value":290}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":11.8},{"date":"2025-12-04","label":"Dec 2025","value":11.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":163.4},{"date":"2025-12-04","label":"Dec 2025","value":165.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":185.3},{"date":"2025-12-04","label":"Dec 2025","value":187.3}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":25.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.234}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":21.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.34}]},"heightIn":72.8},{"id":"m27","no":27,"name":"Alex Long","pos":"SSDM","cl":"Jr.","hometown":"Hamilton, Ontario / Bishop Ryan","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":263},{"date":"2026-08-27","label":"Fall '26 test","value":308}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.6},{"date":"2025-12-03","label":"Dec 2025","value":11.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":142.1},{"date":"2025-12-03","label":"Dec 2025","value":139.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":166.3},{"date":"2025-12-03","label":"Dec 2025","value":158}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.192}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":14.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.99}]},"heightIn":71.9},{"id":"m29","no":29,"name":"Ethan Erker","pos":"M","cl":"Jr.","hometown":"Heber City, UT / Wasatch","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":262}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":4.4},{"date":"2025-12-03","label":"Dec 2025","value":7.5}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":172.9},{"date":"2025-12-03","label":"Dec 2025","value":170.4}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":180.8},{"date":"2025-12-03","label":"Dec 2025","value":184.1}]},"heightIn":70.2},{"id":"m31","no":31,"name":"Carson Cheek","pos":"FO","cl":"Jr.","hometown":"West Chester, OH / Badin","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":287},{"date":"2026-08-27","label":"Fall '26 test","value":318}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":18.9},{"date":"2025-12-02","label":"Dec 2025","value":18}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":145.8},{"date":"2025-12-02","label":"Dec 2025","value":146.6}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":179.8},{"date":"2025-12-02","label":"Dec 2025","value":178.9}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":25.7}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.179}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":25.2}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":3.59}]},"heightIn":68.3},{"id":"m47","no":47,"name":"Mattix Groves","pos":"M","cl":"Jr.","hometown":"Naperville, IL / Naperville North","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":190.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":250},{"date":"2026-08-27","label":"Fall '26 test","value":289}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":9},{"date":"2025-12-04","label":"Dec 2025","value":7.4}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":152.6},{"date":"2025-12-04","label":"Dec 2025","value":160.1}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":167.8},{"date":"2025-12-04","label":"Dec 2025","value":173}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.4}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.197}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.38}]},"heightIn":73.7},{"id":"m77","no":77,"name":"Caden Wilson","pos":"FO","cl":"Jr.","hometown":"Hilliard, OH / Hilliard Davidson","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":355.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":11.3},{"date":"2025-12-02","label":"Dec 2025","value":15.3}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":181},{"date":"2025-12-02","label":"Dec 2025","value":174.5}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":204.1},{"date":"2025-12-02","label":"Dec 2025","value":206.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.263}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.3}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.61}]},"heightIn":70.5},{"id":"m88","no":88,"name":"Creed McDonald","pos":"M","cl":"Jr.","hometown":"Springboro, OH / Springboro","series":{"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":290}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.2},{"date":"2025-12-03","label":"Dec 2025","value":16.7}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.8},{"date":"2025-12-03","label":"Dec 2025","value":151}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":180.4},{"date":"2025-12-03","label":"Dec 2025","value":181.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.225}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.3}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.09}]},"heightIn":71.2},{"id":"m99","no":99,"name":"Logan Leatherberry","pos":"GK","cl":"Jr.","hometown":"Oregon, WI / Oregon","series":{"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":310}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":36.8},{"date":"2025-12-04","label":"Dec 2025","value":35.1}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":180},{"date":"2025-12-04","label":"Dec 2025","value":171.5}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":284.8},{"date":"2025-12-04","label":"Dec 2025","value":264.3}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":16.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.225}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":13.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.56}]},"heightIn":73.8},{"id":"m16","no":16,"name":"Joel Brown","pos":"SSDM","cl":"R-Jr.","hometown":"Loveland, OH / Archbishop Moeller","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":255.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":270}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":11.8}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":127.9}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":145}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.183}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.63}]},"heightIn":69.9},{"id":"m19","no":19,"name":"Joe Ginnetti","pos":"SSDM","cl":"R-Jr.","hometown":"Cincinnati, OH / Moeller (Air Force)","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":294}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":21.2},{"date":"2025-12-02","label":"Dec 2025","value":25.9}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":175.3},{"date":"2025-12-02","label":"Dec 2025","value":173.7}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":222.6},{"date":"2025-12-02","label":"Dec 2025","value":234.3}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.228}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.2}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.15}]},"heightIn":71.8},{"id":"m22","no":22,"name":"Jameson Demarco","pos":"SSDM","cl":"R-Jr.","hometown":"Olmstead Falls, OH / Olmstead Falls","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":235.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":260},{"date":"2026-08-27","label":"Fall '26 test","value":282}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.7},{"date":"2025-12-03","label":"Dec 2025","value":8.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":152.3},{"date":"2025-12-03","label":"Dec 2025","value":150.8}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":161.5},{"date":"2025-12-03","label":"Dec 2025","value":165}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.4}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.191}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.64}]},"heightIn":67.2},{"id":"m28","no":28,"name":"Luke Ray","pos":"M","cl":"R-So.","hometown":"Milfrod, OH / Milford (Towson)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":29.3},{"date":"2025-12-04","label":"Dec 2025","value":28.6}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":128.1},{"date":"2025-12-04","label":"Dec 2025","value":128.2}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":181.1},{"date":"2025-12-04","label":"Dec 2025","value":179.7}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":23.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.196}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.21}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":293}]},"heightIn":66.1},{"id":"m0","no":0,"name":"Noah Goedjen","pos":"D","cl":"R-Sr.","hometown":"Greenfield, MN / Providence Academy (High Point)","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.192}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.39}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":300}]}},{"id":"m1","no":1,"name":"Will Adair","pos":"M","cl":"R-Sr.","hometown":"Cincinnati, OH / Indian Hills","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":320.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bodyFat":[{"date":"2025-09-12","label":"Fall 2025","value":10.6},{"date":"2025-12-03","label":"Dec 2025","value":12.5}],"leanMass":[{"date":"2025-09-12","label":"Fall 2025","value":165.1},{"date":"2025-12-03","label":"Dec 2025","value":163.2}],"bodyMass":[{"date":"2025-09-12","label":"Fall 2025","value":184.7},{"date":"2025-12-03","label":"Dec 2025","value":186.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.264}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":20.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.99}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":289}]},"heightIn":71.9},{"id":"m7","no":7,"name":"Jack Dickson","pos":"SSDM","cl":"R-Sr.","hometown":"Laguna Niguel, CA / Corona Del Mar","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":272},{"date":"2026-08-27","label":"Fall '26 test","value":304}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":16},{"date":"2025-12-03","label":"Dec 2025","value":20.8}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":168.4},{"date":"2025-12-03","label":"Dec 2025","value":161.3}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":200.5},{"date":"2025-12-03","label":"Dec 2025","value":203.6}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.227}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.7}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.09}]},"heightIn":71.9},{"id":"m41","no":41,"name":"Xander Johnson","pos":"A","cl":"R-Sr.","hometown":"Lancaster, PA / Manheim Township","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":300.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":395.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":13.9},{"date":"2025-12-02","label":"Dec 2025","value":12}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.1},{"date":"2025-12-02","label":"Dec 2025","value":155.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":177.8},{"date":"2025-12-02","label":"Dec 2025","value":177.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.29}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":23.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.08}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":289}]},"heightIn":70.5},{"id":"m66","no":66,"name":"Chase Gettys","pos":"D","cl":"So.","hometown":"Mason, OH / Mason","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":420.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":269},{"date":"2026-08-27","label":"Fall '26 test","value":297}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":9.1},{"date":"2025-12-03","label":"Dec 2025","value":12.1}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":151.1},{"date":"2025-12-03","label":"Dec 2025","value":149.9}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":166.2},{"date":"2025-12-03","label":"Dec 2025","value":170.5}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.234}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":22.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.42}]},"heightIn":71.0},{"id":"m9","no":9,"name":"Ever Whitaker","pos":"D","cl":"So.","hometown":"Reno, NV / Galena","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":255.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":296}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":16.1},{"date":"2025-12-05","label":"Dec 2025","value":15.8}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":165.9},{"date":"2025-12-05","label":"Dec 2025","value":169.7}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":197.8},{"date":"2025-12-05","label":"Dec 2025","value":201.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":24.2}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.199}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.49}]},"heightIn":72.0},{"id":"m17","no":17,"name":"Jayvon Robinson","pos":"GK","cl":"So.","hometown":"Bronx, NY / Suffield Academy","series":{"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":16.2},{"date":"2025-12-05","label":"Dec 2025","value":16.3}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":144.8},{"date":"2025-12-05","label":"Dec 2025","value":145.7}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":172.8},{"date":"2025-12-05","label":"Dec 2025","value":174.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.212}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":15.1}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.82}]},"heightIn":70.8},{"id":"m33","no":33,"name":"Nico Federici","pos":"GK","cl":"So.","hometown":"Wausau, WI / Wausau","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":145.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":17.9},{"date":"2025-12-03","label":"Dec 2025","value":20.4}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":161.4},{"date":"2025-12-03","label":"Dec 2025","value":162.4}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":196.5},{"date":"2025-12-03","label":"Dec 2025","value":204}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.7}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.177}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.85}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":301}]},"heightIn":76.2},{"id":"m34","no":34,"name":"Tavin Jones","pos":"FO","cl":"So.","hometown":"Las Vegas, NV / Western Reserve Academy","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":375.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":263},{"date":"2026-08-27","label":"Fall '26 test","value":292}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":9.5},{"date":"2025-12-02","label":"Dec 2025","value":7.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.3},{"date":"2025-12-02","label":"Dec 2025","value":153.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":170.6},{"date":"2025-12-02","label":"Dec 2025","value":166.5}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":23.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.206}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.7}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.08}]},"heightIn":70.0},{"id":"m51","no":51,"name":"Landon Whalen","pos":"A","cl":"So.","hometown":"Hilliard, OH / Hilliard Darby","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":270},{"date":"2026-08-27","label":"Fall '26 test","value":292}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":14.3},{"date":"2025-12-04","label":"Dec 2025","value":15.4}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":163.1},{"date":"2025-12-04","label":"Dec 2025","value":164.8}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":190.4},{"date":"2025-12-04","label":"Dec 2025","value":194.9}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.8}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.192}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":21.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.92}]},"heightIn":71.9},{"id":"m5","no":5,"name":"Layton Speer","pos":"M","cl":"Sr.","hometown":"Houston, TX / Langham Creek","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":260}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":9.6},{"date":"2025-12-02","label":"Dec 2025","value":5.5}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.2},{"date":"2025-12-02","label":"Dec 2025","value":156.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":169.5},{"date":"2025-12-02","label":"Dec 2025","value":166.1}]},"heightIn":72.0},{"id":"m6","no":6,"name":"Oliver Vanyo","pos":"GK","cl":"Sr.","hometown":"St. Catherines, Ontario / Governor Science (Lindenwood)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":200.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":285},{"date":"2026-08-27","label":"Fall '26 test","value":303}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.3},{"date":"2025-12-03","label":"Dec 2025","value":20.3}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":138},{"date":"2025-12-03","label":"Dec 2025","value":136.8}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":161.1},{"date":"2025-12-03","label":"Dec 2025","value":171.8}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.193}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.51}]},"heightIn":72.2},{"id":"m8","no":8,"name":"Griffin Valli","pos":"D","cl":"Sr.","hometown":"Buffalo, MN / Buffalo","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":365.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":261}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":14.8},{"date":"2025-12-08","label":"Dec 2025","value":12.7}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":170.1},{"date":"2025-12-08","label":"Dec 2025","value":171.5}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":199.6},{"date":"2025-12-08","label":"Dec 2025","value":196.5}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.7}]},"heightIn":73.4},{"id":"m18","no":18,"name":"Ethan Brooks","pos":"M","cl":"Sr.","hometown":"Powell, OH / Olentangy Liberty","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":165.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":270},{"date":"2026-08-27","label":"Fall '26 test","value":288}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":12.5},{"date":"2025-12-02","label":"Dec 2025","value":10.3}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":123.1},{"date":"2025-12-02","label":"Dec 2025","value":123.7}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":140.7},{"date":"2025-12-02","label":"Dec 2025","value":138}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.183}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.73}]},"heightIn":67.5},{"id":"m23","no":23,"name":"Evan Knickle","pos":"A","cl":"Sr.","hometown":"Springboro, OH / Springboro","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":310.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":235.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":300}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.3},{"date":"2025-12-02","label":"Dec 2025","value":7.5}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":174.2},{"date":"2025-12-02","label":"Dec 2025","value":175.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":184},{"date":"2025-12-02","label":"Dec 2025","value":190.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.7}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.188}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.28}]},"heightIn":72.0},{"id":"m36","no":36,"name":"Liam Moffatt","pos":"D","cl":"Sr.","hometown":"Toronto, Ontario / Everest Academy","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":260.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":190.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":277}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":15.9},{"date":"2025-12-05","label":"Dec 2025","value":20.9}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.9},{"date":"2025-12-05","label":"Dec 2025","value":148.3}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":183},{"date":"2025-12-05","label":"Dec 2025","value":187.4}]},"heightIn":72.2},{"id":"m43","no":43,"name":"Luke Mitchell","pos":"LSM","cl":"Sr.","hometown":"Troy, OH / Chaminade-Juliene","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":210.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":273},{"date":"2026-08-27","label":"Fall '26 test","value":312}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.8},{"date":"2025-12-03","label":"Dec 2025","value":2.8}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":155.1},{"date":"2025-12-03","label":"Dec 2025","value":152.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":164.7},{"date":"2025-12-03","label":"Dec 2025","value":157.2}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.5}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.212}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.03}]},"heightIn":73.0},{"id":"m50","no":50,"name":"Sebastian West","pos":"A","cl":"Sr.","hometown":"Racine, WI / Culver Acadmey (Hampton)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":282},{"date":"2026-08-27","label":"Fall '26 test","value":305}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":14.5},{"date":"2025-12-09","label":"Dec 2025","value":10.8}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":119.8},{"date":"2025-12-09","label":"Dec 2025","value":126.5}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":140.2},{"date":"2025-12-09","label":"Dec 2025","value":141.8}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.227}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.33}]},"heightIn":65.7},{"id":"m82","no":82,"name":"Mitchell Maibaucher","pos":"SSDM","cl":"Sr.","hometown":"Chicago, IL / Notre Dame College Prep","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":450.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":340.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":262}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":7.1},{"date":"2025-12-03","label":"Dec 2025","value":8.7}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":170.6},{"date":"2025-12-03","label":"Dec 2025","value":169.8}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":183.5},{"date":"2025-12-03","label":"Dec 2025","value":186}]},"heightIn":69.7}];
 
 
 
@@ -525,6 +607,9 @@ var METRICS = [
   {key:'deadlift', label:'Deadlift', short:'Deadlift', unit:'lb', decimals:0, group:'lifts', better:'high'},
   {key:'powerClean', label:'Power clean', short:'Power clean', unit:'lb', decimals:0, group:'lifts', better:'high'},
   {key:'cmj', label:'CMJ height', short:'CMJ', unit:'in', decimals:1, group:'power', better:'high'},
+  {key:'rsiJump', label:'RSI jump height', short:'RSI jump', unit:'in', decimals:1, group:'reactive', better:'high'},
+  {key:'rsiGct', label:'Ground contact time', short:'GCT', unit:'s', decimals:3, group:'reactive', better:'low'},
+  {key:'rsiScore', label:'Reactive Strength Index', short:'RSI', unit:'', decimals:2, group:'reactive', better:'high'},
   {key:'bronco', label:'1200m Bronco', short:'Bronco', unit:'sec', decimals:0, group:'power', better:'low', timeFormat:true},
   {key:'fortyYard', label:'40-yard dash', short:'40yd', unit:'sec', decimals:2, group:'power', better:'low'},
   {key:'bodyFat', label:'Body fat %', short:'BF%', unit:'%', decimals:1, group:'bodycomp', better:'low'},
@@ -595,17 +680,10 @@ function seriesSorted(a, key){
   return arr.slice().sort(function(x,y){ return x.date<y.date?-1:(x.date>y.date?1:0); });
 }
 
-/* Metrics being actively re-tested this cycle: once ANY athlete has a point on/after
-   the cutoff, athletes without one show as "not yet tested" (no data) rather than
-   silently falling back to a prior-cycle baseline as if it were current. */
-var CYCLE_CUTOFF = { bronco: '2026-08-20' };
-
 function curVal(a, key){
   var s = seriesSorted(a, key);
   if(s.length===0) return null;
-  var latest = s[s.length-1];
-  if(CYCLE_CUTOFF[key] && latest.date < CYCLE_CUTOFF[key]) return null;
-  return latest.value;
+  return s[s.length-1].value;
 }
 
 function computeScore(a){
@@ -773,11 +851,11 @@ var STANDARDS = {
     note:'The measured D1 team mean was 18.2%. The 20% flag line was chosen as a middle ground between that mean (which would flag close to half of any roster by definition) and a looser, less useful cutoff.'
   },
   bronco: {
-    kind:'threshold', flagIf:'above', value:301, /* 5:01 in seconds */
+    kind:'threshold', flagIf:'above', value:275, /* 4:35 in seconds */
     label:'1200m Bronco',
-    source:'Program standard set directly by the Cleveland State strength & conditioning staff (5:01 pass time for the 1200-meter test), not an external or published figure.',
+    source:'Program standard set directly by the Cleveland State strength & conditioning staff (4:35 pass time), not an external or published figure.',
     sourceUrl:null,
-    note:'Updated for Fall 2026: the test moved from 1200 yards to 1200 meters (a longer distance), so the pass time moved from 4:35 to 5:01. Prior-year baseline times shown elsewhere on this dashboard are pace-adjusted to the 1200m distance for fair comparison.'
+    note:null
   },
   fortyYard: {
     kind:'percentileBottom', pct:20,
@@ -791,6 +869,48 @@ var STANDARDS = {
     label:'CMJ (vertical jump)',
     source:'Jump height and body mass converted to peak power using the Sayers equation (Sayers et al., "Cross-validation of three jump power equations," Medicine & Science in Sports & Exercise, 1999; cross-validated, derived from squat-jump data but tested valid for CMJ within ~2.7%), then expressed as relative power (W/kg) for a bodyweight-fair comparison, and flagged as the bottom 20% of the team.',
     sourceUrl:'https://pubmed.ncbi.nlm.nih.gov/10211854/',
+    note:null
+  },
+  rsiJump: {
+    kind:'percentileBottom', pct:20,
+    label:'RSI jump height',
+    source:'Team-relative only \u2014 bottom 20% of the roster. This is the jump height from the pogo-hop RSI test itself (hands on hips, no countermovement dip), which is a different movement than the CMJ, so there is no external published standard for this specific value. It is used here mainly as one of the two inputs to the reactive power quadrant, not as a standalone flag.',
+    sourceUrl:null,
+    note:null
+  },
+  rsiGct: {
+    kind:'threshold', flagIf:'above', value:0.20,
+    label:'Ground contact time',
+    source:'Plyomat coaching guidance: a genuinely \u201cgood\u201d reactive ground contact runs roughly a fifth of a second (\u22480.20s). The more commonly cited 0.25s figure is actually the qualifying ceiling several RSI test protocols use to decide whether a hop counts at all (Schmidtbleicher\u2019s \u201cfast SSC\u201d definition) \u2014 not a real performance bar, and on a D1 roster it barely discriminates anyone.',
+    sourceUrl:'https://www.plyomat.com/reactive-strength-index',
+    note:'On this roster\u2019s Fall 2026 pogo-hop data (range 0.17\u20130.29s, mean 0.208s), 0.25s only flagged 3 of 38 athletes as slow \u2014 essentially useless as a bar. 0.20s splits the roster into 21 fast / 17 slow, close to the team median (0.196s) and a real discrimination.'
+  },
+  rsiScore: {
+    kind:'threshold', flagIf:'below', value:1.5,
+    label:'Reactive Strength Index',
+    source:'Flanagan (2021), \u201cThe Reactive Strength Index Revisited\u201d (via Sport Science Insider): an RSI of roughly 2.0+ is a reasonable \u201cgood\u201d benchmark across most sports, with lower bars appropriate for less reactive-strength-dependent populations. 1.5 is used here as the floor for \u201cdeveloping,\u201d consistent with general S&C practitioner guidance that scores below that level reflect a clear reactive-strength deficit rather than normal variation.',
+    sourceUrl:'https://sportscienceinsider.com/reactive-strength-index-chart/',
+    note:null
+  },
+  reactiveQuadrant: {
+    kind:'quadrant',
+    label:'Power profile quadrant (jump height \u00d7 GCT)',
+    source:'Composite classification built from this athlete\u2019s own pogo-hop RSI test: jump height on one axis, ground contact time on the other. \u201cHigh\u201d jump height is always team-relative (split at this roster\u2019s median \u2014 no external standard exists for this specific test). \u201cFast\u201d ground contact time can be judged either the same way (team median) or against the fixed 0.20s benchmark, toggled above. RSI itself is shown alongside as a cross-check, since a high jump combined with a fast contact time will always produce a high RSI by definition (RSI = jump height \u00f7 GCT).',
+    sourceUrl:null,
+    note:'This is a coaching framework for grouping athletes by training need, not a validated diagnostic scale \u2014 treat quadrant placement as a starting conversation, not a verdict.'
+  },
+  speedQuadrant: {
+    kind:'quadrant',
+    label:'Speed profile quadrant (40-yard \u00d7 MAS)',
+    source:'Composite classification from two separate tests: the 40-yard dash (acceleration/top speed) and MAS \u2014 maximal aerobic speed, computed as 1200m \u00f7 Bronco time \u2014 the same formula already used in this program\u2019s own Bronco tracking sheet. The fixed 40-yard line (4.6s) comes from Sell et al. (2018, J Strength Cond Res), the one peer-reviewed D1 men\u2019s lacrosse fitness-profile study located, cross-checked against a Division I recruiting guideline citing a 4.5\u20134.6s range; no exact published mean 40-yard time for D1 lacrosse was found, so treat this line as a reasonable estimate rather than a hard number. The fixed MAS line (4.0 m/s) is this program\u2019s own team-wide 5:01 Bronco baseline, converted to pace.',
+    sourceUrl:'https://pubmed.ncbi.nlm.nih.gov/30216251/',
+    note:'40-yard dash has no baseline logged for this roster yet, so the quadrant chart will stay empty until that testing happens \u2014 MAS alone is rankable today from the Fall 2026 Bronco data already on file.'
+  },
+  strengthQuadrant: {
+    kind:'quadrant',
+    label:'Strength profile quadrant (relative squat \u00d7 clean:squat ratio)',
+    source:'Composite classification: back squat relative to bodyweight (maximal strength) against the power clean:squat ratio (explosiveness/rate of force development) \u2014 the same ratio already tracked elsewhere on this dashboard. The fixed squat line (1.5\u00d7 BW) is the existing SimpliFaster/Basil \u201cmin\u201d bar, cross-checked against Sell et al. (2018, J Strength Cond Res): D1 men\u2019s lacrosse players in that study averaged roughly 1.50\u00d7 bodyweight on squat across positions, which matches independently. The fixed clean:squat line (0.79) comes from the same study\u2019s hang-clean:squat ratio \u2014 note hang clean typically loads somewhat lower than a full power clean from the floor, so treat 0.79 as a conservative (easy-to-clear) line rather than an aggressive one.',
+    sourceUrl:'https://pubmed.ncbi.nlm.nih.gov/30216251/',
     note:null
   },
   squatCleanTrend: {
@@ -945,16 +1065,16 @@ function selfCompareProfile(a){
 function setHeaderMeta(){
   var withScore = athletes.filter(function(a){return computeScore(a)!==null;}).length;
   var withCmj = athletes.filter(function(a){return curVal(a,'cmj')!==null;}).length;
-  var withBronco = athletes.filter(function(a){return curVal(a,'bronco')!==null;}).length;
+  var withRsi = athletes.filter(function(a){return curVal(a,'rsiScore')!==null;}).length;
   document.getElementById('headerMeta').innerHTML =
-    '<b>'+athletes.length+'</b> on roster &middot; <b>'+withScore+'</b> with lift maxes on file &middot; <b>'+withBronco+'</b> with a Fall 26 Bronco on file &middot; <b>'+withCmj+'</b> with a Fall 26 CMJ on file';
+    '<b>'+athletes.length+'</b> on roster &middot; <b>'+withScore+'</b> with lift maxes on file &middot; <b>'+withCmj+'</b> with a Fall 26 CMJ on file &middot; <b>'+withRsi+'</b> with a Fall 26 RSI test on file';
 }
 
 function renderOverviewNote(){
   document.getElementById('overviewNote').innerHTML =
-    'Lift maxes and Bod Pod scans below are still 2025-26 baseline data. Fall 2026 Bronco testing is now on file (1200m, tested Aug 27) \u2014 prior-year Bronco times are pace-adjusted to the new 1200m distance so the comparison is apples-to-apples. '+
-    'Athletes not yet tested this fall show as <b>not yet tested</b> rather than their old baseline, so nothing looks more current than it is. '+
-    'CMJ and 40-yard dash have no Fall 2026 numbers logged in this dashboard yet \u2014 that\u2019s next.';
+    'Every lift, Bronco, and body comp number below is real 2025-26 baseline data \u2014 last year\u2019s tested lift maxes and Bronco time, and the Fall/Dec 2025 Bod Pod scans. '+
+    'Once each athlete\u2019s Fall 2026 numbers are logged, their profile will lead with <b>progress since this baseline</b> \u2014 that comparison matters most, alongside how they stack up against the team average. '+
+    'CMJ is now populated from Fall 2026 testing (in progress \u2014 not everyone has a mark yet). RSI and ground contact time have their own dedicated view in the <b>Power profile</b> tab. 40-yard dash still has no baseline on file.';
 }
 
 /* --- Position filter pills (overview) --- */
@@ -1480,6 +1600,37 @@ Array.prototype.forEach.call(document.querySelectorAll('.tab-btn'), function(btn
     btn.classList.add('active');
     document.getElementById('panel-'+btn.getAttribute('data-tab')).classList.add('active');
     if(btn.getAttribute('data-tab')==='leaderboard') renderTrendChart();
+    if(btn.getAttribute('data-tab')==='power') renderPowerProfile();
+    if(btn.getAttribute('data-tab')==='speed') renderSpeedProfile();
+    if(btn.getAttribute('data-tab')==='strength') renderStrengthProfile();
+  });
+});
+
+/* --- Power profile mode toggle --- */
+Array.prototype.forEach.call(document.querySelectorAll('#powerModeToggle button'), function(btn){
+  btn.addEventListener('click', function(){
+    Array.prototype.forEach.call(document.querySelectorAll('#powerModeToggle button'), function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    profileMode.power = btn.getAttribute('data-mode');
+    renderPowerProfile();
+  });
+});
+
+Array.prototype.forEach.call(document.querySelectorAll('#speedModeToggle button'), function(btn){
+  btn.addEventListener('click', function(){
+    Array.prototype.forEach.call(document.querySelectorAll('#speedModeToggle button'), function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    profileMode.speed = btn.getAttribute('data-mode');
+    renderSpeedProfile();
+  });
+});
+
+Array.prototype.forEach.call(document.querySelectorAll('#strengthModeToggle button'), function(btn){
+  btn.addEventListener('click', function(){
+    Array.prototype.forEach.call(document.querySelectorAll('#strengthModeToggle button'), function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    profileMode.strength = btn.getAttribute('data-mode');
+    renderStrengthProfile();
   });
 });
 
@@ -1712,6 +1863,322 @@ function renderTrendChart(){
   container.innerHTML = svg + legend;
 }
 
+/* ================= GENERIC QUADRANT PROFILE ENGINE ================= */
+/* Powers the Power / Speed / Strength profile tabs. Each profile plots two
+   metrics against each other, splits the roster into 4 training-need groups,
+   and supports both a team-relative (median split) and fixed (literature or
+   program-benchmark) threshold mode. */
+var profileMode = {power:'team', speed:'team', strength:'team'};
+
+function teamMedianValues(vals){
+  var v = vals.filter(function(x){ return x!==null && x!==undefined && !isNaN(x); });
+  if(v.length===0) return 0;
+  v.sort(function(a,b){ return a-b; });
+  var mid = Math.floor(v.length/2);
+  return v.length%2 ? v[mid] : (v[mid-1]+v[mid])/2;
+}
+function teamMedian(key){
+  return teamMedianValues(athletes.map(function(a){ return curVal(a,key); }));
+}
+
+/* config shape:
+   { key, getX, getY, xBetterHigh, yBetterHigh, xFmt, yFmt, xAxisLabel, yAxisLabel,
+     fixedX, fixedY,
+     quadLabels:{hh,hl,lh,ll}, quadDescs:{hh,hl,lh,ll}, quadColors:{hh,hl,lh,ll}, quadBg:{hh,hl,lh,ll},
+     quadCorner:{hh,hl,lh,ll} (short ALL-CAPS corner labels for the chart),
+     extraGetter, extraLabel, extraFmt (optional third value shown per-athlete, e.g. RSI),
+     partialGetter, partialLabel, partialFmt (optional: athletes with only one axis logged, ranked on this alone) } */
+
+function computeQuadrantData(config, mode){
+  var xVals = athletes.map(config.getX).filter(function(v){ return v!==null && v!==undefined && !isNaN(v); });
+  var yVals = athletes.map(config.getY).filter(function(v){ return v!==null && v!==undefined && !isNaN(v); });
+  var hasAnyX = xVals.length>0, hasAnyY = yVals.length>0;
+  var xThresh = mode==='fixed' && config.fixedX!==null ? config.fixedX : (hasAnyX ? teamMedianValues(xVals) : null);
+  var yThresh = mode==='fixed' && config.fixedY!==null ? config.fixedY : (hasAnyY ? teamMedianValues(yVals) : null);
+  var pts = [];
+  var partial = [];
+  var untested = [];
+
+  athletes.forEach(function(a){
+    var x = config.getX(a), y = config.getY(a);
+    var hasX = x!==null && x!==undefined && !isNaN(x);
+    var hasY = y!==null && y!==undefined && !isNaN(y);
+    if(hasX && hasY && xThresh!==null && yThresh!==null){
+      var xGood = config.xBetterHigh ? x>=xThresh : x<=xThresh;
+      var yGood = config.yBetterHigh ? y>=yThresh : y<=yThresh;
+      var qkey = xGood ? (yGood?'hh':'hl') : (yGood?'lh':'ll');
+      var extra = config.extraGetter ? config.extraGetter(a) : null;
+      pts.push({a:a, x:x, y:y, extra:extra, qkey:qkey});
+    } else if(config.partialGetter){
+      var pv = config.partialGetter(a);
+      if(pv!==null && pv!==undefined && !isNaN(pv)) partial.push({a:a, val:pv});
+      else untested.push(a);
+    } else {
+      untested.push(a);
+    }
+  });
+
+  partial.sort(function(p1,p2){ return p2.val - p1.val; });
+
+  return {xThresh:xThresh, yThresh:yThresh, hasAnyX:hasAnyX, hasAnyY:hasAnyY, pts:pts, partial:partial, untested:untested};
+}
+
+function buildQuadrantSVG(config, data){
+  if(data.pts.length===0){
+    return '<div class="empty-note">Not enough athletes have both numbers logged yet for a chart \u2014 the plot will fill in as testing continues.</div>';
+  }
+
+  var width = 700, height = 420;
+  var marginLeft = 58, marginRight = 20, marginTop = 26, marginBottom = 48;
+  var plotW = width - marginLeft - marginRight;
+  var plotH = height - marginTop - marginBottom;
+
+  var xs = data.pts.map(function(p){ return p.x; });
+  var ys = data.pts.map(function(p){ return p.y; });
+  var xMin = Math.min.apply(null,xs), xMax = Math.max.apply(null,xs);
+  var yMin = Math.min.apply(null,ys), yMax = Math.max.apply(null,ys);
+  var xPad = (xMax-xMin)*0.15 || Math.abs(xMax)*0.1 || 1;
+  var yPad = (yMax-yMin)*0.15 || Math.abs(yMax)*0.1 || 0.1;
+  xMin = Math.min(xMin-xPad, data.xThresh-xPad*0.6); xMax = Math.max(xMax+xPad, data.xThresh+xPad*0.6);
+  yMin = Math.min(yMin-yPad, data.yThresh-yPad*0.6); yMax = Math.max(yMax+yPad, data.yThresh+yPad*0.6);
+
+  /* screen-x always increases with "goodness"; screen-y always increases toward the top with "goodness" */
+  function xPos(v){
+    var frac = config.xBetterHigh ? (v-xMin)/(xMax-xMin) : (xMax-v)/(xMax-xMin);
+    return marginLeft + frac*plotW;
+  }
+  function yPos(v){
+    var frac = config.yBetterHigh ? (v-yMin)/(yMax-yMin) : (yMax-v)/(yMax-yMin);
+    return marginTop + (1-frac)*plotH;
+  }
+
+  var xT = xPos(data.xThresh), yT = yPos(data.yThresh);
+
+  var svg = '<svg viewBox="0 0 '+width+' '+height+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">';
+
+  svg += '<rect x="'+marginLeft+'" y="'+marginTop+'" width="'+(xT-marginLeft)+'" height="'+(yT-marginTop)+'" fill="'+config.quadBg.lh+'"/>';
+  svg += '<rect x="'+xT+'" y="'+marginTop+'" width="'+(marginLeft+plotW-xT)+'" height="'+(yT-marginTop)+'" fill="'+config.quadBg.hh+'"/>';
+  svg += '<rect x="'+marginLeft+'" y="'+yT+'" width="'+(xT-marginLeft)+'" height="'+(marginTop+plotH-yT)+'" fill="'+config.quadBg.ll+'"/>';
+  svg += '<rect x="'+xT+'" y="'+yT+'" width="'+(marginLeft+plotW-xT)+'" height="'+(marginTop+plotH-yT)+'" fill="'+config.quadBg.hl+'"/>';
+
+  svg += '<rect x="'+marginLeft+'" y="'+marginTop+'" width="'+plotW+'" height="'+plotH+'" fill="none" stroke="#dde0df" stroke-width="1"/>';
+  svg += '<line x1="'+xT+'" y1="'+marginTop+'" x2="'+xT+'" y2="'+(marginTop+plotH)+'" stroke="#9aa19e" stroke-width="1" stroke-dasharray="4 3"/>';
+  svg += '<line x1="'+marginLeft+'" y1="'+yT+'" x2="'+(marginLeft+plotW)+'" y2="'+yT+'" stroke="#9aa19e" stroke-width="1" stroke-dasharray="4 3"/>';
+
+  svg += '<text x="'+(marginLeft+6)+'" y="'+(marginTop+14)+'" font-size="10" font-weight="700" fill="'+config.quadColors.lh+'">'+config.quadCorner.lh+'</text>';
+  svg += '<text x="'+(marginLeft+plotW-6)+'" y="'+(marginTop+14)+'" text-anchor="end" font-size="10" font-weight="700" fill="'+config.quadColors.hh+'">'+config.quadCorner.hh+'</text>';
+  svg += '<text x="'+(marginLeft+6)+'" y="'+(marginTop+plotH-6)+'" font-size="10" font-weight="700" fill="'+config.quadColors.ll+'">'+config.quadCorner.ll+'</text>';
+  svg += '<text x="'+(marginLeft+plotW-6)+'" y="'+(marginTop+plotH-6)+'" text-anchor="end" font-size="10" font-weight="700" fill="'+config.quadColors.hl+'">'+config.quadCorner.hl+'</text>';
+
+  var xMinLabel = config.xFmt ? config.xFmt(xMin) : xMin.toFixed(1);
+  var xMaxLabel = config.xFmt ? config.xFmt(xMax) : xMax.toFixed(1);
+  var yMinLabel = config.yFmt ? config.yFmt(yMin) : yMin.toFixed(2);
+  var yMaxLabel = config.yFmt ? config.yFmt(yMax) : yMax.toFixed(2);
+  if(!config.xBetterHigh){ var tmpL = xMinLabel; xMinLabel = xMaxLabel; xMaxLabel = tmpL; }
+  if(!config.yBetterHigh){ var tmpL2 = yMinLabel; yMinLabel = yMaxLabel; yMaxLabel = tmpL2; }
+
+  svg += '<text x="'+marginLeft+'" y="'+(marginTop+plotH+18)+'" font-size="10" fill="#5c635f">'+(config.xBetterHigh?xMin.toFixed(2):xMax.toFixed(2))+'</text>';
+  svg += '<text x="'+(marginLeft+plotW)+'" y="'+(marginTop+plotH+18)+'" text-anchor="end" font-size="10" fill="#5c635f">'+(config.xBetterHigh?xMax.toFixed(2):xMin.toFixed(2))+'</text>';
+  svg += '<text x="'+(marginLeft-8)+'" y="'+(marginTop+4)+'" text-anchor="end" font-size="10" fill="#5c635f">'+(config.yBetterHigh?yMax.toFixed(2):yMin.toFixed(2))+'</text>';
+  svg += '<text x="'+(marginLeft-8)+'" y="'+(marginTop+plotH)+'" text-anchor="end" font-size="10" fill="#5c635f">'+(config.yBetterHigh?yMin.toFixed(2):yMax.toFixed(2))+'</text>';
+
+  svg += '<text x="'+(marginLeft+plotW/2)+'" y="'+(height-8)+'" text-anchor="middle" font-size="11" font-weight="600" fill="#5c635f">'+config.xAxisLabel+'</text>';
+  svg += '<text x="14" y="'+(marginTop+plotH/2)+'" text-anchor="middle" font-size="11" font-weight="600" fill="#5c635f" transform="rotate(-90 14 '+(marginTop+plotH/2)+')">'+config.yAxisLabel+'</text>';
+
+  data.pts.forEach(function(p){
+    var cx = xPos(p.x), cy = yPos(p.y);
+    var color = config.quadColors[p.qkey];
+    var xLabel = config.xFmt ? config.xFmt(p.x) : p.x.toFixed(2);
+    var yLabel = config.yFmt ? config.yFmt(p.y) : p.y.toFixed(2);
+    var extraStr = '';
+    if(config.extraGetter){
+      var ev = p.extra;
+      extraStr = ', '+config.extraLabel+' '+(ev!==null&&ev!==undefined?(config.extraFmt?config.extraFmt(ev):ev.toFixed(2)):'\u2014');
+    }
+    svg += '<circle cx="'+cx+'" cy="'+cy+'" r="6.5" fill="'+color+'" stroke="#fff" stroke-width="1.4" opacity="0.94">'+
+      '<title>'+escapeHtml(p.a.name)+' (#'+p.a.no+') \u2014 '+xLabel+', '+yLabel+extraStr+' \u2014 '+config.quadLabels[p.qkey]+'</title>'+
+      '</circle>';
+    svg += '<text x="'+cx+'" y="'+(cy-10)+'" text-anchor="middle" font-size="8" fill="#5c635f">'+p.a.no+'</text>';
+  });
+
+  svg += '</svg>';
+  svg += '<div class="chart-legend">'+['hh','hl','lh','ll'].map(function(k){
+    return '<span class="chart-legend-item"><span class="chart-legend-dot" style="background:'+config.quadColors[k]+'"></span>'+config.quadLabels[k]+'</span>';
+  }).join('')+'</div>';
+
+  return svg;
+}
+
+function renderQuadrantProfile(config, ids){
+  var mode = profileMode[config.key];
+  var data = computeQuadrantData(config, mode);
+  var groups = {hh:[], hl:[], lh:[], ll:[]};
+  data.pts.forEach(function(p){ groups[p.qkey].push(p); });
+  ['hh','hl','lh','ll'].forEach(function(k){
+    groups[k].sort(function(p1,p2){
+      var e1 = p1.extra===null||p1.extra===undefined ? -Infinity : p1.extra;
+      var e2 = p2.extra===null||p2.extra===undefined ? -Infinity : p2.extra;
+      if(e1!==e2) return e2-e1;
+      return (config.xBetterHigh ? p2.x-p1.x : p1.x-p2.x);
+    });
+  });
+
+  var xThreshLabel = data.xThresh!==null ? (config.xFmt ? config.xFmt(data.xThresh) : data.xThresh.toFixed(2)) : null;
+  var yThreshLabel = data.yThresh!==null ? (config.yFmt ? config.yFmt(data.yThresh) : data.yThresh.toFixed(2)) : null;
+  var noteHtml;
+  if(!data.hasAnyX || !data.hasAnyY){
+    var missingWhich = !data.hasAnyX && !data.hasAnyY ? (config.xShort+' or '+config.yShort) : (!data.hasAnyX ? config.xShort : config.yShort);
+    noteHtml = 'No '+missingWhich+' logged for anyone on the roster yet, so this profile can\u2019t split into quadrants yet.';
+    if(data.hasAnyY && config.partialLabel){
+      noteHtml += ' In the meantime, athletes are ranked below by '+config.partialLabel+' alone.';
+    }
+  } else {
+    noteHtml = 'Split at '+(mode==='fixed' ? 'fixed benchmarks' : "this roster's own median")+': '+
+      config.xShort+' at '+xThreshLabel+(mode==='fixed'&&config.xSource?' ('+config.xSource+')':'')+', '+
+      config.yShort+' at '+yThreshLabel+(mode==='fixed'&&config.ySource?' ('+config.ySource+')':'')+'.';
+    if(config.extraGetter && config.extraNote){ noteHtml += ' '+config.extraNote; }
+  }
+
+  if(data.partial.length>0 && config.partialLabel){
+    noteHtml += '<div class="quad-untested-note">'+data.partial.length+' athlete'+(data.partial.length===1?'':'s')+' with only '+config.partialLabel+' logged so far (ranked below, not yet placed in a quadrant): '+
+      data.partial.slice(0,8).map(function(p){return escapeHtml(p.a.name);}).join(', ')+(data.partial.length>8?', \u2026':'')+'.</div>';
+  }
+  if(data.untested.length>0){
+    noteHtml += '<div class="quad-untested-note">'+data.untested.length+' athlete'+(data.untested.length===1?'':'s')+' with no data logged yet for this profile.</div>';
+  }
+  document.getElementById(ids.note).innerHTML = noteHtml;
+  document.getElementById(ids.chart).innerHTML = buildQuadrantSVG(config, data);
+
+  var grid = document.getElementById(ids.grid);
+  var cardsHtml = ['hh','hl','lh','ll'].map(function(k){
+    var list = groups[k];
+    var rowsHtml = list.length ? list.map(function(p){
+      var xLabel = config.xFmt ? config.xFmt(p.x) : p.x.toFixed(2);
+      var yLabel = config.yFmt ? config.yFmt(p.y) : p.y.toFixed(2);
+      var extraStr = config.extraGetter ? ' &middot; '+config.extraLabel+' '+(p.extra!==null&&p.extra!==undefined?(config.extraFmt?config.extraFmt(p.extra):p.extra.toFixed(2)):'\u2014') : '';
+      return '<div class="quad-athlete-row">'+
+        '<span class="quad-athlete-name" data-id="'+p.a.id+'">#'+p.a.no+' '+escapeHtml(p.a.name)+'</span>'+
+        '<span class="quad-athlete-stats">'+xLabel+' &middot; '+yLabel+extraStr+'</span>'+
+        '</div>';
+    }).join('') : '<div class="quad-empty">No athletes here right now.</div>';
+    return '<div class="quad-card" style="border-top-color:'+config.quadColors[k]+';">'+
+      '<div class="quad-card-head"><h3>'+config.quadLabels[k]+'</h3><span class="quad-count" style="color:'+config.quadColors[k]+';background:'+config.quadBg[k]+';">'+list.length+'</span></div>'+
+      '<p class="hint">'+config.quadDescs[k]+'</p>'+
+      rowsHtml+
+      '</div>';
+  }).join('');
+
+  if(config.partialLabel && data.partial.length>0){
+    var partialRows = data.partial.map(function(p){
+      var vLabel = config.partialFmt ? config.partialFmt(p.val) : p.val.toFixed(2);
+      return '<div class="quad-athlete-row">'+
+        '<span class="quad-athlete-name" data-id="'+p.a.id+'">#'+p.a.no+' '+escapeHtml(p.a.name)+'</span>'+
+        '<span class="quad-athlete-stats">'+config.partialLabel+' '+vLabel+'</span>'+
+        '</div>';
+    }).join('');
+    cardsHtml += '<div class="quad-card quad-partial"><div class="quad-card-head"><h3>Awaiting the other test</h3><span class="quad-count">'+data.partial.length+'</span></div>'+
+      '<p class="hint">Ranked by '+config.partialLabel+' alone \u2014 will drop into a quadrant above once the paired test is logged.</p>'+
+      partialRows+'</div>';
+  }
+
+  grid.innerHTML = cardsHtml;
+
+  Array.prototype.forEach.call(grid.querySelectorAll('.quad-athlete-name'), function(el){
+    el.addEventListener('click', function(){ openProfile(el.getAttribute('data-id')); });
+  });
+}
+
+/* --- Power profile config: jump height x GCT, built from the RSI test --- */
+var POWER_CONFIG = {
+  key:'power',
+  getX:function(a){ return curVal(a,'rsiJump'); },
+  getY:function(a){ return curVal(a,'rsiGct'); },
+  xBetterHigh:true, yBetterHigh:false,
+  xFmt:function(v){ return v.toFixed(1)+'in'; }, yFmt:function(v){ return v.toFixed(3)+'s'; },
+  xAxisLabel:'Jump height (in) \u2014 more power \u2192', yAxisLabel:'\u2191 faster ground contact (s)',
+  xShort:'jump height', yShort:'ground contact time',
+  fixedX:null, fixedY:0.20,
+  ySource:'Plyomat: \u2248a fifth of a second is a good reactive contact',
+  quadLabels:{hh:'Power + Elasticity', hl:'Strong, Not Reactive', lh:'Quick, Lacks Power', ll:'Building Base'},
+  quadDescs:{
+    hh:'High jump, fast ground contact. This is the target profile \u2014 keep reinforcing it, don\u2019t just chase more volume.',
+    hl:'Jumps high but is slow to reverse the landing force \u2014 force-dominant. Needs reactive/plyo work: depth jumps, short-contact hops, less time thinking about it.',
+    lh:'Off the ground fast but limited height \u2014 speed without the horsepower behind it. Needs raw/explosive strength: squats, trap bar jumps, loaded jumps.',
+    ll:'Below split on both jump height and ground contact speed. Needs foundational strength and general plyometric exposure before specializing either direction.'
+  },
+  quadColors:{hh:'#1c6b3c', hl:'#8a6a08', lh:'#1f6feb', ll:'#a3312b'},
+  quadBg:{hh:'#e5f3ea', hl:'#fbf1d9', lh:'#e7f0fe', ll:'#f7e6e5'},
+  quadCorner:{hh:'POWER + ELASTICITY', hl:'STRONG, NOT REACTIVE', lh:'QUICK, LACKS POWER', ll:'BUILDING BASE'},
+  extraGetter:function(a){ return curVal(a,'rsiScore'); }, extraLabel:'RSI', extraFmt:function(v){ return v.toFixed(2); },
+  extraNote:'RSI is shown for reference on each athlete \u2014 it\u2019s the same two numbers expressed as one ratio.'
+};
+
+/* --- Speed profile config: 40-yard dash x MAS from the Bronco --- */
+function computeMAS(a){
+  var sec = curVal(a,'bronco');
+  return sec ? 1200/sec : null;
+}
+var SPEED_CONFIG = {
+  key:'speed',
+  getX:function(a){ return curVal(a,'fortyYard'); },
+  getY:function(a){ return computeMAS(a); },
+  xBetterHigh:false, yBetterHigh:true,
+  xFmt:function(v){ return v.toFixed(2)+'s'; }, yFmt:function(v){ return v.toFixed(2)+'m/s'; },
+  xAxisLabel:'\u2190 faster 40-yard dash (s)', yAxisLabel:'\u2191 higher MAS from Bronco (m/s)',
+  xShort:'40-yard dash', yShort:'MAS',
+  fixedX:4.6, fixedY:4.0,
+  xSource:'Sell et al. 2018, J Strength Cond Res, D1 men\u2019s lacrosse + Inside Lacrosse recruiting guidance (~4.5\u20134.6s range)',
+  ySource:'this program\u2019s own 5:01 team-wide Bronco baseline (Bronco_Standards_Fall2026.pdf), converted to pace',
+  quadLabels:{hh:'All-Around Speed', hl:'Explosive, Needs Engine', lh:'Engine, Lacks Top End', ll:'Building Base'},
+  quadDescs:{
+    hh:'Fast over 40 yards and a strong aerobic engine on the Bronco. The complete speed profile.',
+    hl:'Quick out of the gate but the Bronco pace lags \u2014 needs more aerobic base/tempo work to hold speed over a shift.',
+    lh:'Strong aerobic engine but limited top-end/acceleration speed \u2014 needs sprint mechanics and max-velocity work.',
+    ll:'Below split on both the 40 and the Bronco. Needs a general speed and conditioning base before specializing either direction.'
+  },
+  quadColors:{hh:'#1c6b3c', hl:'#1f6feb', lh:'#8a6a08', ll:'#a3312b'},
+  quadBg:{hh:'#e5f3ea', hl:'#e7f0fe', lh:'#fbf1d9', ll:'#f7e6e5'},
+  quadCorner:{hh:'ALL-AROUND SPEED', hl:'EXPLOSIVE, NEEDS ENGINE', lh:'ENGINE, LACKS TOP END', ll:'BUILDING BASE'},
+  partialGetter:function(a){ return computeMAS(a); }, partialLabel:'MAS', partialFmt:function(v){ return v.toFixed(2)+'m/s'; }
+};
+
+/* --- Strength profile config: relative squat strength x power clean:squat ratio --- */
+function squatRatio(a){
+  var sq = curVal(a,'backSquat'), bw = curVal(a,'bodyMass');
+  return (sq && bw) ? sq/bw : null;
+}
+function cleanSquatRatio(a){
+  var sq = curVal(a,'backSquat'), cl = curVal(a,'powerClean');
+  return (sq && cl) ? cl/sq : null;
+}
+var STRENGTH_CONFIG = {
+  key:'strength',
+  getX:function(a){ return squatRatio(a); },
+  getY:function(a){ return cleanSquatRatio(a); },
+  xBetterHigh:true, yBetterHigh:true,
+  xFmt:function(v){ return v.toFixed(2)+'\u00d7BW'; }, yFmt:function(v){ return v.toFixed(2); },
+  xAxisLabel:'Back squat (\u00d7 bodyweight) \u2014 more max strength \u2192', yAxisLabel:'\u2191 higher power clean : squat ratio (explosiveness)',
+  xShort:'squat relative strength', yShort:'clean:squat ratio',
+  fixedX:1.5, fixedY:0.79,
+  xSource:'SimpliFaster/Basil generic min-strength bar, cross-checked against Sell et al. 2018 D1 men\u2019s lacrosse (team-average squat \u2248 1.50\u00d7 BW)',
+  ySource:'Sell et al. 2018 D1 men\u2019s lacrosse hang-clean:squat ratio (\u22480.79); hang clean loads a bit lower than a full power clean from the floor, so treat this as a conservative line',
+  quadLabels:{hh:'Strong + Explosive', hl:'Strong, Not Explosive', lh:'Explosive, Not Maximal', ll:'Building Base'},
+  quadDescs:{
+    hh:'Strong relative to bodyweight and translates it into the clean well. The ideal strength-power combination.',
+    hl:'Good raw strength but the power clean is lagging behind the squat \u2014 needs rate-of-force-development work: Olympic lift technique, jump squats, less pure grinding.',
+    lh:'Cleans well relative to squat but the max-strength base is limited \u2014 needs more raw squat/deadlift strength to have more force to convert.',
+    ll:'Below split on both relative strength and explosiveness. Needs a foundational strength block before specializing.'
+  },
+  quadColors:{hh:'#1c6b3c', hl:'#8a6a08', lh:'#1f6feb', ll:'#a3312b'},
+  quadBg:{hh:'#e5f3ea', hl:'#fbf1d9', lh:'#e7f0fe', ll:'#f7e6e5'},
+  quadCorner:{hh:'STRONG + EXPLOSIVE', hl:'STRONG, NOT EXPLOSIVE', lh:'EXPLOSIVE, NOT MAXIMAL', ll:'BUILDING BASE'}
+};
+
+function renderPowerProfile(){ renderQuadrantProfile(POWER_CONFIG, {note:'powerProfileNote', chart:'quadChartCard', grid:'quadGrid'}); }
+function renderSpeedProfile(){ renderQuadrantProfile(SPEED_CONFIG, {note:'speedProfileNote', chart:'speedChartCard', grid:'speedGrid'}); }
+function renderStrengthProfile(){ renderQuadrantProfile(STRENGTH_CONFIG, {note:'strengthProfileNote', chart:'strengthChartCard', grid:'strengthGrid'}); }
+
+/* --- Flags: built from real standards, not just team-relative top-10 lists --- */
 /* --- Flags: built from real standards, not just team-relative top-10 lists --- */
 function flagRowHtml(rank, a, valueHtml, contextHtml, tier){
   var tierClass = tier ? ' flag-value-'+tier : ' flag-value-below';
@@ -1943,6 +2410,12 @@ function shortSourceLabel(key, std){
   if(key==='bronco') return 'Set directly by CSU strength staff';
   if(key==='fortyYard') return 'Team-relative, no external standard';
   if(key==='cmj') return 'Sayers equation (1999), peer-reviewed';
+  if(key==='rsiJump') return 'Team-relative, no external standard';
+  if(key==='rsiGct') return 'Plyomat coaching guidance (\u22480.20s)';
+  if(key==='rsiScore') return 'Flanagan (2021) via Sport Science Insider';
+  if(key==='reactiveQuadrant') return 'Composite of jump height + GCT, team-calibrated';
+  if(key==='speedQuadrant') return 'Sell et al. 2018 (D1 men\u2019s lacrosse) + program Bronco baseline';
+  if(key==='strengthQuadrant') return 'Sell et al. 2018, D1 men\u2019s lacrosse squat/clean data';
   if(key==='squatCleanTrend') return 'S&C coaching guidance \u2014 trend-based, not a fixed ratio';
   return '';
 }
@@ -1961,6 +2434,8 @@ function methodologyCardHtml(key){
     valuesHtml = 'Flag bottom <b>'+std.pct+'%</b> of the team';
   } else if(std.kind==='divergence'){
     valuesHtml = 'Flag if squat +<b>'+std.minSquatGainPct+'%</b>+ while clean:squat ratio drops <b>\u2212'+std.minRatioDrop+'</b>+';
+  } else if(std.kind==='quadrant'){
+    valuesHtml = '4 groups: <b>Power+Elasticity</b> &middot; <b>Strong, Not Reactive</b> &middot; <b>Quick, Lacks Power</b> &middot; <b>Building Base</b>';
   }
   var linkHtml = std.sourceUrl ? '<a href="'+std.sourceUrl+'" target="_blank" rel="noopener" class="method-link">View source \u2192</a>' : '';
   var noteHtml = std.note ? '<div class="method-note">'+escapeHtml(std.note)+'</div>' : '';
@@ -1981,8 +2456,9 @@ function renderMethodology(){
   if(!el) return;
   var groups = [
     {title:'Body composition', keys:['bodyFat','ffmi']},
-    {title:'Strength', keys:['backSquat','benchPress','deadlift','powerClean','squatCleanTrend']},
-    {title:'Power & speed', keys:['cmj','fortyYard','bronco']}
+    {title:'Strength', keys:['backSquat','benchPress','deadlift','powerClean','squatCleanTrend','strengthQuadrant']},
+    {title:'Power & speed', keys:['cmj','fortyYard','bronco','speedQuadrant']},
+    {title:'Reactive power (RSI)', keys:['rsiJump','rsiGct','rsiScore','reactiveQuadrant']}
   ];
   el.innerHTML = groups.map(function(g){
     return '<div class="flags-col-head">'+g.title+'</div><div class="method-grid">'+g.keys.map(methodologyCardHtml).join('')+'</div>';
@@ -1995,6 +2471,9 @@ function renderAll(){
   renderBarList();
   renderLeaderboard();
   renderTrendChart();
+  renderPowerProfile();
+  renderSpeedProfile();
+  renderStrengthProfile();
   renderFlags();
   renderMethodology();
 }
