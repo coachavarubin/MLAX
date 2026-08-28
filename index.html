@@ -463,8 +463,8 @@
   <section class="panel" id="panel-power">
     <div class="toolbar">
       <div class="toolbar-left">
-        <h2>Power profile: jump height &times; ground contact time</h2>
-        <p class="quad-toolbar-note">Every athlete's pogo-hop RSI test gives us three numbers from the same rep: how high they jump, how long they're on the ground, and RSI (jump height &divide; ground contact time). Plotting jump height against ground contact time sorts the roster into four training-need groups &mdash; who needs raw power, who needs to get off the ground faster, and who's already doing both well.</p>
+        <h2>Power profile: CMJ height &times; ground contact time</h2>
+        <p class="quad-toolbar-note">CMJ height is the vertical power number you already know from the rest of this dashboard (hands on hips). Ground contact time comes from the separate pogo-hop RSI test &mdash; how fast an athlete reverses force into the ground. Plotting the two together sorts the roster into four training-need groups &mdash; who needs raw power, who needs to get off the ground faster, and who's already doing both well. (RSI itself is shown per-athlete as a secondary reactive-strength number, since it comes from the pogo test's own jump height, not CMJ, and can occasionally disagree with the quadrant above &mdash; even with arms free to swing on the pogo test, that jump height almost always reads lower than CMJ, because the pogo protocol rewards minimizing ground contact time over maximizing height. That's the test working as intended, not a data quality issue.)</p>
       </div>
     </div>
     <div class="field-inline" style="margin-bottom:16px;">
@@ -874,9 +874,9 @@ var STANDARDS = {
   rsiJump: {
     kind:'percentileBottom', pct:20,
     label:'RSI jump height',
-    source:'Team-relative only \u2014 bottom 20% of the roster. This is the jump height from the pogo-hop RSI test itself (hands on hips, no countermovement dip), which is a different movement than the CMJ, so there is no external published standard for this specific value. It is used here mainly as one of the two inputs to the reactive power quadrant, not as a standalone flag.',
+    source:'Team-relative only \u2014 bottom 20% of the roster. This is the jump height from the pogo-hop RSI test itself (continuous hops, arms free to swing) \u2014 not the same movement as the CMJ (a single jump, hands on hips), so there is no external published standard for this specific value and it is not directly comparable to CMJ height. It feeds into this athlete\u2019s RSI score (shown on the Power profile as a secondary cross-check) rather than driving the quadrant axes directly.',
     sourceUrl:null,
-    note:null
+    note:'This number almost always reads lower than CMJ for the same athlete, even with arms free to swing \u2014 the pogo protocol rewards minimizing ground contact time over maximizing height, so a lower pogo jump height is expected, not a sign of poor testing.'
   },
   rsiGct: {
     kind:'threshold', flagIf:'above', value:0.20,
@@ -894,8 +894,8 @@ var STANDARDS = {
   },
   reactiveQuadrant: {
     kind:'quadrant',
-    label:'Power profile quadrant (jump height \u00d7 GCT)',
-    source:'Composite classification built from this athlete\u2019s own pogo-hop RSI test: jump height on one axis, ground contact time on the other. \u201cHigh\u201d jump height is always team-relative (split at this roster\u2019s median \u2014 no external standard exists for this specific test). \u201cFast\u201d ground contact time can be judged either the same way (team median) or against the fixed 0.20s benchmark, toggled above. RSI itself is shown alongside as a cross-check, since a high jump combined with a fast contact time will always produce a high RSI by definition (RSI = jump height \u00f7 GCT).',
+    label:'Power profile quadrant (CMJ height \u00d7 GCT)',
+    source:'Composite classification from two separate tests: CMJ height (the same number shown elsewhere on this dashboard) on one axis, ground contact time from the pogo-hop RSI test on the other. \u201cHigh\u201d CMJ is always team-relative (split at this roster\u2019s median \u2014 no external standard exists for this specific CMJ-height cutoff). \u201cFast\u201d ground contact time can be judged either the same way (team median) or against the fixed 0.20s benchmark, toggled above. RSI (jump height \u00f7 GCT, using the pogo test\u2019s own jump height, not CMJ) is shown per-athlete as a separate reactive-strength cross-check \u2014 it can occasionally disagree with the CMJ-based quadrant, since CMJ is a single jump with hands on hips while the pogo test is a continuous rhythmic hop with arms free, and it prioritizes minimizing ground contact time over maximizing height, so it will almost always read lower regardless of the arm-swing advantage.',
     sourceUrl:null,
     note:'This is a coaching framework for grouping athletes by training need, not a validated diagnostic scale \u2014 treat quadrant placement as a starting conversation, not a verdict.'
   },
@@ -2091,26 +2091,26 @@ function renderQuadrantProfile(config, ids){
 /* --- Power profile config: jump height x GCT, built from the RSI test --- */
 var POWER_CONFIG = {
   key:'power',
-  getX:function(a){ return curVal(a,'rsiJump'); },
+  getX:function(a){ return curVal(a,'cmj'); },
   getY:function(a){ return curVal(a,'rsiGct'); },
   xBetterHigh:true, yBetterHigh:false,
   xFmt:function(v){ return v.toFixed(1)+'in'; }, yFmt:function(v){ return v.toFixed(3)+'s'; },
-  xAxisLabel:'Jump height (in) \u2014 more power \u2192', yAxisLabel:'\u2191 faster ground contact (s)',
-  xShort:'jump height', yShort:'ground contact time',
+  xAxisLabel:'CMJ height (in) \u2014 more power \u2192', yAxisLabel:'\u2191 faster ground contact (s)',
+  xShort:'CMJ height', yShort:'ground contact time',
   fixedX:null, fixedY:0.20,
   ySource:'Plyomat: \u2248a fifth of a second is a good reactive contact',
   quadLabels:{hh:'Power + Elasticity', hl:'Strong, Not Reactive', lh:'Quick, Lacks Power', ll:'Building Base'},
   quadDescs:{
-    hh:'High jump, fast ground contact. This is the target profile \u2014 keep reinforcing it, don\u2019t just chase more volume.',
-    hl:'Jumps high but is slow to reverse the landing force \u2014 force-dominant. Needs reactive/plyo work: depth jumps, short-contact hops, less time thinking about it.',
-    lh:'Off the ground fast but limited height \u2014 speed without the horsepower behind it. Needs raw/explosive strength: squats, trap bar jumps, loaded jumps.',
-    ll:'Below split on both jump height and ground contact speed. Needs foundational strength and general plyometric exposure before specializing either direction.'
+    hh:'Jumps high on the CMJ and gets off the ground fast on the pogo test. This is the target profile \u2014 keep reinforcing it, don\u2019t just chase more volume.',
+    hl:'Strong vertical power (CMJ) but slow to reverse the landing force on the reactive test \u2014 force-dominant. Needs reactive/plyo work: depth jumps, short-contact hops, less time thinking about it.',
+    lh:'Fast off the ground reactively but limited CMJ height \u2014 quick without the raw power behind it. Needs strength work: squats, trap bar jumps, loaded jumps.',
+    ll:'Below split on both CMJ height and ground contact speed. Needs foundational strength and general plyometric exposure before specializing either direction.'
   },
   quadColors:{hh:'#1c6b3c', hl:'#8a6a08', lh:'#1f6feb', ll:'#a3312b'},
   quadBg:{hh:'#e5f3ea', hl:'#fbf1d9', lh:'#e7f0fe', ll:'#f7e6e5'},
   quadCorner:{hh:'POWER + ELASTICITY', hl:'STRONG, NOT REACTIVE', lh:'QUICK, LACKS POWER', ll:'BUILDING BASE'},
   extraGetter:function(a){ return curVal(a,'rsiScore'); }, extraLabel:'RSI', extraFmt:function(v){ return v.toFixed(2); },
-  extraNote:'RSI is shown for reference on each athlete \u2014 it\u2019s the same two numbers expressed as one ratio.'
+  extraNote:'RSI (from the pogo test) is shown alongside as a separate reactive-strength cross-check \u2014 it can disagree with the CMJ-based quadrant above, since it\u2019s a different jump.'
 };
 
 /* --- Speed profile config: 40-yard dash x MAS from the Bronco --- */
