@@ -163,6 +163,8 @@
     align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;z-index:50;
   }
   .modal-overlay.active{display:flex;}
+  /* Athlete profile can be opened from within the drill-down modal, so it must always stack on top of it */
+  #modalOverlay{z-index:70;}
   .modal{
     background:var(--surface);border:1px solid var(--border);border-radius:14px;max-width:840px;width:100%;
     box-shadow:0 20px 50px rgba(0,0,0,0.25);overflow:hidden;
@@ -181,6 +183,13 @@
   .modal-close{background:rgba(255,255,255,0.15);border:none;color:var(--white);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1;margin-left:12px;}
   .modal-close:hover{background:rgba(255,255,255,0.3);}
   .modal-body{padding:22px 26px;}
+
+  /* Profile drill-down modal (Power/Speed/Strength team breakdown) */
+  .modal-wide{max-width:980px;}
+  .drill-clickable{cursor:pointer;transition:border-color .15s, box-shadow .15s;}
+  .drill-clickable:hover{border-color:var(--csu-green);box-shadow:0 4px 14px rgba(0,0,0,0.08);}
+  .drill-clickable .std-section-head{display:flex;justify-content:space-between;align-items:center;}
+  .drill-hint{font-size:11px;color:var(--csu-green);font-weight:700;white-space:nowrap;}
   .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-bottom:20px;font-size:13px;}
   .info-grid div span.label{display:block;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:2px;}
   .info-grid div span.value{font-weight:600;color:var(--text-primary);}
@@ -262,6 +271,35 @@
   .quad-empty{font-size:12px;color:var(--text-muted);padding:6px 0;}
   .quad-untested-note{font-size:12px;color:var(--text-muted);margin-top:4px;}
   .std-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;}
+
+  /* --- Team / Positions / Athlete cards --- */
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px;}
+  .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;}
+  .stat-card .stat-value{font-size:26px;font-weight:800;color:var(--csu-green);line-height:1.1;}
+  .stat-card .stat-label{font-size:12px;color:var(--text-secondary);margin-top:4px;}
+  .stat-card .stat-sub{font-size:11px;color:var(--text-muted);margin-top:2px;}
+  .quad-summary-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 2px;}
+  .quad-summary-pill{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:12px;white-space:nowrap;}
+  .pos-table{width:100%;border-collapse:collapse;font-size:13px;}
+  .pos-table th{text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);color:var(--text-secondary);font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  .pos-table td{padding:8px 10px;border-bottom:1px solid var(--border);}
+  .pos-table tr:last-child td{border-bottom:none;}
+  .pos-table td.num{font-variant-numeric:tabular-nums;}
+  .athlete-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+  .athlete-search{flex:1;min-width:180px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;background:var(--surface);color:var(--text-primary);}
+  .athlete-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;}
+  .athlete-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;cursor:pointer;transition:border-color .15s;}
+  .athlete-card:hover{border-color:var(--csu-green);}
+  .athlete-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+  .athlete-card-name{font-weight:700;font-size:14.5px;color:var(--text-primary);}
+  .athlete-card-meta{font-size:11.5px;color:var(--text-secondary);}
+  .athlete-card-flag{font-size:11px;font-weight:700;color:var(--danger);background:#f7e6e5;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+  .athlete-card-flags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+  .athlete-stat-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;color:var(--text-secondary);}
+  .athlete-stat-row b{color:var(--text-primary);font-weight:700;}
+  .athlete-card-quads{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 6px;}
+  .quad-pill{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;}
+  .athlete-card-spark{margin-top:6px;}
   .std-section-head{display:flex;align-items:center;margin-bottom:10px;}
   .std-section-head h3{margin:0;font-size:14px;color:var(--text-primary);display:flex;align-items:center;}
   .tier-bar{display:flex;width:100%;height:20px;border-radius:6px;overflow:hidden;margin-bottom:8px;}
@@ -334,26 +372,45 @@
 </header>
 
 <nav class="tabs">
-  <button class="tab-btn active" data-tab="overview">Team overview</button>
-  <button class="tab-btn" data-tab="leaderboard">Leaderboard &amp; trends</button>
-  <button class="tab-btn" data-tab="power">Power profile</button>
-  <button class="tab-btn" data-tab="speed">Speed profile</button>
-  <button class="tab-btn" data-tab="strength">Strength profile</button>
-  <button class="tab-btn" data-tab="flags">Flags</button>
+  <button class="tab-btn active" data-tab="team">Team</button>
+  <button class="tab-btn" data-tab="positions">Positions</button>
+  <button class="tab-btn" data-tab="athletes">Athlete cards</button>
   <button class="tab-btn" data-tab="methodology">Methodology</button>
 </nav>
 
 <main>
 
-  <section class="panel active" id="panel-overview">
-    <div class="empty-note" id="overviewNote"></div>
-
-    <div class="snapshot-grid" id="snapshotGrid"></div>
-
+  <section class="panel active" id="panel-team">
     <div class="toolbar">
       <div class="toolbar-left">
-        <h2>Team overview</h2>
-        <p>Click any athlete to open their full profile. Numbers are colored by tier within the team — top, middle, or bottom third — based on the most recent test on file.</p>
+        <h2>Team snapshot</h2>
+        <p class="quad-toolbar-note">Roster health at a glance: testing completion, where the team sits overall, and how the power/speed/strength profiles break down across everyone. Check this weekly to see if the needle is moving.</p>
+      </div>
+    </div>
+    <div class="stat-grid" id="teamStatGrid"></div>
+    <div class="std-section drill-clickable" style="margin-bottom:16px;" data-drill="power">
+      <div class="std-section-head"><h3>Power profile distribution</h3><span class="drill-hint">View full breakdown &rarr;</span></div>
+      <div class="quad-summary-row" id="teamPowerSummary"></div>
+    </div>
+    <div class="std-section drill-clickable" style="margin-bottom:16px;" data-drill="speed">
+      <div class="std-section-head"><h3>Speed &amp; conditioning distribution</h3><span class="drill-hint">View full breakdown &rarr;</span></div>
+      <div class="quad-summary-row" id="teamSpeedSummary"></div>
+    </div>
+    <div class="std-section drill-clickable" data-drill="strength">
+      <div class="std-section-head"><h3>Strength profile distribution</h3><span class="drill-hint">View full breakdown &rarr;</span></div>
+      <div class="quad-summary-row" id="teamStrengthSummary"></div>
+    </div>
+
+    <div class="std-section" style="margin-top:16px;">
+      <div class="std-section-head"><h3>Where flags are concentrated</h3></div>
+      <div class="quad-summary-row" id="teamFlagBreakdown"></div>
+    </div>
+
+    <div class="empty-note" id="overviewNote"></div>
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Full roster</h2>
+        <p>Click any athlete to open their full profile. Numbers are colored by tier within the team &mdash; top, middle, or bottom third &mdash; based on the most recent test on file.</p>
       </div>
       <div class="legend">
         <span class="legend-item"><span class="trend-arrow trend-up" style="font-size:11px;">&#9650;</span>Improved since last test</span>
@@ -365,20 +422,20 @@
       <table id="overviewTable">
         <thead>
           <tr>
-            <th>No.</th>
-            <th>Name</th>
-            <th>Pos.</th>
-            <th>Cl.</th>
-            <th>Back squat</th>
-            <th>Bench press</th>
-            <th>Deadlift</th>
-            <th>Power clean</th>
-            <th>Strength score</th>
-            <th>CMJ (best)</th>
-            <th>1200m Bronco</th>
-            <th>40-yd dash</th>
-            <th>Body fat %</th>
-            <th>Fat-free mass</th>
+            <th class="sortable" data-key="no" data-label="No.">No.</th>
+            <th class="sortable" data-key="name" data-label="Name">Name</th>
+            <th class="sortable" data-key="pos" data-label="Pos.">Pos.</th>
+            <th class="sortable" data-key="cl" data-label="Cl.">Cl.</th>
+            <th class="sortable" data-key="backSquat" data-label="Back squat">Back squat</th>
+            <th class="sortable" data-key="benchPress" data-label="Bench press">Bench press</th>
+            <th class="sortable" data-key="deadlift" data-label="Deadlift">Deadlift</th>
+            <th class="sortable" data-key="powerClean" data-label="Power clean">Power clean</th>
+            <th class="sortable" data-key="score" data-label="Strength score">Strength score</th>
+            <th class="sortable" data-key="cmj" data-label="CMJ (best)">CMJ (best)</th>
+            <th class="sortable" data-key="bronco" data-label="1200m Bronco">1200m Bronco</th>
+            <th class="sortable" data-key="fortyYard" data-label="40-yd dash">40-yd dash</th>
+            <th class="sortable" data-key="bodyFat" data-label="Body fat %">Body fat %</th>
+            <th class="sortable" data-key="leanMass" data-label="Fat-free mass">Fat-free mass</th>
           </tr>
         </thead>
         <tbody id="overviewBody"></tbody>
@@ -386,154 +443,32 @@
     </div>
   </section>
 
-  <section class="panel" id="panel-leaderboard">
+  <section class="panel" id="panel-positions">
     <div class="toolbar">
       <div class="toolbar-left">
-        <h2>Leaderboard</h2>
-        <p>Pick a metric to see the team ranked, top to bottom.</p>
+        <h2>Positions</h2>
+        <p class="quad-toolbar-note">Team averages broken out by position, so you can see how each group is trending before you write position-specific programming.</p>
       </div>
     </div>
-    <div class="filter-pills" id="barMetricPills"></div>
-    <div class="bar-list-card">
-      <div id="barList"></div>
-    </div>
-
-    <div class="toolbar">
-      <div class="toolbar-left">
-        <h2 style="font-size:16px;">Full comparison table</h2>
-        <p>Click a column header to sort. Filter to a metric group, or show everything.</p>
-      </div>
-    </div>
-    <div class="filter-pills" id="leaderFilterPills">
-      <button class="filter-pill active" data-filter="all">All metrics</button>
-      <button class="filter-pill" data-filter="lifts">Lifts</button>
-      <button class="filter-pill" data-filter="power">Power &amp; conditioning</button>
-      <button class="filter-pill" data-filter="bodycomp">Body comp</button>
-    </div>
-    <div class="table-wrap">
-      <table id="leaderTable">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th class="sortable" data-key="no">No.<span class="arrow"></span></th>
-            <th class="sortable" data-key="name">Name<span class="arrow"></span></th>
-            <th class="sortable" data-key="pos">Pos.<span class="arrow"></span></th>
-            <th class="sortable" data-key="cl">Cl.<span class="arrow"></span></th>
-            <th class="sortable col-lifts" data-key="backSquat">Back squat<span class="arrow"></span></th>
-            <th class="sortable col-lifts" data-key="benchPress">Bench press<span class="arrow"></span></th>
-            <th class="sortable col-lifts" data-key="deadlift">Deadlift<span class="arrow"></span></th>
-            <th class="sortable col-lifts" data-key="powerClean">Power clean<span class="arrow"></span></th>
-            <th class="sortable col-lifts" data-key="score">Strength score<span class="arrow"></span></th>
-            <th class="sortable col-power" data-key="cmj">CMJ<span class="arrow"></span></th>
-            <th class="sortable col-power" data-key="bronco">Bronco<span class="arrow"></span></th>
-            <th class="sortable col-power" data-key="fortyYard">40-yd<span class="arrow"></span></th>
-            <th class="sortable col-bodycomp" data-key="bodyFat">Body fat %<span class="arrow"></span></th>
-            <th class="sortable col-bodycomp" data-key="leanMass">FFM<span class="arrow"></span></th>
-            <th class="sortable col-bodycomp" data-key="bodyMass">Body mass<span class="arrow"></span></th>
-          </tr>
-        </thead>
-        <tbody id="leaderBody"></tbody>
-      </table>
-    </div>
-
-    <div class="trends-wrap">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <h2 style="font-size:16px;">Trends over time</h2>
-          <p>Track a metric across every logged test date — team average, or individual athletes side by side.</p>
-        </div>
-      </div>
-      <div class="trend-controls">
-        <div class="field-inline">
-          <label for="trendMetric">Metric</label>
-          <select id="trendMetric"></select>
-        </div>
-        <div class="segmented" id="trendViewToggle">
-          <button data-view="team" class="active">Team average</button>
-          <button data-view="individual">Individual athletes</button>
-        </div>
-      </div>
-      <div class="athlete-picker" id="trendAthletePicker" style="display:none;"></div>
-      <div class="chart-card">
-        <div id="trendChart"></div>
-      </div>
+    <div class="std-section">
+      <div id="posTableWrap"></div>
     </div>
   </section>
 
-  <section class="panel" id="panel-power">
+  <section class="panel" id="panel-athletes">
     <div class="toolbar">
       <div class="toolbar-left">
-        <h2>Power profile: CMJ height &times; ground contact time</h2>
-        <p class="quad-toolbar-note">CMJ height is the vertical power number you already know from the rest of this dashboard (hands on hips). Ground contact time comes from the separate pogo-hop RSI test &mdash; how fast an athlete reverses force into the ground. Plotting the two together sorts the roster into four training-need groups &mdash; who needs raw power, who needs to get off the ground faster, and who's already doing both well. (RSI itself is shown per-athlete as a secondary reactive-strength number, since it comes from the pogo test's own jump height, not CMJ, and can occasionally disagree with the quadrant above &mdash; even with arms free to swing on the pogo test, that jump height almost always reads lower than CMJ, because the pogo protocol rewards minimizing ground contact time over maximizing height. That's the test working as intended, not a data quality issue.)</p>
+        <h2>Athlete cards</h2>
+        <p class="quad-toolbar-note">One card per athlete &mdash; current status, quadrant placements, and any active flags. Click a card for the full profile with complete history.</p>
       </div>
     </div>
-    <div class="field-inline" style="margin-bottom:16px;">
-      <label>Thresholds</label>
-      <div class="segmented" id="powerModeToggle">
-        <button data-mode="team" class="active">Team-relative</button>
-        <button data-mode="fixed">Fixed benchmarks</button>
+    <div class="athlete-toolbar">
+      <input type="text" class="athlete-search" id="athleteSearch" placeholder="Search by name...">
+      <div class="segmented" id="athletePosFilter">
+        <button data-pos="all" class="active">All</button>
       </div>
     </div>
-    <div class="empty-note" id="powerProfileNote"></div>
-
-    <div class="chart-card" id="quadChartCard" style="margin-bottom:22px;"></div>
-
-    <div class="quad-grid" id="quadGrid"></div>
-  </section>
-
-  <section class="panel" id="panel-speed">
-    <div class="toolbar">
-      <div class="toolbar-left">
-        <h2>Speed profile: 40-yard dash &times; MAS (Bronco)</h2>
-        <p class="quad-toolbar-note">The 40-yard dash captures acceleration and top-end speed; MAS (maximal aerobic speed, derived from the Bronco: 1200m &divide; time) captures the aerobic engine that lets speed repeat over a game. Plotting them together separates true all-around speed from a big engine with no top gear, or a fast first step that can't be repeated.</p>
-      </div>
-    </div>
-    <div class="field-inline" style="margin-bottom:16px;">
-      <label>Thresholds</label>
-      <div class="segmented" id="speedModeToggle">
-        <button data-mode="team" class="active">Team-relative</button>
-        <button data-mode="fixed">Fixed benchmarks</button>
-      </div>
-    </div>
-    <div class="empty-note" id="speedProfileNote"></div>
-
-    <div class="chart-card" id="speedChartCard" style="margin-bottom:22px;"></div>
-
-    <div class="quad-grid" id="speedGrid"></div>
-  </section>
-
-  <section class="panel" id="panel-strength">
-    <div class="toolbar">
-      <div class="toolbar-left">
-        <h2>Strength profile: relative squat &times; clean:squat ratio</h2>
-        <p class="quad-toolbar-note">Back squat relative to bodyweight captures maximal strength; the power clean : squat ratio captures how much of that strength converts into rate of force development. Plotting them together separates athletes who are strong but slow to apply it from athletes who are explosive relative to a still-developing strength base.</p>
-      </div>
-    </div>
-    <div class="field-inline" style="margin-bottom:16px;">
-      <label>Thresholds</label>
-      <div class="segmented" id="strengthModeToggle">
-        <button data-mode="team" class="active">Team-relative</button>
-        <button data-mode="fixed">Fixed benchmarks</button>
-      </div>
-    </div>
-    <div class="empty-note" id="strengthProfileNote"></div>
-
-    <div class="chart-card" id="strengthChartCard" style="margin-bottom:22px;"></div>
-
-    <div class="quad-grid" id="strengthGrid"></div>
-  </section>
-
-  <section class="panel" id="panel-flags">
-    <div class="flags-intro">Every category below is judged against a real standard, not just team rank — hover the <span class="info-icon" style="margin-left:0;">&#9432;</span> next to any metric to see exactly where its numbers come from. Full detail lives in the <a href="#" data-goto-tab="methodology" class="flags-intro-link">Methodology</a> tab. Click any athlete to open their profile.</div>
-
-    <div class="flags-col-head">Body composition</div>
-    <div class="flags-grid" id="flagBodyComp"></div>
-
-    <div class="flags-col-head">Strength</div>
-    <div class="flags-grid flags-grid-4" id="flagStrength"></div>
-
-    <div class="flags-col-head">Power &amp; speed</div>
-    <div class="flags-grid" id="flagPowerSpeed"></div>
+    <div class="athlete-card-grid" id="athleteCardGrid"></div>
   </section>
 
   <section class="panel" id="panel-methodology">
@@ -578,7 +513,7 @@
       <div class="analysis-grid">
         <div class="analysis-card">
           <h3>Performance radar</h3>
-          <p class="hint" id="radarHint">Percentile rank vs team — higher is better (Bronco time inverted). Dashed spokes = not yet tested.</p>
+          <p class="hint" id="radarHint">Percentile rank vs team — higher is better (Bronco and 40-yard dash times inverted). Dashed spokes = not yet tested.</p>
           <div id="modalRadar"></div>
         </div>
         <div class="analysis-card">
@@ -588,6 +523,30 @@
         </div>
       </div>
       <div id="modalSelfCompare" style="margin-top:16px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="drillOverlay">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <div>
+        <h2 id="drillTitle">—</h2>
+        <div class="pos-line" id="drillSubtitle">—</div>
+      </div>
+      <button class="modal-close" id="drillClose">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-inline" style="margin-bottom:16px;">
+        <label>Thresholds</label>
+        <div class="segmented" id="drillModeToggle">
+          <button data-mode="team" class="active">Team-relative</button>
+          <button data-mode="fixed">Fixed benchmarks</button>
+        </div>
+      </div>
+      <div class="empty-note" id="drillNote"></div>
+      <div class="chart-card" id="drillChart" style="margin-bottom:22px;"></div>
+      <div class="quad-grid" id="drillGrid"></div>
     </div>
   </div>
 </div>
@@ -617,7 +576,7 @@ var METRICS = [
   {key:'bodyMass', label:'Body mass', short:'Mass', unit:'lb', decimals:1, group:'bodycomp', better:'neutral'}
 ];
 var SCORE_METRICS = ['backSquat','benchPress','deadlift','powerClean'];
-var RADAR_KEYS = ['backSquat','benchPress','deadlift','powerClean','cmj','bronco'];
+var RADAR_KEYS = ['backSquat','benchPress','deadlift','powerClean','cmj','bronco','fortyYard'];
 var COMPARE_BAR_KEYS = ['backSquat','benchPress','deadlift','powerClean','cmj'];
 var OFFENSE_POS = ['A','M','FO'];
 var DEFENSE_POS = ['D','SSDM','LSM','GK'];
@@ -851,11 +810,11 @@ var STANDARDS = {
     note:'The measured D1 team mean was 18.2%. The 20% flag line was chosen as a middle ground between that mean (which would flag close to half of any roster by definition) and a looser, less useful cutoff.'
   },
   bronco: {
-    kind:'threshold', flagIf:'above', value:275, /* 4:35 in seconds */
+    kind:'threshold', flagIf:'above', value:301, /* 5:01 in seconds */
     label:'1200m Bronco',
-    source:'Program standard set directly by the Cleveland State strength & conditioning staff (4:35 pass time), not an external or published figure.',
+    source:'Program standard set directly by the Cleveland State strength & conditioning staff (5:01 pass time, flat team-wide). This replaces the old 4:35 standard, which was calibrated to last year\u2019s 1200-yard version of the test, not this year\u2019s true 1200m.',
     sourceUrl:null,
-    note:null
+    note:'Position- and class-specific pass times are already worked out (see Bronco_Standards_Fall2026.pdf) but haven\u2019t been announced to the team yet. This dashboard will switch to those once they\u2019re live \u2014 for now it uses the flat 5:01 team standard.'
   },
   fortyYard: {
     kind:'percentileBottom', pct:20,
@@ -1030,6 +989,42 @@ function tierBadgeForCard(key, a){
   return '';
 }
 
+/* Simple flag count per athlete, reused by Team/Positions/Athlete-card views */
+var FLAG_METRIC_LABELS = {
+  backSquat:'Back squat', benchPress:'Bench', deadlift:'Deadlift', powerClean:'Power clean',
+  ffmi:'FFMI', bodyFat:'Body fat', bronco:'Bronco', rsiGct:'Ground contact', rsiScore:'RSI'
+};
+
+/* Returns [{key, label}] for every metric currently flagging this athlete */
+function athleteFlagDetails(a){
+  var flags = [];
+  ['backSquat','benchPress','deadlift','powerClean'].forEach(function(k){
+    var t = tierForRatioMetric(a, k);
+    if(t && t.tier==='below') flags.push({key:k, label:FLAG_METRIC_LABELS[k]});
+  });
+  var fT = ffmiTier(a);
+  if(fT && fT.tier==='below') flags.push({key:'ffmi', label:FLAG_METRIC_LABELS.ffmi});
+  ['bodyFat','bronco','rsiGct','rsiScore'].forEach(function(k){
+    var f = thresholdFlag(a, k);
+    if(f && f.flagged) flags.push({key:k, label:FLAG_METRIC_LABELS[k]});
+  });
+  return flags;
+}
+
+function athleteFlagCount(a){ return athleteFlagDetails(a).length; }
+
+/* Team-wide count of flagged athletes per metric, for the Team tab breakdown */
+function teamFlagBreakdown(){
+  var counts = {};
+  Object.keys(FLAG_METRIC_LABELS).forEach(function(k){ counts[k] = 0; });
+  athletes.forEach(function(a){
+    athleteFlagDetails(a).forEach(function(f){ counts[f.key]++; });
+  });
+  return Object.keys(FLAG_METRIC_LABELS).map(function(k){
+    return {key:k, label:FLAG_METRIC_LABELS[k], count:counts[k]};
+  }).filter(function(x){ return x.count>0; }).sort(function(x,y){ return y.count-x.count; });
+}
+
 /* ================= SELF-RELATIVE (WITHIN-ATHLETE) COMPARISON ================= */
 /* Only uses metrics with a real min/goal standard, so we're not inventing scales for
    metrics that don't have one yet (body fat/Bronco/40yd/CMJ standards aren't shaped that way). */
@@ -1074,7 +1069,7 @@ function renderOverviewNote(){
   document.getElementById('overviewNote').innerHTML =
     'Every lift, Bronco, and body comp number below is real 2025-26 baseline data \u2014 last year\u2019s tested lift maxes and Bronco time, and the Fall/Dec 2025 Bod Pod scans. '+
     'Once each athlete\u2019s Fall 2026 numbers are logged, their profile will lead with <b>progress since this baseline</b> \u2014 that comparison matters most, alongside how they stack up against the team average. '+
-    'CMJ is now populated from Fall 2026 testing (in progress \u2014 not everyone has a mark yet). RSI and ground contact time have their own dedicated view in the <b>Power profile</b> tab. 40-yard dash still has no baseline on file.';
+    'CMJ is now populated from Fall 2026 testing (in progress \u2014 not everyone has a mark yet). RSI and ground contact time show up on each athlete\u2019s card and profile. 40-yard dash still has no baseline on file.';
 }
 
 /* --- Position filter pills (overview) --- */
@@ -1120,6 +1115,17 @@ function renderSnapshot(){
 }
 
 /* --- Overview table --- */
+var overviewSort = {key:null, dir:'asc'};
+
+function overviewSortValue(a, key){
+  if(key==='no') return a.no;
+  if(key==='name') return a.name;
+  if(key==='pos') return a.pos;
+  if(key==='cl') return a.cl;
+  if(key==='score') return computeScore(a);
+  return curVal(a, key);
+}
+
 function renderOverview(){
   var tiers = {};
   var allKeys = SCORE_METRICS.concat(['score','cmj','bronco','fortyYard','bodyFat','leanMass']);
@@ -1127,8 +1133,39 @@ function renderOverview(){
 
   var body = document.getElementById('overviewBody');
   var rows = athletes.slice()
-    .filter(function(a){ return overviewPosFilter==='all' || posGroup(a.pos)===overviewPosFilter; })
-    .sort(function(a,b){ return (a.no||0)-(b.no||0); });
+    .filter(function(a){ return overviewPosFilter==='all' || posGroup(a.pos)===overviewPosFilter; });
+
+  var TEXT_SORT_KEYS = {name:1, pos:1, cl:1};
+  if(overviewSort.key){
+    var key = overviewSort.key;
+    if(TEXT_SORT_KEYS[key]){
+      rows.sort(function(a,b){
+        var va = (overviewSortValue(a,key)||'').toString().toLowerCase();
+        var vb = (overviewSortValue(b,key)||'').toString().toLowerCase();
+        var cmp = va<vb ? -1 : (va>vb ? 1 : 0);
+        return overviewSort.dir==='asc' ? cmp : -cmp;
+      });
+    } else if(key==='no'){
+      rows.sort(function(a,b){
+        var cmp = (a.no||0)-(b.no||0);
+        return overviewSort.dir==='asc' ? cmp : -cmp;
+      });
+    } else {
+      var meta = metricMeta(key);
+      rows.sort(function(a,b){
+        var va = overviewSortValue(a,key), vb = overviewSortValue(b,key);
+        var ga = (va===null||va===undefined||isNaN(va)) ? null : goodness(va, meta);
+        var gb = (vb===null||vb===undefined||isNaN(vb)) ? null : goodness(vb, meta);
+        if(ga===null && gb===null) return 0;
+        if(ga===null) return 1; /* no data always sorts last, either direction */
+        if(gb===null) return -1;
+        var cmp = gb-ga; /* dir 'desc' = best first */
+        return overviewSort.dir==='asc' ? -cmp : cmp;
+      });
+    }
+  } else {
+    rows.sort(function(a,b){ return (a.no||0)-(b.no||0); });
+  }
 
   body.innerHTML = rows.map(function(a){
     var score = computeScore(a);
@@ -1599,39 +1636,79 @@ Array.prototype.forEach.call(document.querySelectorAll('.tab-btn'), function(btn
     Array.prototype.forEach.call(document.querySelectorAll('.panel'), function(p){p.classList.remove('active');});
     btn.classList.add('active');
     document.getElementById('panel-'+btn.getAttribute('data-tab')).classList.add('active');
-    if(btn.getAttribute('data-tab')==='leaderboard') renderTrendChart();
-    if(btn.getAttribute('data-tab')==='power') renderPowerProfile();
-    if(btn.getAttribute('data-tab')==='speed') renderSpeedProfile();
-    if(btn.getAttribute('data-tab')==='strength') renderStrengthProfile();
+    if(btn.getAttribute('data-tab')==='team') renderTeamTab();
+    if(btn.getAttribute('data-tab')==='positions') renderPositionsTab();
+    if(btn.getAttribute('data-tab')==='athletes') renderAthletesTab();
   });
 });
 
 /* --- Power profile mode toggle --- */
-Array.prototype.forEach.call(document.querySelectorAll('#powerModeToggle button'), function(btn){
+/* --- Profile drill-down modal (Team tab distribution -> full breakdown) --- */
+var drillConfig = null;
+var DRILL_META = {
+  power:{title:'Power profile', subtitle:'CMJ height \u00d7 ground contact time \u2014 who has the raw power, who has the reactive speed, who has both.'},
+  speed:{title:'Speed &amp; conditioning profile', subtitle:'40-yard dash \u00d7 MAS (Bronco) \u2014 who has top-end speed, who has the aerobic engine, who has both.'},
+  strength:{title:'Strength profile', subtitle:'Relative squat strength \u00d7 power clean:squat ratio \u2014 who\u2019s strong, who\u2019s explosive, who\u2019s both.'}
+};
+
+function openProfileDrilldown(key){
+  var configs = {power:POWER_CONFIG, speed:SPEED_CONFIG, strength:STRENGTH_CONFIG};
+  drillConfig = configs[key];
+  document.getElementById('drillTitle').innerHTML = DRILL_META[key].title;
+  document.getElementById('drillSubtitle').textContent = DRILL_META[key].subtitle;
+  Array.prototype.forEach.call(document.querySelectorAll('#drillModeToggle button'), function(b){
+    b.classList.toggle('active', b.getAttribute('data-mode')===profileMode[key]);
+  });
+  renderDrilldown();
+  document.getElementById('drillOverlay').classList.add('active');
+}
+function closeDrilldown(){
+  document.getElementById('drillOverlay').classList.remove('active');
+}
+function renderDrilldown(){
+  if(!drillConfig) return;
+  renderQuadrantProfile(drillConfig, {note:'drillNote', chart:'drillChart', grid:'drillGrid'});
+}
+
+document.getElementById('drillClose').addEventListener('click', closeDrilldown);
+document.getElementById('drillOverlay').addEventListener('click', function(e){
+  if(e.target===document.getElementById('drillOverlay')) closeDrilldown();
+});
+Array.prototype.forEach.call(document.querySelectorAll('#drillModeToggle button'), function(btn){
   btn.addEventListener('click', function(){
-    Array.prototype.forEach.call(document.querySelectorAll('#powerModeToggle button'), function(b){b.classList.remove('active');});
+    Array.prototype.forEach.call(document.querySelectorAll('#drillModeToggle button'), function(b){b.classList.remove('active');});
     btn.classList.add('active');
-    profileMode.power = btn.getAttribute('data-mode');
-    renderPowerProfile();
+    if(drillConfig){ profileMode[drillConfig.key] = btn.getAttribute('data-mode'); renderDrilldown(); }
+  });
+});
+Array.prototype.forEach.call(document.querySelectorAll('.drill-clickable'), function(el){
+  el.addEventListener('click', function(){ openProfileDrilldown(el.getAttribute('data-drill')); });
+});
+
+function updateOverviewSortIndicators(){
+  Array.prototype.forEach.call(document.querySelectorAll('#overviewTable thead th[data-key]'), function(th){
+    var key = th.getAttribute('data-key');
+    var base = th.getAttribute('data-label');
+    th.textContent = base + (overviewSort.key===key ? (overviewSort.dir==='asc' ? ' \u25B2' : ' \u25BC') : '');
+  });
+}
+Array.prototype.forEach.call(document.querySelectorAll('#overviewTable thead th[data-key]'), function(th){
+  th.addEventListener('click', function(){
+    var key = th.getAttribute('data-key');
+    if(overviewSort.key===key){
+      overviewSort.dir = overviewSort.dir==='asc' ? 'desc' : 'asc';
+    } else {
+      overviewSort.key = key;
+      overviewSort.dir = (key==='name'||key==='pos'||key==='cl'||key==='no') ? 'asc' : 'desc';
+    }
+    renderOverview();
+    updateOverviewSortIndicators();
   });
 });
 
-Array.prototype.forEach.call(document.querySelectorAll('#speedModeToggle button'), function(btn){
-  btn.addEventListener('click', function(){
-    Array.prototype.forEach.call(document.querySelectorAll('#speedModeToggle button'), function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-    profileMode.speed = btn.getAttribute('data-mode');
-    renderSpeedProfile();
-  });
-});
-
-Array.prototype.forEach.call(document.querySelectorAll('#strengthModeToggle button'), function(btn){
-  btn.addEventListener('click', function(){
-    Array.prototype.forEach.call(document.querySelectorAll('#strengthModeToggle button'), function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-    profileMode.strength = btn.getAttribute('data-mode');
-    renderStrengthProfile();
-  });
+document.getElementById('athleteSearch').addEventListener('input', function(e){
+  athleteCardState.search = e.target.value;
+  renderAthletesTab();
 });
 
 Array.prototype.forEach.call(document.querySelectorAll('[data-goto-tab]'), function(link){
@@ -1647,70 +1724,6 @@ document.getElementById('modalClose').addEventListener('click', closeProfile);
 document.getElementById('modalOverlay').addEventListener('click', function(e){
   if(e.target===document.getElementById('modalOverlay')) closeProfile();
 });
-
-/* --- Leaderboard sorting & filters --- */
-Array.prototype.forEach.call(document.querySelectorAll('#leaderTable thead th.sortable'), function(th){
-  th.addEventListener('click', function(){
-    var key = th.getAttribute('data-key');
-    if(currentSort.key===key){
-      currentSort.dir = currentSort.dir==='asc'?'desc':'asc';
-    } else {
-      currentSort.key = key;
-      currentSort.dir = (key==='name'||key==='pos'||key==='cl') ? 'asc' : 'desc';
-    }
-    renderLeaderboard();
-  });
-});
-
-Array.prototype.forEach.call(document.querySelectorAll('#leaderFilterPills .filter-pill'), function(btn){
-  btn.addEventListener('click', function(){
-    Array.prototype.forEach.call(document.querySelectorAll('#leaderFilterPills .filter-pill'), function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-    leaderFilter = btn.getAttribute('data-filter');
-    renderLeaderboard();
-  });
-});
-
-/* --- Trend chart controls --- */
-function populateTrendMetricSelect(){
-  var sel = document.getElementById('trendMetric');
-  var options = [{key:'score', label:'Strength score'}].concat(METRICS.map(function(m){return {key:m.key,label:m.label};}));
-  sel.innerHTML = options.map(function(o){
-    return '<option value="'+o.key+'"'+(o.key===trendState.metric?' selected':'')+'>'+o.label+'</option>';
-  }).join('');
-}
-
-document.getElementById('trendMetric').addEventListener('change', function(){
-  trendState.metric = this.value;
-  renderTrendChart();
-});
-
-Array.prototype.forEach.call(document.querySelectorAll('#trendViewToggle button'), function(btn){
-  btn.addEventListener('click', function(){
-    Array.prototype.forEach.call(document.querySelectorAll('#trendViewToggle button'), function(b){b.classList.remove('active');});
-    btn.classList.add('active');
-    trendState.view = btn.getAttribute('data-view');
-    document.getElementById('trendAthletePicker').style.display = trendState.view==='individual' ? 'flex' : 'none';
-    renderTrendChart();
-  });
-});
-
-function populateAthletePicker(){
-  var wrap = document.getElementById('trendAthletePicker');
-  var sorted = athletes.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
-  wrap.innerHTML = sorted.map(function(a){
-    var sel = trendState.selected[a.id] ? ' selected' : '';
-    return '<span class="athlete-chip'+sel+'" data-id="'+a.id+'">'+escapeHtml(a.name)+'</span>';
-  }).join('');
-  Array.prototype.forEach.call(wrap.querySelectorAll('.athlete-chip'), function(chip){
-    chip.addEventListener('click', function(){
-      var id = chip.getAttribute('data-id');
-      if(trendState.selected[id]){ delete trendState.selected[id]; chip.classList.remove('selected'); }
-      else { trendState.selected[id] = true; chip.classList.add('selected'); }
-      renderTrendChart();
-    });
-  });
-}
 
 function scoreSeriesForAthlete(a){
   var dateSet = {};
@@ -1817,6 +1830,30 @@ function buildChartSVG(series, meta, width){
 
   svg += '</svg>';
   return svg;
+}
+
+function buildSparklineSVG(points, width, height){
+  width = width || 140; height = height || 36;
+  if(!points || points.length===0) return '<div class="sparkline-empty">No history yet</div>';
+  var pts = points.slice().sort(function(a,b){return a.date<b.date?-1:(a.date>b.date?1:0);});
+  if(pts.length===1){
+    return '<svg viewBox="0 0 '+width+' '+height+'" width="'+width+'" height="'+height+'"><circle cx="'+(width/2)+'" cy="'+(height/2)+'" r="3" fill="var(--csu-green)"/></svg>';
+  }
+  var vals = pts.map(function(p){return p.value;});
+  var minY = Math.min.apply(null, vals), maxY = Math.max.apply(null, vals);
+  if(minY===maxY){ minY -= 1; maxY += 1; }
+  var pad = 4;
+  function xPos(i){ return pad + (i/(pts.length-1))*(width-pad*2); }
+  function yPos(v){ return pad + (1-(v-minY)/(maxY-minY))*(height-pad*2); }
+  var path = '';
+  pts.forEach(function(p,i){ path += (i===0?'M':'L')+xPos(i)+','+yPos(p.value)+' '; });
+  var lastX = xPos(pts.length-1), lastY = yPos(pts[pts.length-1].value);
+  var up = pts[pts.length-1].value >= pts[0].value;
+  var color = up ? 'var(--success)' : 'var(--danger)';
+  return '<svg viewBox="0 0 '+width+' '+height+'" width="'+width+'" height="'+height+'">'+
+    '<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<circle cx="'+lastX+'" cy="'+lastY+'" r="2.6" fill="'+color+'"/>'+
+    '</svg>';
 }
 
 function renderTrendChart(){
@@ -2070,7 +2107,7 @@ function renderQuadrantProfile(config, ids){
 
   if(config.partialLabel && data.partial.length>0){
     var partialRows = data.partial.map(function(p){
-      var vLabel = config.partialFmt ? config.partialFmt(p.val) : p.val.toFixed(2);
+      var vLabel = config.partialFmt ? config.partialFmt(p.val, p.a) : p.val.toFixed(2);
       return '<div class="quad-athlete-row">'+
         '<span class="quad-athlete-name" data-id="'+p.a.id+'">#'+p.a.no+' '+escapeHtml(p.a.name)+'</span>'+
         '<span class="quad-athlete-stats">'+config.partialLabel+' '+vLabel+'</span>'+
@@ -2139,7 +2176,9 @@ var SPEED_CONFIG = {
   quadColors:{hh:'#1c6b3c', hl:'#1f6feb', lh:'#8a6a08', ll:'#a3312b'},
   quadBg:{hh:'#e5f3ea', hl:'#e7f0fe', lh:'#fbf1d9', ll:'#f7e6e5'},
   quadCorner:{hh:'ALL-AROUND SPEED', hl:'EXPLOSIVE, NEEDS ENGINE', lh:'ENGINE, LACKS TOP END', ll:'BUILDING BASE'},
-  partialGetter:function(a){ return computeMAS(a); }, partialLabel:'MAS', partialFmt:function(v){ return v.toFixed(2)+'m/s'; }
+  extraGetter:function(a){ return curVal(a,'bronco'); }, extraLabel:'Bronco', extraFmt:function(v){ return fmtTime(v); },
+  extraNote:'Raw Bronco (1200m) time is shown alongside MAS for each athlete, since that\u2019s the number actually recorded on test day.',
+  partialGetter:function(a){ return computeMAS(a); }, partialLabel:'MAS', partialFmt:function(v,a){ var raw=curVal(a,'bronco'); return v.toFixed(2)+'m/s'+(raw!==null?' ('+fmtTime(raw)+')':''); }
 };
 
 /* --- Strength profile config: relative squat strength x power clean:squat ratio --- */
@@ -2174,11 +2213,165 @@ var STRENGTH_CONFIG = {
   quadCorner:{hh:'STRONG + EXPLOSIVE', hl:'STRONG, NOT EXPLOSIVE', lh:'EXPLOSIVE, NOT MAXIMAL', ll:'BUILDING BASE'}
 };
 
-function renderPowerProfile(){ renderQuadrantProfile(POWER_CONFIG, {note:'powerProfileNote', chart:'quadChartCard', grid:'quadGrid'}); }
-function renderSpeedProfile(){ renderQuadrantProfile(SPEED_CONFIG, {note:'speedProfileNote', chart:'speedChartCard', grid:'speedGrid'}); }
-function renderStrengthProfile(){ renderQuadrantProfile(STRENGTH_CONFIG, {note:'strengthProfileNote', chart:'strengthChartCard', grid:'strengthGrid'}); }
 
-/* --- Flags: built from real standards, not just team-relative top-10 lists --- */
+/* ================= TEAM / POSITIONS / ATHLETE CARDS (report-card views) ================= */
+
+function classifyForCard(config, a){
+  var data = computeQuadrantData(config, profileMode[config.key]);
+  var found = data.pts.find(function(p){ return p.a.id===a.id; });
+  return found ? found.qkey : null;
+}
+
+function quadPillHtml(config, qkey, label){
+  if(!qkey) return '<span class="quad-pill" style="background:var(--surface-2);color:var(--text-muted);">'+label+': no data</span>';
+  return '<span class="quad-pill" style="background:'+config.quadBg[qkey]+';color:'+config.quadColors[qkey]+';">'+label+': '+config.quadLabels[qkey]+'</span>';
+}
+
+function renderTeamTab(){
+  var withScore = athletes.filter(function(a){return computeScore(a)!==null;});
+  var withBodyFat = athletes.filter(function(a){return curVal(a,'bodyFat')!==null;});
+  var withCmj = athletes.filter(function(a){return curVal(a,'cmj')!==null;});
+  var withMas = athletes.filter(function(a){return computeMAS(a)!==null;});
+  var avgOf = function(list, fn){ var v = list.map(fn).filter(function(x){return x!==null&&!isNaN(x);}); return v.length ? round1(v.reduce(function(s,x){return s+x;},0)/v.length) : null; };
+  var avgScore = avgOf(withScore, computeScore);
+  var avgBodyFat = avgOf(withBodyFat, function(a){return curVal(a,'bodyFat');});
+  var avgCmj = avgOf(withCmj, function(a){return curVal(a,'cmj');});
+  var avgMas = avgOf(withMas, computeMAS);
+  var withBronco = athletes.filter(function(a){return curVal(a,'bronco')!==null;});
+  var avgBroncoSec = avgOf(withBronco, function(a){return curVal(a,'bronco');});
+  var flaggedAthletes = athletes.filter(function(a){return athleteFlagCount(a)>0;}).length;
+
+  var stats = [
+    {value:athletes.length, label:'On roster'},
+    {value:withScore.length+'/'+athletes.length, label:'Have lift maxes on file'},
+    {value:avgScore!==null?avgScore+' lb':'\u2014', label:'Team avg strength score'},
+    {value:avgBodyFat!==null?avgBodyFat+'%':'\u2014', label:'Team avg body fat'},
+    {value:avgCmj!==null?avgCmj+'in':'\u2014', label:'Team avg CMJ'},
+    {value:avgBroncoSec!==null?fmtTime(avgBroncoSec):'\u2014', label:'Team avg Bronco (1200m)', sub:avgMas!==null?'MAS '+avgMas.toFixed(2)+'m/s':null},
+    {value:flaggedAthletes, label:'Athletes with 1+ flag', sub:'out of '+athletes.length}
+  ];
+  document.getElementById('teamStatGrid').innerHTML = stats.map(function(s){
+    return '<div class="stat-card"><div class="stat-value">'+s.value+'</div><div class="stat-label">'+s.label+'</div>'+(s.sub?'<div class="stat-sub">'+s.sub+'</div>':'')+'</div>';
+  }).join('');
+
+  [['teamPowerSummary',POWER_CONFIG],['teamSpeedSummary',SPEED_CONFIG],['teamStrengthSummary',STRENGTH_CONFIG]].forEach(function(pair){
+    var data = computeQuadrantData(pair[1], profileMode[pair[1].key]);
+    var counts = {hh:0,hl:0,lh:0,ll:0};
+    data.pts.forEach(function(p){ counts[p.qkey]++; });
+    var html = ['hh','hl','lh','ll'].map(function(k){
+      return '<span class="quad-summary-pill" style="background:'+pair[1].quadBg[k]+';color:'+pair[1].quadColors[k]+';">'+pair[1].quadLabels[k]+': '+counts[k]+'</span>';
+    }).join('');
+    if(data.pts.length===0){ html = '<div class="quad-empty">Not enough data logged yet for this profile.</div>'; }
+    document.getElementById(pair[0]).innerHTML = html;
+  });
+
+  var breakdown = teamFlagBreakdown();
+  document.getElementById('teamFlagBreakdown').innerHTML = breakdown.length
+    ? breakdown.map(function(f){ return '<span class="quad-summary-pill" style="background:#f7e6e5;color:var(--danger);">'+f.label+': '+f.count+'</span>'; }).join('')
+    : '<div class="quad-empty">Nobody currently flagged on any metric.</div>';
+}
+
+function renderPositionsTab(){
+  var positions = [];
+  athletes.forEach(function(a){ if(positions.indexOf(a.pos)<0) positions.push(a.pos); });
+  positions.sort();
+
+  var cols = [
+    {label:'Athletes', fn:function(list){ return list.length; }},
+    {label:'Avg strength score', fn:function(list){ var v=list.map(computeScore).filter(function(x){return x!==null;}); return v.length?round1(v.reduce(function(s,x){return s+x;},0)/v.length)+' lb':'\u2014'; }},
+    {label:'Avg body fat', fn:function(list){ var v=list.map(function(a){return curVal(a,'bodyFat');}).filter(function(x){return x!==null;}); return v.length?round1(v.reduce(function(s,x){return s+x;},0)/v.length)+'%':'\u2014'; }},
+    {label:'Avg CMJ', fn:function(list){ var v=list.map(function(a){return curVal(a,'cmj');}).filter(function(x){return x!==null;}); return v.length?round1(v.reduce(function(s,x){return s+x;},0)/v.length)+'in':'\u2014'; }},
+    {label:'Avg Bronco (1200m)', fn:function(list){ var v=list.map(function(a){return curVal(a,'bronco');}).filter(function(x){return x!==null;}); if(!v.length) return '\u2014'; var avgSec=v.reduce(function(s,x){return s+x;},0)/v.length; return fmtTime(avgSec)+' ('+(1200/avgSec).toFixed(2)+'m/s)'; }},
+    {label:'Avg GCT', fn:function(list){ var v=list.map(function(a){return curVal(a,'rsiGct');}).filter(function(x){return x!==null;}); return v.length?(v.reduce(function(s,x){return s+x;},0)/v.length).toFixed(3)+'s':'\u2014'; }},
+    {label:'Flags', fn:function(list){ return list.reduce(function(s,a){return s+(athleteFlagCount(a)>0?1:0);},0); }}
+  ];
+
+  var html = '<table class="pos-table"><thead><tr><th>Position</th>'+cols.map(function(c){return '<th>'+c.label+'</th>';}).join('')+'</tr></thead><tbody>';
+  positions.forEach(function(pos){
+    var list = athletes.filter(function(a){return a.pos===pos;});
+    html += '<tr><td><b>'+escapeHtml(pos)+'</b></td>'+cols.map(function(c){return '<td class="num">'+c.fn(list)+'</td>';}).join('')+'</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('posTableWrap').innerHTML = html;
+}
+
+var athleteCardState = {search:'', pos:'all'};
+
+function renderAthletesTab(){
+  var posFilterEl = document.getElementById('athletePosFilter');
+  if(posFilterEl.querySelectorAll('button').length===1){
+    var positions = [];
+    athletes.forEach(function(a){ if(positions.indexOf(a.pos)<0) positions.push(a.pos); });
+    positions.sort();
+    positions.forEach(function(pos){
+      var btn = document.createElement('button');
+      btn.setAttribute('data-pos', pos);
+      btn.textContent = pos;
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(posFilterEl.querySelectorAll('button'), function(b){b.classList.remove('active');});
+        btn.classList.add('active');
+        athleteCardState.pos = pos;
+        renderAthletesTab();
+      });
+      posFilterEl.appendChild(btn);
+    });
+    posFilterEl.querySelector('button[data-pos="all"]').addEventListener('click', function(){
+      Array.prototype.forEach.call(posFilterEl.querySelectorAll('button'), function(b){b.classList.remove('active');});
+      this.classList.add('active');
+      athleteCardState.pos = 'all';
+      renderAthletesTab();
+    });
+  }
+
+  var list = athletes.filter(function(a){
+    if(athleteCardState.pos!=='all' && a.pos!==athleteCardState.pos) return false;
+    if(athleteCardState.search && a.name.toLowerCase().indexOf(athleteCardState.search.toLowerCase())<0) return false;
+    return true;
+  });
+
+  var grid = document.getElementById('athleteCardGrid');
+  if(list.length===0){
+    grid.innerHTML = '<div class="quad-empty">No athletes match this search/filter.</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(function(a){
+    var score = computeScore(a);
+    var bodyFat = curVal(a,'bodyFat');
+    var cmj = curVal(a,'cmj');
+    var mas = computeMAS(a);
+    var broncoRaw = curVal(a,'bronco');
+    var gct = curVal(a,'rsiGct');
+    var flags = athleteFlagDetails(a);
+    var powerQ = classifyForCard(POWER_CONFIG, a);
+    var speedQ = classifyForCard(SPEED_CONFIG, a);
+    var strengthQ = classifyForCard(STRENGTH_CONFIG, a);
+    var sparkPts = metricSeriesForAthlete(a, 'score');
+
+    return '<div class="athlete-card" data-id="'+a.id+'">'+
+      '<div class="athlete-card-head">'+
+        '<div><div class="athlete-card-name">#'+a.no+' '+escapeHtml(a.name)+'</div><div class="athlete-card-meta">'+escapeHtml(a.pos)+' &middot; '+escapeHtml(a.cl)+'</div></div>'+
+      '</div>'+
+      (flags.length>0 ? '<div class="athlete-card-flags">'+flags.map(function(f){return '<span class="athlete-card-flag">'+f.label+'</span>';}).join('')+'</div>' : '')+
+      '<div class="athlete-stat-row"><span>Strength score</span><b>'+(score!==null?score+' lb':'\u2014')+'</b></div>'+
+      '<div class="athlete-stat-row"><span>Body fat</span><b>'+(bodyFat!==null?bodyFat+'%':'\u2014')+'</b></div>'+
+      '<div class="athlete-stat-row"><span>CMJ</span><b>'+(cmj!==null?cmj+'in':'\u2014')+'</b></div>'+
+      '<div class="athlete-stat-row"><span>Bronco (1200m)</span><b>'+(broncoRaw!==null?fmtTime(broncoRaw):'\u2014')+(mas!==null?' <span style="color:var(--text-muted);font-weight:400;">('+mas.toFixed(2)+'m/s)</span>':'')+'</b></div>'+
+      '<div class="athlete-stat-row"><span>Ground contact</span><b>'+(gct!==null?gct.toFixed(3)+'s':'\u2014')+'</b></div>'+
+      '<div class="athlete-card-quads">'+
+        quadPillHtml(POWER_CONFIG, powerQ, 'Power')+
+        quadPillHtml(SPEED_CONFIG, speedQ, 'Speed')+
+        quadPillHtml(STRENGTH_CONFIG, strengthQ, 'Strength')+
+      '</div>'+
+      '<div class="athlete-card-spark">'+buildSparklineSVG(sparkPts, 240, 34)+'</div>'+
+    '</div>';
+  }).join('');
+
+  Array.prototype.forEach.call(grid.querySelectorAll('.athlete-card'), function(card){
+    card.addEventListener('click', function(){ openProfile(card.getAttribute('data-id')); });
+  });
+}
+
 /* --- Flags: built from real standards, not just team-relative top-10 lists --- */
 function flagRowHtml(rank, a, valueHtml, contextHtml, tier){
   var tierClass = tier ? ' flag-value-'+tier : ' flag-value-below';
@@ -2376,30 +2569,6 @@ function divergenceSectionHtml(){
   '</div>';
 }
 
-function renderFlags(){
-  var bodyCompEl = document.getElementById('flagBodyComp');
-  if(bodyCompEl) bodyCompEl.innerHTML = thresholdSectionHtml('bodyFat') + tierSectionHtml('ffmi');
-
-  var strengthEl = document.getElementById('flagStrength');
-  if(strengthEl) strengthEl.innerHTML = tierSectionHtml('backSquat') + tierSectionHtml('benchPress') + tierSectionHtml('deadlift') + tierSectionHtml('powerClean') + divergenceSectionHtml();
-
-  var powerSpeedEl = document.getElementById('flagPowerSpeed');
-  if(powerSpeedEl) powerSpeedEl.innerHTML = percentileSectionHtml('cmj') + percentileSectionHtml('fortyYard') + thresholdSectionHtml('bronco');
-
-  var panel = document.getElementById('panel-flags');
-  Array.prototype.forEach.call(panel.querySelectorAll('.tier-toggle'), function(toggle){
-    var key = toggle.getAttribute('data-tier-key');
-    Array.prototype.forEach.call(toggle.querySelectorAll('.tier-toggle-btn'), function(btn){
-      btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        flagTierView[key] = btn.getAttribute('data-tier');
-        renderFlags();
-      });
-    });
-  });
-
-  if(panel) wireFlagRows(panel);
-}
 
 /* --- Methodology tab: generated straight from STANDARDS, one source of truth --- */
 function shortSourceLabel(key, std){
@@ -2466,35 +2635,18 @@ function renderMethodology(){
 }
 
 function renderAll(){
-  renderSnapshot();
+  renderTeamTab();
+  renderPositionsTab();
+  renderAthletesTab();
   renderOverview();
-  renderBarList();
-  renderLeaderboard();
-  renderTrendChart();
-  renderPowerProfile();
-  renderSpeedProfile();
-  renderStrengthProfile();
-  renderFlags();
   renderMethodology();
 }
 
 loadData();
 renderOverviewNote();
 populatePosFilterOverview();
-populateBarMetricPills();
-populateTrendMetricSelect();
-populateAthletePicker();
 renderAll();
 setHeaderMeta();
-
-var resizeTimer = null;
-window.addEventListener('resize', function(){
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function(){
-    renderBarList();
-    renderTrendChart();
-  }, 200);
-});
 
 })();
 </script>
