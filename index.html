@@ -190,6 +190,21 @@
   .drill-clickable:hover{border-color:var(--csu-green);box-shadow:0 4px 14px rgba(0,0,0,0.08);}
   .drill-clickable .std-section-head{display:flex;justify-content:space-between;align-items:center;}
   .drill-hint{font-size:11px;color:var(--csu-green);font-weight:700;white-space:nowrap;}
+
+  .stat-card.stat-clickable{cursor:pointer;transition:border-color .15s, box-shadow .15s;position:relative;}
+  .stat-card.stat-clickable:hover{border-color:var(--csu-green);box-shadow:0 4px 14px rgba(0,0,0,0.08);}
+  .stat-card.stat-clickable::after{content:'View breakdown \2192';position:absolute;right:14px;bottom:10px;font-size:10px;font-weight:700;color:var(--csu-green);opacity:0;transition:opacity .15s;}
+  .stat-card.stat-clickable:hover::after{opacity:1;}
+  .rank-list{display:flex;flex-direction:column;}
+  .rank-row{display:flex;align-items:center;gap:12px;padding:9px 4px;border-bottom:1px solid var(--border);cursor:pointer;font-size:13px;}
+  .rank-row:last-child{border-bottom:none;}
+  .rank-row:hover{background:var(--surface-2);}
+  .rank-num{width:24px;flex-shrink:0;color:var(--text-muted);font-size:11.5px;font-weight:700;text-align:right;}
+  .rank-name{flex:1;font-weight:600;color:var(--text-primary);}
+  .rank-value{font-variant-numeric:tabular-nums;color:var(--text-secondary);font-weight:700;white-space:nowrap;}
+  .rank-value b{color:var(--text-primary);}
+  .rank-extra{font-weight:400;color:var(--text-muted);}
+  .rank-flags{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;}
   .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-bottom:20px;font-size:13px;}
   .info-grid div span.label{display:block;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:2px;}
   .info-grid div span.value{font-weight:600;color:var(--text-primary);}
@@ -548,6 +563,19 @@
       <div class="chart-card" id="drillChart" style="margin-bottom:22px;"></div>
       <div class="quad-grid" id="drillGrid"></div>
     </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="metricDrillOverlay">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <div>
+        <h2 id="metricDrillTitle">—</h2>
+        <div class="pos-line" id="metricDrillSubtitle">—</div>
+      </div>
+      <button class="modal-close" id="metricDrillClose">&#10005;</button>
+    </div>
+    <div class="modal-body" id="metricDrillBody"></div>
   </div>
 </div>
 
@@ -1685,6 +1713,107 @@ Array.prototype.forEach.call(document.querySelectorAll('.drill-clickable'), func
   el.addEventListener('click', function(){ openProfileDrilldown(el.getAttribute('data-drill')); });
 });
 
+/* --- Metric breakdown modal (Team tab stat cards -> ranked list of everyone) --- */
+var METRIC_DRILL_META = {
+  score:{title:'Strength score breakdown', key:'score'},
+  bodyFat:{title:'Body fat breakdown', key:'bodyFat'},
+  cmj:{title:'CMJ breakdown', key:'cmj'},
+  bronco:{title:'Bronco (1200m) breakdown', key:'bronco'}
+};
+
+function metricBreakdownList(key){
+  var meta = metricMeta(key);
+  var list = athletes.map(function(a){
+    var v = key==='score' ? computeScore(a) : curVal(a, key);
+    return {a:a, v:v};
+  });
+  list.sort(function(x,y){
+    var gx = (x.v===null||x.v===undefined||isNaN(x.v)) ? null : goodness(x.v, meta);
+    var gy = (y.v===null||y.v===undefined||isNaN(y.v)) ? null : goodness(y.v, meta);
+    if(gx===null && gy===null) return 0;
+    if(gx===null) return 1;
+    if(gy===null) return -1;
+    return gy-gx;
+  });
+  return list;
+}
+
+function closeMetricDrilldown(){ document.getElementById('metricDrillOverlay').classList.remove('active'); }
+
+function openMetricDrilldown(stat){
+  if(stat==='roster'){
+    var table = document.getElementById('overviewTable');
+    if(table && table.scrollIntoView) table.scrollIntoView({behavior:'smooth', block:'start'});
+    return;
+  }
+  if(stat==='flags'){ renderFlagsBreakdown(); document.getElementById('metricDrillOverlay').classList.add('active'); return; }
+
+  var meta = metricMeta(stat);
+  var list = metricBreakdownList(stat);
+  var tested = list.filter(function(x){ return x.v!==null && x.v!==undefined && !isNaN(x.v); });
+  var avg = tested.length ? round1(tested.reduce(function(s,x){return s+x.v;},0)/tested.length) : null;
+
+  document.getElementById('metricDrillTitle').textContent = METRIC_DRILL_META[stat].title;
+  document.getElementById('metricDrillSubtitle').textContent = tested.length+' of '+athletes.length+' tested'+
+    (avg!==null ? ' \u00b7 Team avg '+formatValue(avg,meta)+(meta.timeFormat?'':(' '+meta.unit)) : '');
+
+  var rowsHtml = list.map(function(item, i){
+    var hasVal = item.v!==null && item.v!==undefined && !isNaN(item.v);
+    var valLabel = hasVal ? formatValue(item.v, meta)+(meta.timeFormat?'':(' '+meta.unit)) : 'Not tested';
+    var extra = '';
+    if(stat==='bronco' && hasVal){
+      var mas = computeMAS(item.a);
+      if(mas!==null) extra = ' <span class="rank-extra">('+mas.toFixed(2)+'m/s)</span>';
+    }
+    return '<div class="rank-row" data-id="'+item.a.id+'">'+
+      '<span class="rank-num">'+(hasVal?(i+1):'\u2014')+'</span>'+
+      '<span class="rank-name">#'+item.a.no+' '+escapeHtml(item.a.name)+' <span style="color:var(--text-muted);font-weight:400;">'+escapeHtml(item.a.pos)+'</span></span>'+
+      '<span class="rank-value">'+valLabel+extra+'</span>'+
+      '</div>';
+  }).join('');
+  document.getElementById('metricDrillBody').innerHTML = '<div class="rank-list">'+rowsHtml+'</div>';
+  wireMetricDrillRows();
+  document.getElementById('metricDrillOverlay').classList.add('active');
+}
+
+function renderFlagsBreakdown(){
+  document.getElementById('metricDrillTitle').textContent = 'Flags breakdown';
+  var flagged = athletes.map(function(a){ return {a:a, flags:athleteFlagDetails(a)}; })
+    .filter(function(x){ return x.flags.length>0; })
+    .sort(function(x,y){ return y.flags.length-x.flags.length; });
+  document.getElementById('metricDrillSubtitle').textContent = flagged.length+' of '+athletes.length+' athletes with at least one flag';
+
+  var breakdown = teamFlagBreakdown();
+  var summaryHtml = breakdown.length
+    ? '<div class="quad-summary-row" style="margin-bottom:16px;">'+breakdown.map(function(f){ return '<span class="quad-summary-pill" style="background:#f7e6e5;color:var(--danger);">'+f.label+': '+f.count+'</span>'; }).join('')+'</div>'
+    : '';
+
+  var rowsHtml = flagged.map(function(item){
+    return '<div class="rank-row" data-id="'+item.a.id+'">'+
+      '<span class="rank-name">#'+item.a.no+' '+escapeHtml(item.a.name)+' <span style="color:var(--text-muted);font-weight:400;">'+escapeHtml(item.a.pos)+'</span></span>'+
+      '<span class="rank-flags">'+item.flags.map(function(f){return '<span class="athlete-card-flag">'+f.label+'</span>';}).join('')+'</span>'+
+      '</div>';
+  }).join('') || '<div class="quad-empty">Nobody currently flagged on any metric.</div>';
+
+  document.getElementById('metricDrillBody').innerHTML = summaryHtml+'<div class="rank-list">'+rowsHtml+'</div>';
+  wireMetricDrillRows();
+}
+
+function wireMetricDrillRows(){
+  Array.prototype.forEach.call(document.querySelectorAll('#metricDrillBody .rank-row'), function(row){
+    row.addEventListener('click', function(){ openProfile(row.getAttribute('data-id')); });
+  });
+}
+
+document.getElementById('metricDrillClose').addEventListener('click', closeMetricDrilldown);
+document.getElementById('metricDrillOverlay').addEventListener('click', function(e){
+  if(e.target===document.getElementById('metricDrillOverlay')) closeMetricDrilldown();
+});
+document.getElementById('teamStatGrid').addEventListener('click', function(e){
+  var card = e.target.closest('.stat-clickable');
+  if(card) openMetricDrilldown(card.getAttribute('data-stat'));
+});
+
 function updateOverviewSortIndicators(){
   Array.prototype.forEach.call(document.querySelectorAll('#overviewTable thead th[data-key]'), function(th){
     var key = th.getAttribute('data-key');
@@ -2242,16 +2371,16 @@ function renderTeamTab(){
   var flaggedAthletes = athletes.filter(function(a){return athleteFlagCount(a)>0;}).length;
 
   var stats = [
-    {value:athletes.length, label:'On roster'},
-    {value:withScore.length+'/'+athletes.length, label:'Have lift maxes on file'},
-    {value:avgScore!==null?avgScore+' lb':'\u2014', label:'Team avg strength score'},
-    {value:avgBodyFat!==null?avgBodyFat+'%':'\u2014', label:'Team avg body fat'},
-    {value:avgCmj!==null?avgCmj+'in':'\u2014', label:'Team avg CMJ'},
-    {value:avgBroncoSec!==null?fmtTime(avgBroncoSec):'\u2014', label:'Team avg Bronco (1200m)', sub:avgMas!==null?'MAS '+avgMas.toFixed(2)+'m/s':null},
-    {value:flaggedAthletes, label:'Athletes with 1+ flag', sub:'out of '+athletes.length}
+    {value:athletes.length, label:'On roster', stat:'roster'},
+    {value:withScore.length+'/'+athletes.length, label:'Have lift maxes on file', stat:'score'},
+    {value:avgScore!==null?avgScore+' lb':'\u2014', label:'Team avg strength score', stat:'score'},
+    {value:avgBodyFat!==null?avgBodyFat+'%':'\u2014', label:'Team avg body fat', stat:'bodyFat'},
+    {value:avgCmj!==null?avgCmj+'in':'\u2014', label:'Team avg CMJ', stat:'cmj'},
+    {value:avgBroncoSec!==null?fmtTime(avgBroncoSec):'\u2014', label:'Team avg Bronco (1200m)', sub:avgMas!==null?'MAS '+avgMas.toFixed(2)+'m/s':null, stat:'bronco'},
+    {value:flaggedAthletes, label:'Athletes with 1+ flag', sub:'out of '+athletes.length, stat:'flags'}
   ];
   document.getElementById('teamStatGrid').innerHTML = stats.map(function(s){
-    return '<div class="stat-card"><div class="stat-value">'+s.value+'</div><div class="stat-label">'+s.label+'</div>'+(s.sub?'<div class="stat-sub">'+s.sub+'</div>':'')+'</div>';
+    return '<div class="stat-card stat-clickable" data-stat="'+s.stat+'"><div class="stat-value">'+s.value+'</div><div class="stat-label">'+s.label+'</div>'+(s.sub?'<div class="stat-sub">'+s.sub+'</div>':'')+'</div>';
   }).join('');
 
   [['teamPowerSummary',POWER_CONFIG],['teamSpeedSummary',SPEED_CONFIG],['teamStrengthSummary',STRENGTH_CONFIG]].forEach(function(pair){
