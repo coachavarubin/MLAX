@@ -584,7 +584,4387 @@
 <script>
 (function(){
 
-var ATHLETES_SEED = [{"id":"m2","no":2,"name":"Evan Ryba","pos":"D","cl":"Fr.","hometown":"Medina, OH / Medina","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":17.2}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.248}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.74}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":294}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.35}]}},{"id":"m11","no":11,"name":"Carter Haun","pos":"SSDM","cl":"Fr.","hometown":"Milford, OH / Milford","series":{}},{"id":"m14","no":14,"name":"Gavin Cunningham","pos":"M","cl":"Fr.","hometown":"Lino Lakes, MN / Centennial","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.17}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.69}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":289}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.88}]}},{"id":"m20","no":20,"name":"Grant Koloski","pos":"GK","cl":"Fr.","hometown":"Lincoln, RI / Mt. Saint Charlies Academy","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":24.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.187}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.1}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.19}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":320}]}},{"id":"m21","no":21,"name":"Gabe Ponte","pos":"LSM","cl":"Fr.","hometown":"Kent, OH / Perkiomen School","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.195}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":13.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.75}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.35}]}},{"id":"m25","no":25,"name":"Micah Fenske","pos":"SSDM","cl":"Fr.","hometown":"Salem, OR / West Salem","series":{}},{"id":"m32","no":32,"name":"Brooks Mahoney","pos":"A","cl":"Fr.","hometown":"Louisville, KY / St. Xavier","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.5}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.193}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":12.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.64}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":290}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.78}]}},{"id":"m35","no":35,"name":"Malik Andrews","pos":"FO","cl":"Fr.","hometown":"Wausau, WI / Wausau","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":23.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.227}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.5}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.96}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":312}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.88}]}},{"id":"m37","no":37,"name":"Brady Gallagher","pos":"A","cl":"Fr.","hometown":"Reinholds, PA / Cocalico","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":17.5}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.208}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":13.2}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.61}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":301}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.39}]}},{"id":"m45","no":45,"name":"Michael McBay","pos":"D","cl":"Fr.","hometown":"Burlington, Ontario / Dr. Frank Hayden Secondary School","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.4}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.175}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.3}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.38}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":310}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.97}]}},{"id":"m55","no":55,"name":"Grayson Cole","pos":"SSDM","cl":"Fr.","hometown":"Highlands Ranch, CO / Rock Canyon","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.187}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.1}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.45}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":302}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.84}]}},{"id":"m3","no":3,"name":"Brennen Hickey","pos":"A","cl":"Jr.","hometown":"West Chester, OH / Moeller","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":10.7},{"date":"2025-12-03","label":"Dec 2025","value":13}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":165.6},{"date":"2025-12-03","label":"Dec 2025","value":164.1}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":185.4},{"date":"2025-12-03","label":"Dec 2025","value":188.7}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.16}]},"heightIn":70.5},{"id":"m4","no":4,"name":"Adam Van Voorhis","pos":"M","cl":"Jr.","hometown":"Columbus, OH / Hilliard Davidson","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":15.4},{"date":"2025-12-02","label":"Dec 2025","value":15.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.7},{"date":"2025-12-02","label":"Dec 2025","value":155.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":182.8},{"date":"2025-12-02","label":"Dec 2025","value":184.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.4}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.77}]},"heightIn":70.0},{"id":"m10","no":10,"name":"Seth Alejandrino","pos":"D","cl":"Jr.","hometown":"Dayton, OH / Centerville","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":300}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":19.5},{"date":"2025-12-04","label":"Dec 2025","value":16.3}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":161.3},{"date":"2025-12-04","label":"Dec 2025","value":172.1}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":200.5},{"date":"2025-12-04","label":"Dec 2025","value":205.7}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.235}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.14}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.02}]},"heightIn":72.5},{"id":"m12","no":12,"name":"Enrico Lombardo","pos":"LSM","cl":"Jr.","hometown":"North York, Ontario / Perkiomen School","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":240.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":260.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":195.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":295}],"bodyFat":[{"date":"2025-09-12","label":"Fall 2025","value":21.3},{"date":"2025-12-02","label":"Dec 2025","value":21.4}],"leanMass":[{"date":"2025-09-12","label":"Fall 2025","value":149.4},{"date":"2025-12-02","label":"Dec 2025","value":145}],"bodyMass":[{"date":"2025-09-12","label":"Fall 2025","value":189.9},{"date":"2025-12-02","label":"Dec 2025","value":184.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.182}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.7}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.77}]},"heightIn":70.7},{"id":"m15","no":15,"name":"Maddox Johnson","pos":"M","cl":"Jr.","hometown":"Beavercreek Township, OH / Beavercreek","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":293}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":13.7},{"date":"2025-12-04","label":"Dec 2025","value":16.8}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":152.7},{"date":"2025-12-04","label":"Dec 2025","value":155.3}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":176.9},{"date":"2025-12-04","label":"Dec 2025","value":186.6}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.184}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":21.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.92}]},"heightIn":68.5},{"id":"m24","no":24,"name":"Jason Hilton","pos":"M","cl":"Jr.","hometown":"Lancaster, PA / Hempfield (Wagner)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":360.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":262},{"date":"2026-08-27","label":"Fall '26 test","value":290}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":11.8},{"date":"2025-12-04","label":"Dec 2025","value":11.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":163.4},{"date":"2025-12-04","label":"Dec 2025","value":165.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":185.3},{"date":"2025-12-04","label":"Dec 2025","value":187.3}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":25.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.234}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":21.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.34}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.81}]},"heightIn":72.8},{"id":"m27","no":27,"name":"Alex Long","pos":"SSDM","cl":"Jr.","hometown":"Hamilton, Ontario / Bishop Ryan","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":263},{"date":"2026-08-27","label":"Fall '26 test","value":308}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.6},{"date":"2025-12-03","label":"Dec 2025","value":11.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":142.1},{"date":"2025-12-03","label":"Dec 2025","value":139.7}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":166.3},{"date":"2025-12-03","label":"Dec 2025","value":158}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.192}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":14.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.99}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.84}]},"heightIn":71.9},{"id":"m29","no":29,"name":"Ethan Erker","pos":"M","cl":"Jr.","hometown":"Heber City, UT / Wasatch","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":262}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":4.4},{"date":"2025-12-03","label":"Dec 2025","value":7.5}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":172.9},{"date":"2025-12-03","label":"Dec 2025","value":170.4}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":180.8},{"date":"2025-12-03","label":"Dec 2025","value":184.1}]},"heightIn":70.2},{"id":"m31","no":31,"name":"Carson Cheek","pos":"FO","cl":"Jr.","hometown":"West Chester, OH / Badin","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":287},{"date":"2026-08-27","label":"Fall '26 test","value":318}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":18.9},{"date":"2025-12-02","label":"Dec 2025","value":18}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":145.8},{"date":"2025-12-02","label":"Dec 2025","value":146.6}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":179.8},{"date":"2025-12-02","label":"Dec 2025","value":178.9}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":25.7}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.179}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":25.2}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":3.59}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.64}]},"heightIn":68.3},{"id":"m47","no":47,"name":"Mattix Groves","pos":"M","cl":"Jr.","hometown":"Naperville, IL / Naperville North","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":190.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":250},{"date":"2026-08-27","label":"Fall '26 test","value":289}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":9},{"date":"2025-12-04","label":"Dec 2025","value":7.4}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":152.6},{"date":"2025-12-04","label":"Dec 2025","value":160.1}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":167.8},{"date":"2025-12-04","label":"Dec 2025","value":173}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.4}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.197}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.38}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.15}]},"heightIn":73.7},{"id":"m77","no":77,"name":"Caden Wilson","pos":"FO","cl":"Jr.","hometown":"Hilliard, OH / Hilliard Davidson","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":355.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":11.3},{"date":"2025-12-02","label":"Dec 2025","value":15.3}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":181},{"date":"2025-12-02","label":"Dec 2025","value":174.5}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":204.1},{"date":"2025-12-02","label":"Dec 2025","value":206.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.263}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.3}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.61}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.06}]},"heightIn":70.5},{"id":"m88","no":88,"name":"Creed McDonald","pos":"M","cl":"Jr.","hometown":"Springboro, OH / Springboro","series":{"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":290}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.2},{"date":"2025-12-03","label":"Dec 2025","value":16.7}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.8},{"date":"2025-12-03","label":"Dec 2025","value":151}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":180.4},{"date":"2025-12-03","label":"Dec 2025","value":181.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.225}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.3}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.09}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.11}]},"heightIn":71.2},{"id":"m99","no":99,"name":"Logan Leatherberry","pos":"GK","cl":"Jr.","hometown":"Oregon, WI / Oregon","series":{"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":310}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":36.8},{"date":"2025-12-04","label":"Dec 2025","value":35.1}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":180},{"date":"2025-12-04","label":"Dec 2025","value":171.5}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":284.8},{"date":"2025-12-04","label":"Dec 2025","value":264.3}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":16.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.225}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":13.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.56}]},"heightIn":73.8},{"id":"m16","no":16,"name":"Joel Brown","pos":"SSDM","cl":"R-Jr.","hometown":"Loveland, OH / Archbishop Moeller","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":255.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":270}],"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":11.8}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":127.9}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":145}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.183}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.63}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.8}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.84}]},"heightIn":69.9},{"id":"m19","no":19,"name":"Joe Ginnetti","pos":"SSDM","cl":"R-Jr.","hometown":"Cincinnati, OH / Moeller (Air Force)","series":{"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":294}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":21.2},{"date":"2025-12-02","label":"Dec 2025","value":25.9}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":175.3},{"date":"2025-12-02","label":"Dec 2025","value":173.7}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":222.6},{"date":"2025-12-02","label":"Dec 2025","value":234.3}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.228}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.2}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.15}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.23}]},"heightIn":71.8},{"id":"m22","no":22,"name":"Jameson Demarco","pos":"SSDM","cl":"R-Jr.","hometown":"Olmstead Falls, OH / Olmstead Falls","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":235.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":260},{"date":"2026-08-27","label":"Fall '26 test","value":282}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.7},{"date":"2025-12-03","label":"Dec 2025","value":8.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":152.3},{"date":"2025-12-03","label":"Dec 2025","value":150.8}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":161.5},{"date":"2025-12-03","label":"Dec 2025","value":165}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.4}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.191}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.64}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.95}]},"heightIn":67.2},{"id":"m28","no":28,"name":"Luke Ray","pos":"M","cl":"R-So.","hometown":"Milfrod, OH / Milford (Towson)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":29.3},{"date":"2025-12-04","label":"Dec 2025","value":28.6}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":128.1},{"date":"2025-12-04","label":"Dec 2025","value":128.2}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":181.1},{"date":"2025-12-04","label":"Dec 2025","value":179.7}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":23.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.196}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":17.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.21}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":293}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.01}]},"heightIn":66.1},{"id":"m0","no":0,"name":"Noah Goedjen","pos":"D","cl":"R-Sr.","hometown":"Greenfield, MN / Providence Academy (High Point)","series":{"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.192}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.39}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":300}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.36}]}},{"id":"m1","no":1,"name":"Will Adair","pos":"M","cl":"R-Sr.","hometown":"Cincinnati, OH / Indian Hills","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":320.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bodyFat":[{"date":"2025-09-12","label":"Fall 2025","value":10.6},{"date":"2025-12-03","label":"Dec 2025","value":12.5}],"leanMass":[{"date":"2025-09-12","label":"Fall 2025","value":165.1},{"date":"2025-12-03","label":"Dec 2025","value":163.2}],"bodyMass":[{"date":"2025-09-12","label":"Fall 2025","value":184.7},{"date":"2025-12-03","label":"Dec 2025","value":186.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.264}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":20.4}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.99}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":289}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.99}]},"heightIn":71.9},{"id":"m7","no":7,"name":"Jack Dickson","pos":"SSDM","cl":"R-Sr.","hometown":"Laguna Niguel, CA / Corona Del Mar","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":272},{"date":"2026-08-27","label":"Fall '26 test","value":304}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":16},{"date":"2025-12-03","label":"Dec 2025","value":20.8}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":168.4},{"date":"2025-12-03","label":"Dec 2025","value":161.3}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":200.5},{"date":"2025-12-03","label":"Dec 2025","value":203.6}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.0}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.227}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":18.7}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.09}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5}]},"heightIn":71.9},{"id":"m41","no":41,"name":"Xander Johnson","pos":"A","cl":"R-Sr.","hometown":"Lancaster, PA / Manheim Township","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":300.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":215.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":395.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":295.0}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":13.9},{"date":"2025-12-02","label":"Dec 2025","value":12}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.1},{"date":"2025-12-02","label":"Dec 2025","value":155.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":177.8},{"date":"2025-12-02","label":"Dec 2025","value":177.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.3}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.29}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":23.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.08}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":289}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.97}]},"heightIn":70.5},{"id":"m66","no":66,"name":"Chase Gettys","pos":"D","cl":"So.","hometown":"Mason, OH / Mason","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":420.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":269},{"date":"2026-08-27","label":"Fall '26 test","value":297}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":9.1},{"date":"2025-12-03","label":"Dec 2025","value":12.1}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":151.1},{"date":"2025-12-03","label":"Dec 2025","value":149.9}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":166.2},{"date":"2025-12-03","label":"Dec 2025","value":170.5}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.234}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":22.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.42}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.96}]},"heightIn":71.0},{"id":"m9","no":9,"name":"Ever Whitaker","pos":"D","cl":"So.","hometown":"Reno, NV / Galena","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":255.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":296}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":16.1},{"date":"2025-12-05","label":"Dec 2025","value":15.8}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":165.9},{"date":"2025-12-05","label":"Dec 2025","value":169.7}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":197.8},{"date":"2025-12-05","label":"Dec 2025","value":201.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":24.2}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.199}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.49}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.94}]},"heightIn":72.0},{"id":"m17","no":17,"name":"Jayvon Robinson","pos":"GK","cl":"So.","hometown":"Bronx, NY / Suffield Academy","series":{"bodyFat":[{"date":"2025-09-11","label":"Fall 2025","value":16.2},{"date":"2025-12-05","label":"Dec 2025","value":16.3}],"leanMass":[{"date":"2025-09-11","label":"Fall 2025","value":144.8},{"date":"2025-12-05","label":"Dec 2025","value":145.7}],"bodyMass":[{"date":"2025-09-11","label":"Fall 2025","value":172.8},{"date":"2025-12-05","label":"Dec 2025","value":174.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.212}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":15.1}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":1.82}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.04}]},"heightIn":70.8},{"id":"m33","no":33,"name":"Nico Federici","pos":"GK","cl":"So.","hometown":"Wausau, WI / Wausau","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":145.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":17.9},{"date":"2025-12-03","label":"Dec 2025","value":20.4}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":161.4},{"date":"2025-12-03","label":"Dec 2025","value":162.4}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":196.5},{"date":"2025-12-03","label":"Dec 2025","value":204}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.7}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.177}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.85}],"bronco":[{"date":"2026-08-27","label":"Fall '26 test","value":301}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.1}]},"heightIn":76.2},{"id":"m34","no":34,"name":"Tavin Jones","pos":"FO","cl":"So.","hometown":"Las Vegas, NV / Western Reserve Academy","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":375.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":263},{"date":"2026-08-27","label":"Fall '26 test","value":292}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":9.5},{"date":"2025-12-02","label":"Dec 2025","value":7.6}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":154.3},{"date":"2025-12-02","label":"Dec 2025","value":153.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":170.6},{"date":"2025-12-02","label":"Dec 2025","value":166.5}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":23.6}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.206}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.7}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.08}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.78}]},"heightIn":70.0},{"id":"m51","no":51,"name":"Landon Whalen","pos":"A","cl":"So.","hometown":"Hilliard, OH / Hilliard Darby","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":315.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":270},{"date":"2026-08-27","label":"Fall '26 test","value":292}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":14.3},{"date":"2025-12-04","label":"Dec 2025","value":15.4}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":163.1},{"date":"2025-12-04","label":"Dec 2025","value":164.8}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":190.4},{"date":"2025-12-04","label":"Dec 2025","value":194.9}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.8}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.192}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":21.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.92}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.89}]},"heightIn":71.9},{"id":"m5","no":5,"name":"Layton Speer","pos":"M","cl":"Sr.","hometown":"Houston, TX / Langham Creek","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":270.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":225.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":260}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":9.6},{"date":"2025-12-02","label":"Dec 2025","value":5.5}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.2},{"date":"2025-12-02","label":"Dec 2025","value":156.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":169.5},{"date":"2025-12-02","label":"Dec 2025","value":166.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":24.6}],"rsiScore":[{"date":"2026-08-31","label":"Fall '26 test","value":1.68}],"rsiGct":[{"date":"2026-08-31","label":"Fall '26 test","value":0.156}],"rsiJump":[{"date":"2026-08-31","label":"Fall '26 test","value":10.3}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.73}]},"heightIn":72.0},{"id":"m6","no":6,"name":"Oliver Vanyo","pos":"GK","cl":"Sr.","hometown":"St. Catherines, Ontario / Governor Science (Lindenwood)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":370.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":200.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":285},{"date":"2026-08-27","label":"Fall '26 test","value":303}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":14.3},{"date":"2025-12-03","label":"Dec 2025","value":20.3}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":138},{"date":"2025-12-03","label":"Dec 2025","value":136.8}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":161.1},{"date":"2025-12-03","label":"Dec 2025","value":171.8}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.193}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.0}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.51}]},"heightIn":72.2},{"id":"m8","no":8,"name":"Griffin Valli","pos":"D","cl":"Sr.","hometown":"Buffalo, MN / Buffalo","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":330.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":245.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":365.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":275.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":261}],"bodyFat":[{"date":"2025-09-10","label":"Fall 2025","value":14.8},{"date":"2025-12-08","label":"Dec 2025","value":12.7}],"leanMass":[{"date":"2025-09-10","label":"Fall 2025","value":170.1},{"date":"2025-12-08","label":"Dec 2025","value":171.5}],"bodyMass":[{"date":"2025-09-10","label":"Fall 2025","value":199.6},{"date":"2025-12-08","label":"Dec 2025","value":196.5}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":22.7}],"rsiScore":[{"date":null,"label":"Fall '26 test","value":2.03}],"rsiGct":[{"date":null,"label":"Fall '26 test","value":0.212}],"rsiJump":[{"date":null,"label":"Fall '26 test","value":16.8}]},"heightIn":73.4},{"id":"m18","no":18,"name":"Ethan Brooks","pos":"M","cl":"Sr.","hometown":"Powell, OH / Olentangy Liberty","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":250.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":165.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":230.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":270},{"date":"2026-08-27","label":"Fall '26 test","value":288}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":12.5},{"date":"2025-12-02","label":"Dec 2025","value":10.3}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":123.1},{"date":"2025-12-02","label":"Dec 2025","value":123.7}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":140.7},{"date":"2025-12-02","label":"Dec 2025","value":138}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.183}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.6}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.73}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":4.79}]},"heightIn":67.5},{"id":"m23","no":23,"name":"Evan Knickle","pos":"A","cl":"Sr.","hometown":"Springboro, OH / Springboro","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":205.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":310.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":235.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":275},{"date":"2026-08-27","label":"Fall '26 test","value":300}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.3},{"date":"2025-12-02","label":"Dec 2025","value":7.5}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":174.2},{"date":"2025-12-02","label":"Dec 2025","value":175.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":184},{"date":"2025-12-02","label":"Dec 2025","value":190.1}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.7}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.188}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.9}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.28}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.1}]},"heightIn":72.0},{"id":"m36","no":36,"name":"Liam Moffatt","pos":"D","cl":"Sr.","hometown":"Toronto, Ontario / Everest Academy","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":260.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":190.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":405.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":305.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":277}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":15.9},{"date":"2025-12-05","label":"Dec 2025","value":20.9}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":153.9},{"date":"2025-12-05","label":"Dec 2025","value":148.3}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":183},{"date":"2025-12-05","label":"Dec 2025","value":187.4}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":20.9}],"rsiScore":[{"date":"2026-09-01","label":"Fall '26 test","value":1.54}],"rsiGct":[{"date":"2026-09-01","label":"Fall '26 test","value":0.193}],"rsiJump":[{"date":"2026-09-01","label":"Fall '26 test","value":11.6}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.06}]},"heightIn":72.2},{"id":"m43","no":43,"name":"Luke Mitchell","pos":"LSM","cl":"Sr.","hometown":"Troy, OH / Chaminade-Juliene","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":210.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":350.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":265.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":273},{"date":"2026-08-27","label":"Fall '26 test","value":312}],"bodyFat":[{"date":"2025-09-08","label":"Fall 2025","value":5.8},{"date":"2025-12-03","label":"Dec 2025","value":2.8}],"leanMass":[{"date":"2025-09-08","label":"Fall 2025","value":155.1},{"date":"2025-12-03","label":"Dec 2025","value":152.9}],"bodyMass":[{"date":"2025-09-08","label":"Fall 2025","value":164.7},{"date":"2025-12-03","label":"Dec 2025","value":157.2}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":19.5}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.212}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":16.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.03}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.05}]},"heightIn":73.0},{"id":"m50","no":50,"name":"Sebastian West","pos":"A","cl":"Sr.","hometown":"Racine, WI / Culver Acadmey (Hampton)","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":285.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":185.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":290.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":220.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":282},{"date":"2026-08-27","label":"Fall '26 test","value":305}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":14.5},{"date":"2025-12-09","label":"Dec 2025","value":10.8}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":119.8},{"date":"2025-12-09","label":"Dec 2025","value":126.5}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":140.2},{"date":"2025-12-09","label":"Dec 2025","value":141.8}],"cmj":[{"date":"2026-08-28","label":"Fall '26 test","value":21.1}],"rsiGct":[{"date":"2026-08-27","label":"Fall '26 test","value":0.227}],"rsiJump":[{"date":"2026-08-27","label":"Fall '26 test","value":19.8}],"rsiScore":[{"date":"2026-08-27","label":"Fall '26 test","value":2.33}],"fortyYard":[{"date":"2026-09-01","label":"Fall '26 test","value":5.02}]},"heightIn":65.7},{"id":"m82","no":82,"name":"Mitchell Maibaucher","pos":"SSDM","cl":"Sr.","hometown":"Chicago, IL / Notre Dame College Prep","series":{"backSquat":[{"date":"2025-09-01","label":"'25-26 tested max","value":385.0}],"benchPress":[{"date":"2025-09-01","label":"'25-26 tested max","value":280.0}],"deadlift":[{"date":"2025-09-01","label":"'25-26 tested max","value":450.0}],"powerClean":[{"date":"2025-09-01","label":"'25-26 tested max","value":340.0}],"bronco":[{"date":"2025-09-01","label":"'25-26 tested","value":262}],"bodyFat":[{"date":"2025-09-09","label":"Fall 2025","value":7.1},{"date":"2025-12-03","label":"Dec 2025","value":8.7}],"leanMass":[{"date":"2025-09-09","label":"Fall 2025","value":170.6},{"date":"2025-12-03","label":"Dec 2025","value":169.8}],"bodyMass":[{"date":"2025-09-09","label":"Fall 2025","value":183.5},{"date":"2025-12-03","label":"Dec 2025","value":186}]},"heightIn":69.7}];
+var ATHLETES_SEED = [
+  {
+    "id": "m2",
+    "no": 2,
+    "name": "Evan Ryba",
+    "pos": "D",
+    "cl": "Fr.",
+    "hometown": "Medina, OH / Medina",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 17.2
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.248
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.9
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.74
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 294
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.35
+        }
+      ]
+    }
+  },
+  {
+    "id": "m11",
+    "no": 11,
+    "name": "Carter Haun",
+    "pos": "SSDM",
+    "cl": "Fr.",
+    "hometown": "Milford, OH / Milford",
+    "series": {}
+  },
+  {
+    "id": "m14",
+    "no": 14,
+    "name": "Gavin Cunningham",
+    "pos": "M",
+    "cl": "Fr.",
+    "hometown": "Lino Lakes, MN / Centennial",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.6
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.17
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 17.6
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.69
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 289
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.88
+        }
+      ]
+    }
+  },
+  {
+    "id": "m20",
+    "no": 20,
+    "name": "Grant Koloski",
+    "pos": "GK",
+    "cl": "Fr.",
+    "hometown": "Lincoln, RI / Mt. Saint Charlies Academy",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 24.0
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.187
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.1
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.19
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 320
+        }
+      ]
+    }
+  },
+  {
+    "id": "m21",
+    "no": 21,
+    "name": "Gabe Ponte",
+    "pos": "LSM",
+    "cl": "Fr.",
+    "hometown": "Kent, OH / Perkiomen School",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.0
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.195
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 13.4
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.75
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.35
+        }
+      ]
+    }
+  },
+  {
+    "id": "m25",
+    "no": 25,
+    "name": "Micah Fenske",
+    "pos": "SSDM",
+    "cl": "Fr.",
+    "hometown": "Salem, OR / West Salem",
+    "series": {}
+  },
+  {
+    "id": "m32",
+    "no": 32,
+    "name": "Brooks Mahoney",
+    "pos": "A",
+    "cl": "Fr.",
+    "hometown": "Louisville, KY / St. Xavier",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.5
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.193
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 12.4
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.64
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 290
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.78
+        }
+      ]
+    }
+  },
+  {
+    "id": "m35",
+    "no": 35,
+    "name": "Malik Andrews",
+    "pos": "FO",
+    "cl": "Fr.",
+    "hometown": "Wausau, WI / Wausau",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 23.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.227
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 17.5
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.96
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 312
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.88
+        }
+      ]
+    }
+  },
+  {
+    "id": "m37",
+    "no": 37,
+    "name": "Brady Gallagher",
+    "pos": "A",
+    "cl": "Fr.",
+    "hometown": "Reinholds, PA / Cocalico",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 17.5
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.208
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 13.2
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.61
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 301
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.39
+        }
+      ]
+    }
+  },
+  {
+    "id": "m45",
+    "no": 45,
+    "name": "Michael McBay",
+    "pos": "D",
+    "cl": "Fr.",
+    "hometown": "Burlington, Ontario / Dr. Frank Hayden Secondary School",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.4
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.175
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.3
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.38
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 310
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.97
+        }
+      ]
+    }
+  },
+  {
+    "id": "m55",
+    "no": 55,
+    "name": "Grayson Cole",
+    "pos": "SSDM",
+    "cl": "Fr.",
+    "hometown": "Highlands Ranch, CO / Rock Canyon",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.0
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.187
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 18.1
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.45
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 302
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.84
+        }
+      ]
+    }
+  },
+  {
+    "id": "m3",
+    "no": 3,
+    "name": "Brennen Hickey",
+    "pos": "A",
+    "cl": "Jr.",
+    "hometown": "West Chester, OH / Moeller",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 250.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 350.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 10.7
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 13
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 165.6
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 164.1
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 185.4
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 188.7
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.16
+        }
+      ]
+    },
+    "heightIn": 70.5
+  },
+  {
+    "id": "m4",
+    "no": 4,
+    "name": "Adam Van Voorhis",
+    "pos": "M",
+    "cl": "Jr.",
+    "hometown": "Columbus, OH / Hilliard Davidson",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 295.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 230.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 275.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 15.4
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 15.6
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 154.7
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 155.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 182.8
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 184.4
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.4
+        }
+      ]
+    },
+    "heightIn": 70.0
+  },
+  {
+    "id": "m10",
+    "no": 10,
+    "name": "Seth Alejandrino",
+    "pos": "D",
+    "cl": "Jr.",
+    "hometown": "Dayton, OH / Centerville",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 385.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 225.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 385.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 290.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 300
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 19.5
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 16.3
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 161.3
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 172.1
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 200.5
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 205.7
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.0
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.235
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.8
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.14
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.02
+        }
+      ]
+    },
+    "heightIn": 72.5
+  },
+  {
+    "id": "m12",
+    "no": 12,
+    "name": "Enrico Lombardo",
+    "pos": "LSM",
+    "cl": "Jr.",
+    "hometown": "North York, Ontario / Perkiomen School",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 280.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 240.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 260.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 195.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 295
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-12",
+          "label": "Fall 2025",
+          "value": 21.3
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 21.4
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-12",
+          "label": "Fall 2025",
+          "value": 149.4
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 145
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-12",
+          "label": "Fall 2025",
+          "value": 189.9
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 184.4
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.1
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.182
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.7
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.77
+        }
+      ]
+    },
+    "heightIn": 70.7
+  },
+  {
+    "id": "m15",
+    "no": 15,
+    "name": "Maddox Johnson",
+    "pos": "M",
+    "cl": "Jr.",
+    "hometown": "Beavercreek Township, OH / Beavercreek",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 305.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 215.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 350.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 293
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 13.7
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 16.8
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 152.7
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 155.3
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 176.9
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 186.6
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.184
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 21.0
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.92
+        }
+      ]
+    },
+    "heightIn": 68.5
+  },
+  {
+    "id": "m24",
+    "no": 24,
+    "name": "Jason Hilton",
+    "pos": "M",
+    "cl": "Jr.",
+    "hometown": "Lancaster, PA / Hempfield (Wagner)",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 270.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 215.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 360.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 270.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 262
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 290
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 11.8
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 11.6
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 163.4
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 165.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 185.3
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 187.3
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 25.3
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.234
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 21.4
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.34
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.81
+        }
+      ]
+    },
+    "heightIn": 72.8
+  },
+  {
+    "id": "m27",
+    "no": 27,
+    "name": "Alex Long",
+    "pos": "SSDM",
+    "cl": "Jr.",
+    "hometown": "Hamilton, Ontario / Bishop Ryan",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 225.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 185.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 275.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 263
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 308
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 14.6
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 11.6
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 142.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 139.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 166.3
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 158
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.192
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 14.9
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.99
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.84
+        }
+      ]
+    },
+    "heightIn": 71.9
+  },
+  {
+    "id": "m29",
+    "no": 29,
+    "name": "Ethan Erker",
+    "pos": "M",
+    "cl": "Jr.",
+    "hometown": "Heber City, UT / Wasatch",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 270.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 275.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 305.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 230.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 262
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 4.4
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 7.5
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 172.9
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 170.4
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 180.8
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 184.1
+        }
+      ]
+    },
+    "heightIn": 70.2
+  },
+  {
+    "id": "m31",
+    "no": 31,
+    "name": "Carson Cheek",
+    "pos": "FO",
+    "cl": "Jr.",
+    "hometown": "West Chester, OH / Badin",
+    "series": {
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 225.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 287
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 318
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 18.9
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 18
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 145.8
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 146.6
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 179.8
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 178.9
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 25.7
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.179
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 25.2
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 3.59
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.64
+        }
+      ]
+    },
+    "heightIn": 68.3
+  },
+  {
+    "id": "m47",
+    "no": 47,
+    "name": "Mattix Groves",
+    "pos": "M",
+    "cl": "Jr.",
+    "hometown": "Naperville, IL / Naperville North",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 185.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 250.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 190.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 250
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 289
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 9
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 7.4
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 152.6
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 160.1
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 167.8
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 173
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.4
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.197
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 17.9
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.38
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.15
+        }
+      ]
+    },
+    "heightIn": 73.7
+  },
+  {
+    "id": "m77",
+    "no": 77,
+    "name": "Caden Wilson",
+    "pos": "FO",
+    "cl": "Jr.",
+    "hometown": "Hilliard, OH / Hilliard Davidson",
+    "series": {
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 355.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 11.3
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 15.3
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 181
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 174.5
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 204.1
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 206.1
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.6
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.263
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.3
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.61
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.06
+        }
+      ]
+    },
+    "heightIn": 70.5
+  },
+  {
+    "id": "m88",
+    "no": 88,
+    "name": "Creed McDonald",
+    "pos": "M",
+    "cl": "Jr.",
+    "hometown": "Springboro, OH / Springboro",
+    "series": {
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 290
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 14.2
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 16.7
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 154.8
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 151
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 180.4
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 181.4
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.1
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.225
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 18.3
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.09
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.11
+        }
+      ]
+    },
+    "heightIn": 71.2
+  },
+  {
+    "id": "m99",
+    "no": 99,
+    "name": "Logan Leatherberry",
+    "pos": "GK",
+    "cl": "Jr.",
+    "hometown": "Oregon, WI / Oregon",
+    "series": {
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 310
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 36.8
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 35.1
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 180
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 171.5
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 284.8
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 264.3
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 16.3
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.225
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 13.8
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.56
+        }
+      ]
+    },
+    "heightIn": 73.8
+  },
+  {
+    "id": "m16",
+    "no": 16,
+    "name": "Joel Brown",
+    "pos": "SSDM",
+    "cl": "R-Jr.",
+    "hometown": "Loveland, OH / Archbishop Moeller",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 255.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 185.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 295.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 220.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 270
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 11.8
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 127.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 145
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.183
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.0
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.63
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.8
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.84
+        }
+      ]
+    },
+    "heightIn": 69.9
+  },
+  {
+    "id": "m19",
+    "no": 19,
+    "name": "Joe Ginnetti",
+    "pos": "SSDM",
+    "cl": "R-Jr.",
+    "hometown": "Cincinnati, OH / Moeller (Air Force)",
+    "series": {
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 294
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 21.2
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 25.9
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 175.3
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 173.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 222.6
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 234.3
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.3
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.228
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.2
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.15
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.23
+        }
+      ]
+    },
+    "heightIn": 71.8
+  },
+  {
+    "id": "m22",
+    "no": 22,
+    "name": "Jameson Demarco",
+    "pos": "SSDM",
+    "cl": "R-Jr.",
+    "hometown": "Olmstead Falls, OH / Olmstead Falls",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 275.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 315.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 235.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 260
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 282
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 5.7
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 8.6
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 152.3
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 150.8
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 161.5
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 165
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.4
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.191
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.8
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.64
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.95
+        }
+      ]
+    },
+    "heightIn": 67.2
+  },
+  {
+    "id": "m28",
+    "no": 28,
+    "name": "Luke Ray",
+    "pos": "M",
+    "cl": "R-So.",
+    "hometown": "Milfrod, OH / Milford (Towson)",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 285.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 290.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 220.0
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 29.3
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 28.6
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 128.1
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 128.2
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 181.1
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 179.7
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 23.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.196
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 17.0
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.21
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 293
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.01
+        }
+      ]
+    },
+    "heightIn": 66.1
+  },
+  {
+    "id": "m0",
+    "no": 0,
+    "name": "Noah Goedjen",
+    "pos": "D",
+    "cl": "R-Sr.",
+    "hometown": "Greenfield, MN / Providence Academy (High Point)",
+    "series": {
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 19.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.192
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 18.6
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.39
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 300
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.36
+        }
+      ]
+    }
+  },
+  {
+    "id": "m1",
+    "no": 1,
+    "name": "Will Adair",
+    "pos": "M",
+    "cl": "R-Sr.",
+    "hometown": "Cincinnati, OH / Indian Hills",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 320.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 350.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-12",
+          "label": "Fall 2025",
+          "value": 10.6
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 12.5
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-12",
+          "label": "Fall 2025",
+          "value": 165.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 163.2
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-12",
+          "label": "Fall 2025",
+          "value": 184.7
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 186.4
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.1
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.264
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 20.4
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.99
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 289
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.99
+        }
+      ]
+    },
+    "heightIn": 71.9
+  },
+  {
+    "id": "m7",
+    "no": 7,
+    "name": "Jack Dickson",
+    "pos": "SSDM",
+    "cl": "R-Sr.",
+    "hometown": "Laguna Niguel, CA / Corona Del Mar",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 330.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 330.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 250.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 272
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 304
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 16
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 20.8
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 168.4
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 161.3
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 200.5
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 203.6
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 19.0
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.227
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 18.7
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.09
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5
+        }
+      ]
+    },
+    "heightIn": 71.9
+  },
+  {
+    "id": "m41",
+    "no": 41,
+    "name": "Xander Johnson",
+    "pos": "A",
+    "cl": "R-Sr.",
+    "hometown": "Lancaster, PA / Manheim Township",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 300.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 215.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 395.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 295.0
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 13.9
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 12
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 153.1
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 155.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 177.8
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 177.1
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.3
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.29
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 23.6
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.08
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 289
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.97
+        }
+      ]
+    },
+    "heightIn": 70.5
+  },
+  {
+    "id": "m66",
+    "no": 66,
+    "name": "Chase Gettys",
+    "pos": "D",
+    "cl": "So.",
+    "hometown": "Mason, OH / Mason",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 315.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 185.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 420.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 315.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 269
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 297
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 9.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 12.1
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 151.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 149.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 166.2
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 170.5
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.234
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 22.0
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.42
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.96
+        }
+      ]
+    },
+    "heightIn": 71.0
+  },
+  {
+    "id": "m9",
+    "no": 9,
+    "name": "Ever Whitaker",
+    "pos": "D",
+    "cl": "So.",
+    "hometown": "Reno, NV / Galena",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 255.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 250.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 370.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 280.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 296
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 16.1
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 15.8
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 165.9
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 169.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 197.8
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 201.4
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 24.2
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.199
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.6
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.49
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.94
+        }
+      ]
+    },
+    "heightIn": 72.0
+  },
+  {
+    "id": "m17",
+    "no": 17,
+    "name": "Jayvon Robinson",
+    "pos": "GK",
+    "cl": "So.",
+    "hometown": "Bronx, NY / Suffield Academy",
+    "series": {
+      "bodyFat": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 16.2
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 16.3
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 144.8
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 145.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-11",
+          "label": "Fall 2025",
+          "value": 172.8
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 174.1
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 19.6
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.212
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 15.1
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 1.82
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.04
+        }
+      ]
+    },
+    "heightIn": 70.8
+  },
+  {
+    "id": "m33",
+    "no": 33,
+    "name": "Nico Federici",
+    "pos": "GK",
+    "cl": "So.",
+    "hometown": "Wausau, WI / Wausau",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 245.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 145.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 275.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 17.9
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 20.4
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 161.4
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 162.4
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 196.5
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 204
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.7
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.177
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.8
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.85
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 301
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.1
+        }
+      ]
+    },
+    "heightIn": 76.2
+  },
+  {
+    "id": "m34",
+    "no": 34,
+    "name": "Tavin Jones",
+    "pos": "FO",
+    "cl": "So.",
+    "hometown": "Las Vegas, NV / Western Reserve Academy",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 315.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 245.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 375.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 280.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 263
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 292
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 9.5
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 7.6
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 154.3
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 153.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 170.6
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 166.5
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 23.6
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.206
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.7
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.08
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.78
+        }
+      ]
+    },
+    "heightIn": 70.0
+  },
+  {
+    "id": "m51",
+    "no": 51,
+    "name": "Landon Whalen",
+    "pos": "A",
+    "cl": "So.",
+    "hometown": "Hilliard, OH / Hilliard Darby",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 315.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 270.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 405.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 305.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 270
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 292
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 14.3
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 15.4
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 163.1
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 164.8
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 190.4
+        },
+        {
+          "date": "2025-12-04",
+          "label": "Dec 2025",
+          "value": 194.9
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.8
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.192
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 21.9
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.92
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.89
+        }
+      ]
+    },
+    "heightIn": 71.9
+  },
+  {
+    "id": "m5",
+    "no": 5,
+    "name": "Layton Speer",
+    "pos": "M",
+    "cl": "Sr.",
+    "hometown": "Houston, TX / Langham Creek",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 270.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 225.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 370.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 280.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 260
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 9.6
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 5.5
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 153.2
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 156.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 169.5
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 166.1
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 24.6
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-31",
+          "label": "Fall '26 test",
+          "value": 1.68
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-31",
+          "label": "Fall '26 test",
+          "value": 0.156
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-31",
+          "label": "Fall '26 test",
+          "value": 10.3
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.73
+        }
+      ]
+    },
+    "heightIn": 72.0
+  },
+  {
+    "id": "m6",
+    "no": 6,
+    "name": "Oliver Vanyo",
+    "pos": "GK",
+    "cl": "Sr.",
+    "hometown": "St. Catherines, Ontario / Governor Science (Lindenwood)",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 370.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 200.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 405.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 305.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 285
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 303
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 14.3
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 20.3
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 138
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 136.8
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 161.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 171.8
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.193
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.0
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.51
+        }
+      ]
+    },
+    "heightIn": 72.2
+  },
+  {
+    "id": "m8",
+    "no": 8,
+    "name": "Griffin Valli",
+    "pos": "D",
+    "cl": "Sr.",
+    "hometown": "Buffalo, MN / Buffalo",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 330.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 245.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 365.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 275.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 261
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 14.8
+        },
+        {
+          "date": "2025-12-08",
+          "label": "Dec 2025",
+          "value": 12.7
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 170.1
+        },
+        {
+          "date": "2025-12-08",
+          "label": "Dec 2025",
+          "value": 171.5
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-10",
+          "label": "Fall 2025",
+          "value": 199.6
+        },
+        {
+          "date": "2025-12-08",
+          "label": "Dec 2025",
+          "value": 196.5
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 22.7
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": null,
+          "label": "Fall '26 test",
+          "value": 2.03
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": null,
+          "label": "Fall '26 test",
+          "value": 0.212
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": null,
+          "label": "Fall '26 test",
+          "value": 16.8
+        }
+      ]
+    },
+    "heightIn": 73.4
+  },
+  {
+    "id": "m18",
+    "no": 18,
+    "name": "Ethan Brooks",
+    "pos": "M",
+    "cl": "Sr.",
+    "hometown": "Powell, OH / Olentangy Liberty",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 250.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 165.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 305.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 230.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 270
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 288
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 12.5
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 10.3
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 123.1
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 123.7
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 140.7
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 138
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.9
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.183
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.6
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.73
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 4.79
+        }
+      ]
+    },
+    "heightIn": 67.5
+  },
+  {
+    "id": "m23",
+    "no": 23,
+    "name": "Evan Knickle",
+    "pos": "A",
+    "cl": "Sr.",
+    "hometown": "Springboro, OH / Springboro",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 280.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 205.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 310.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 235.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 275
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 300
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 5.3
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 7.5
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 174.2
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 175.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 184
+        },
+        {
+          "date": "2025-12-02",
+          "label": "Dec 2025",
+          "value": 190.1
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.7
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.188
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.9
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.28
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.1
+        }
+      ]
+    },
+    "heightIn": 72.0
+  },
+  {
+    "id": "m36",
+    "no": 36,
+    "name": "Liam Moffatt",
+    "pos": "D",
+    "cl": "Sr.",
+    "hometown": "Toronto, Ontario / Everest Academy",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 260.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 190.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 405.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 305.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 277
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 15.9
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 20.9
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 153.9
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 148.3
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 183
+        },
+        {
+          "date": "2025-12-05",
+          "label": "Dec 2025",
+          "value": 187.4
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 20.9
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 1.54
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 0.193
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 11.6
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.06
+        }
+      ]
+    },
+    "heightIn": 72.2
+  },
+  {
+    "id": "m43",
+    "no": 43,
+    "name": "Luke Mitchell",
+    "pos": "LSM",
+    "cl": "Sr.",
+    "hometown": "Troy, OH / Chaminade-Juliene",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 285.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 210.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 350.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 265.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 273
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 312
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 5.8
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 2.8
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 155.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 152.9
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-08",
+          "label": "Fall 2025",
+          "value": 164.7
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 157.2
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 19.5
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.212
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 16.8
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.03
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.05
+        }
+      ]
+    },
+    "heightIn": 73.0
+  },
+  {
+    "id": "m50",
+    "no": 50,
+    "name": "Sebastian West",
+    "pos": "A",
+    "cl": "Sr.",
+    "hometown": "Racine, WI / Culver Acadmey (Hampton)",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 285.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 185.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 290.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 220.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 282
+        },
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 305
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 14.5
+        },
+        {
+          "date": "2025-12-09",
+          "label": "Dec 2025",
+          "value": 10.8
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 119.8
+        },
+        {
+          "date": "2025-12-09",
+          "label": "Dec 2025",
+          "value": 126.5
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 140.2
+        },
+        {
+          "date": "2025-12-09",
+          "label": "Dec 2025",
+          "value": 141.8
+        }
+      ],
+      "cmj": [
+        {
+          "date": "2026-08-28",
+          "label": "Fall '26 test",
+          "value": 21.1
+        }
+      ],
+      "rsiGct": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 0.227
+        }
+      ],
+      "rsiJump": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 19.8
+        }
+      ],
+      "rsiScore": [
+        {
+          "date": "2026-08-27",
+          "label": "Fall '26 test",
+          "value": 2.33
+        }
+      ],
+      "fortyYard": [
+        {
+          "date": "2026-09-01",
+          "label": "Fall '26 test",
+          "value": 5.02
+        }
+      ]
+    },
+    "heightIn": 65.7
+  },
+  {
+    "id": "m82",
+    "no": 82,
+    "name": "Mitchell Maibaucher",
+    "pos": "SSDM",
+    "cl": "Sr.",
+    "hometown": "Chicago, IL / Notre Dame College Prep",
+    "series": {
+      "backSquat": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 385.0
+        }
+      ],
+      "benchPress": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 280.0
+        }
+      ],
+      "deadlift": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 450.0
+        }
+      ],
+      "powerClean": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested max",
+          "value": 340.0
+        }
+      ],
+      "bronco": [
+        {
+          "date": "2025-09-01",
+          "label": "'25-26 tested",
+          "value": 262
+        }
+      ],
+      "bodyFat": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 7.1
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 8.7
+        }
+      ],
+      "leanMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 170.6
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 169.8
+        }
+      ],
+      "bodyMass": [
+        {
+          "date": "2025-09-09",
+          "label": "Fall 2025",
+          "value": 183.5
+        },
+        {
+          "date": "2025-12-03",
+          "label": "Dec 2025",
+          "value": 186
+        }
+      ]
+    },
+    "heightIn": 69.7
+  }
+];
 
 
 
@@ -891,7 +5271,7 @@ var STANDARDS = {
     label:'Speed profile quadrant (40-yard \u00d7 MAS)',
     source:'Composite classification from two separate tests: the 40-yard dash (acceleration/top speed) and MAS \u2014 maximal aerobic speed, computed as 1200m \u00f7 Bronco time \u2014 the same formula already used in this program\u2019s own Bronco tracking sheet. The fixed 40-yard line (4.6s) comes from Sell et al. (2018, J Strength Cond Res), the one peer-reviewed D1 men\u2019s lacrosse fitness-profile study located, cross-checked against a Division I recruiting guideline citing a 4.5\u20134.6s range; no exact published mean 40-yard time for D1 lacrosse was found, so treat this line as a reasonable estimate rather than a hard number. The fixed MAS line (4.0 m/s) is this program\u2019s own team-wide 5:01 Bronco baseline, converted to pace.',
     sourceUrl:'https://pubmed.ncbi.nlm.nih.gov/30216251/',
-    note:'40-yard dash has no baseline logged for this roster yet, so the quadrant chart will stay empty until that testing happens \u2014 MAS alone is rankable today from the Fall 2026 Bronco data already on file.'
+    note:'Fall 2026 40-yard dash is now on file for most of the roster, so this quadrant is populated \u2014 athletes without a logged time are left off the plot rather than shown at zero.'
   },
   strengthQuadrant: {
     kind:'quadrant',
@@ -1089,15 +5469,16 @@ function setHeaderMeta(){
   var withScore = athletes.filter(function(a){return computeScore(a)!==null;}).length;
   var withCmj = athletes.filter(function(a){return curVal(a,'cmj')!==null;}).length;
   var withRsi = athletes.filter(function(a){return curVal(a,'rsiScore')!==null;}).length;
+  var withForty = athletes.filter(function(a){return curVal(a,'fortyYard')!==null;}).length;
   document.getElementById('headerMeta').innerHTML =
-    '<b>'+athletes.length+'</b> on roster &middot; <b>'+withScore+'</b> with lift maxes on file &middot; <b>'+withCmj+'</b> with a Fall 26 CMJ on file &middot; <b>'+withRsi+'</b> with a Fall 26 RSI test on file';
+    '<b>'+athletes.length+'</b> on roster &middot; <b>'+withScore+'</b> with lift maxes on file &middot; <b>'+withCmj+'</b> with a Fall 26 CMJ on file &middot; <b>'+withRsi+'</b> with a Fall 26 RSI test on file &middot; <b>'+withForty+'</b> with a Fall 26 40-yd dash on file';
 }
 
 function renderOverviewNote(){
   document.getElementById('overviewNote').innerHTML =
     'Every lift, Bronco, and body comp number below is real 2025-26 baseline data \u2014 last year\u2019s tested lift maxes and Bronco time, and the Fall/Dec 2025 Bod Pod scans. '+
     'Once each athlete\u2019s Fall 2026 numbers are logged, their profile will lead with <b>progress since this baseline</b> \u2014 that comparison matters most, alongside how they stack up against the team average. '+
-    'CMJ is now populated from Fall 2026 testing (in progress \u2014 not everyone has a mark yet). RSI and ground contact time show up on each athlete\u2019s card and profile. 40-yard dash still has no baseline on file.';
+    'CMJ, RSI/ground contact time, and 40-yard dash are all now populated from Fall 2026 testing (in progress \u2014 not everyone has a mark yet on each test).';
 }
 
 /* --- Position filter pills (overview) --- */
